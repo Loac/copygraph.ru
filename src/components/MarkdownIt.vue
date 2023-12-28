@@ -1,5 +1,4 @@
 <template>
-
   <div v-html="markdown.render(source)" />
 </template>
 
