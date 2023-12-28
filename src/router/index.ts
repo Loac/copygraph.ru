@@ -19,6 +19,11 @@ const routes = [
         name: 'Copybook',
         component: () => import('@/views/CopybookView.vue'),
       },
+      {
+        path: 'worksheet',
+        name: 'Worksheet',
+        component: () => import('@/views/WorksheetView.vue'),
+      },
     ],
   },
 ]

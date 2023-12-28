@@ -8,7 +8,9 @@
     <router-link to="/copybook">
       <v-btn prepend-icon="mdi-ab-testing" title="">Copybook</v-btn>
     </router-link>
-    <v-btn prepend-icon="mdi-align-vertical-distribute">Worksheet</v-btn>
+    <router-link to="/worksheet">
+      <v-btn prepend-icon="mdi-align-vertical-distribute">Worksheet</v-btn>
+    </router-link>
   </v-app-bar>
 </template>
 

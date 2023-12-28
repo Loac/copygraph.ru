@@ -1,9 +1,7 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-  <v-col>asdf</v-col>
+  <v-main class="d-flex" style="min-height: 300px;">
+    <TheCopybook />
+  </v-main>
   <v-navigation-drawer location="right">
     <v-list>
       <v-list-item title="Navigation drawer"></v-list-item>
@@ -11,6 +9,6 @@
   </v-navigation-drawer>
 </template>
 
-<style scoped>
-
-</style>
+<script setup lang="ts">
+  import TheCopybook from "@/components/copybook/TheCopybook.vue";
+</script>

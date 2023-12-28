@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Gloria script';
+    src: url('Gloriascript.woff2') format('woff2'),
+        url('Gloriascript.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
