@@ -1,10 +1,5 @@
-<script setup lang="ts">
-
-import TheCopybook from "@/components/copybook/TheCopybook.vue";
-</script>
-
 <template>
-  <TheCopybook />
+  <TheWorkbook />
 
   <v-navigation-drawer location="right">
     <v-list>
@@ -12,6 +7,10 @@ import TheCopybook from "@/components/copybook/TheCopybook.vue";
     </v-list>
   </v-navigation-drawer>
 </template>
+
+<script setup lang="ts">
+  import TheWorkbook from "@/components/workbook/TheWorkbook.vue";
+</script>
 
 <style scoped>
 

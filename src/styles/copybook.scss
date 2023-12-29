@@ -4,77 +4,83 @@
     --cg-page-width: 210mm;
     --cg-page-shadow: 0 0 5mm rgba(0, 0, 0, 0.2);
     --cg-page-margin: 10mm;
-    --cg-copybook-background: rgb(250 250 250);
+    --cg-area-background: rgb(250 250 250);
 }
 
-.copybook * {
+.area * {
     box-sizing: border-box;
 }
 
-.copybook {
-    background: var(--cg-copybook-background);
+.area {
+    background: var(--cg-area-background);
     display: flex;
     justify-content: center;
     min-width: 100%;
     max-width: 100%;
-    padding: 10mm;
+
 }
 
-.worksheet {
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
+.copybook {
+    .worksheet {
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
 
-    font-family: 'Gloria script', serif;
-    font-size: 22mm;
+        font-family: 'Gloria script', serif;
+        font-size: 22mm;
+    }
+
+    .page {
+        position: relative;
+        background: white;
+        box-shadow: var(--cg-page-shadow);
+        height: var(--cg-page-height);
+        padding: var(--cg-page-indent);
+        width: var(--cg-page-width);
+    }
+
+    .page:not(:first-child) {
+        margin-top: var(--cg-page-margin);
+    }
+
+    .lines {
+        position: absolute;
+        width: 100%;
+    }
+
+    .slashes {
+        height: 400mm;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(-52deg);
+        width: 400mm;
+    }
+
+    .phrases {
+        position: absolute;
+        padding: 0 5mm;
+        width: 100%;
+    }
+
+    .phrase {
+        align-items: end;
+        display: flex;
+    }
+
+    .phrase:nth-child(2n -1) {
+        /*background: rgba(255, 0, 0, .1);*/
+    }
+
+    .entries {
+        align-items: end;
+        display: flex;
+    }
 }
 
-.page {
-    position: relative;
-    background: white;
-    box-shadow: var(--cg-page-shadow);
-    height: var(--cg-page-height);
-    padding: var(--cg-page-indent);
-    width: var(--cg-page-width);
-}
+.workbook {
 
-.page:not(:first-child) {
-    margin-top: var(--cg-page-margin);
-}
-
-.lines {
-    position: absolute;
-    width: 100%;
-}
-
-.slashes {
-    height: 400mm;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%) rotate(-52deg);
-    width: 400mm;
-}
-
-.phrases {
-    position: absolute;
-    padding: 0 5mm;
-    width: 100%;
-}
-
-.phrase {
-    align-items: end;
-    display: flex;
-}
-
-.phrase:nth-child(2n -1) {
-    /*background: rgba(255, 0, 0, .1);*/
-}
-
-.entries {
-    align-items: end;
-    display: flex;
 }
 
 @font-face {
