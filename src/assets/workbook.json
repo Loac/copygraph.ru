@@ -1,0 +1,760 @@
+{
+  "format": "0.1",
+  "description": "Example",
+  "style": {
+    "font": "Gloria script"
+  },
+  "styles": {
+    "lineA": {
+      "height": "2.3mm",
+      "border-bottom-width": ".5mm",
+      "border-bottom-style": "dotted",
+      "border-bottom-color": "rgb(200, 200, 200)"
+    },
+    "lineB": {
+      "height": "5mm",
+      "margin-top": "7.7mm",
+      "border-bottom-width": ".5mm",
+      "border-bottom-style": "dotted",
+      "border-bottom-color": "rgb(200, 200, 200)",
+      "border-top-width": ".5mm",
+      "border-top-style": "dotted",
+      "border-top-color": "rgb(200, 200, 200)"
+    },
+    "line5dark": {
+      "height": "5mm",
+      "border-bottom-width": ".5mm",
+      "border-bottom-style": "dotted",
+      "border-bottom-color": "rgb(100, 100, 100)"
+    },
+    "slash": {
+      "border-bottom-width": ".5mm",
+      "border-bottom-style": "dotted",
+      "border-bottom-color": "rgb(200, 200, 200)",
+      "height": "20mm",
+      "width": "100%"
+    },
+    "phrase": {
+      "height": "15mm"
+    },
+    "entryContrast": {
+      "color": "rgb(100, 100, 100)",
+      "min-width": "50px",
+      "line-height": "0.45",
+      "margin-top": "0"
+    },
+    "entryNext": {
+      "color": "rgb(200, 200, 200)",
+      "min-width": "50px",
+      "line-height": "0.45",
+      "margin-top": "0"
+    },
+    "entryOutline": {
+      "color": "rgb(255, 255, 255)",
+      "min-width": "50px",
+      "line-height": "0.45",
+      "margin-top": "0",
+      "text-shadow": "0 0 .5mm rgb(100, 100, 100)"
+    }
+  },
+  "pages": [
+    {
+      "title": "First",
+      "lines": ["lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB"],
+      "slashes": ["slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash"],
+      "phrases": [
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "a", "style": "entryContrast" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "a", "style": "entryContrast" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "a", "style": "entryContrast" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "a", "style": "entryContrast" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "a", "style": "entryContrast" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "a", "style": "entryContrast" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "b", "style": "entryContrast" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "b", "style": "entryContrast" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "b", "style": "entryContrast" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "b", "style": "entryContrast" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "b", "style": "entryContrast" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "b", "style": "entryContrast" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "c", "style": "entryContrast" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "c", "style": "entryContrast" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "c", "style": "entryContrast" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "c", "style": "entryContrast" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "c", "style": "entryContrast" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "c", "style": "entryContrast" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "First",
+      "lines": ["lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB", "lineA", "lineB"],
+      "slashes": ["slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash", "slash"],
+      "phrases": [
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "a", "style": "entryContrast" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "a", "style": "entryContrast" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "a", "style": "entryContrast" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "a", "style": "entryContrast" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "a", "style": "entryContrast" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "a", "style": "entryContrast" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryNext" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" },
+            { "content": "a", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "b", "style": "entryContrast" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "b", "style": "entryContrast" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "b", "style": "entryContrast" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "b", "style": "entryContrast" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "b", "style": "entryContrast" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "b", "style": "entryContrast" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryNext" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" },
+            { "content": "b", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "c", "style": "entryContrast" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "c", "style": "entryContrast" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "c", "style": "entryContrast" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "c", "style": "entryContrast" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "c", "style": "entryContrast" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" }
+          ]
+        },
+        {
+          "style": "phrase",
+          "entries": [
+            { "content": "c", "style": "entryContrast" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryNext" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" },
+            { "content": "c", "style": "entryOutline" }
+          ]
+        }
+      ]
+    }
+  ]
+}

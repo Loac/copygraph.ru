@@ -35,5 +35,5 @@
 </script>
 
 <style>
-  @import "@/styles/copybook.scss";
+
 </style>

@@ -80,7 +80,22 @@
 }
 
 .workbook {
+    .page {
+        position: relative;
+        background: white;
+        box-shadow: var(--cg-page-shadow);
+        height: var(--cg-page-height);
+        padding: var(--cg-page-indent);
+        width: var(--cg-page-width);
+    }
 
+    .line {
+        height: 10mm;
+        border-bottom: 1px solid grey;
+        border-top: 1px solid grey;
+        margin: 20px 0;
+        background: rgba(0, 0, 0, .05);
+    }
 }
 
 @font-face {

@@ -7,3 +7,7 @@
 <script lang="ts" setup>
   //
 </script>
+
+<style>
+  @import "@/styles/copygraph.scss";
+</style>
