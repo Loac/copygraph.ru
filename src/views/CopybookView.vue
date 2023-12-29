@@ -1,7 +1,6 @@
 <template>
-  <v-main class="d-flex" style="min-height: 300px;">
-    <TheCopybook />
-  </v-main>
+  <TheCopybook />
+
   <v-navigation-drawer location="right">
     <v-list>
       <v-list-item title="Navigation drawer"></v-list-item>
