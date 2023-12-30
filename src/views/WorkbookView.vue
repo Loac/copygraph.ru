@@ -11,8 +11,9 @@
 
       <v-form @submit.prevent>
         <v-text-field
-          v-model="count"
-          label="First name"
+          v-model.number="count"
+          label="Count"
+          type="number"
         ></v-text-field>
         <v-text-field
           v-model="lineHeight"
@@ -77,7 +78,7 @@
           //   }
           //   return "Wrong value";
           // },
-          (value: number) => (value > 1 && value < 50) || "Wrong value"
+          (value: number) => (value > 1 && value <= 50) || "Wrong value"
 
         ],
         blah2: "blah2",
@@ -85,9 +86,11 @@
     },
     setup(props, ctx) {
       let count = ref(5);
-      let lineHeight = ref(10);
+      let lineHeight = ref(50);
 
-      return { count, lineHeight }
+      let lineCount = count.value
+
+      return { count, lineCount, lineHeight }
     },
   })
 </script>
