@@ -1,0 +1,146 @@
+:root {
+
+    --cg-worksheet-fence-height: 31mm;
+    --cg-worksheet-fence-margin: 10mm;
+    --cg-worksheet-fence-fractions: 10;
+    --cg-worksheet-fraction-height: calc(var(--cg-worksheet-fence-height) / var(--cg-worksheet-fence-fractions));
+    --cg-worksheet-base-coverage: 4;
+    --cg-worksheet-base-position: 3;
+    --cg-worksheet-base-height: calc(var(--cg-worksheet-fraction-height) * var(--cg-worksheet-base-coverage) + 1px);
+    --cg-worksheet-base-top: calc(var(--cg-worksheet-fraction-height) * var(--cg-worksheet-base-position));
+}
+
+
+.copybook {
+    .worksheet {
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+
+        font-family: 'Gloria script', serif;
+        font-size: 22mm;
+    }
+
+    .page {
+        position: relative;
+        background: white;
+        box-shadow: var(--cg-page-shadow);
+        height: var(--cg-page-height);
+        padding: var(--cg-page-indent);
+        width: var(--cg-page-width);
+    }
+
+    .page:not(:first-child) {
+        margin-top: var(--cg-page-margin);
+    }
+
+    .lines {
+        position: absolute;
+        width: 100%;
+    }
+
+    .slashes {
+        height: 400mm;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(-52deg);
+        width: 400mm;
+    }
+
+    .phrases {
+        position: absolute;
+        padding: 0 5mm;
+        width: 100%;
+    }
+
+    .phrase {
+        align-items: end;
+        display: flex;
+    }
+
+    .phrase:nth-child(2n -1) {
+        /*background: rgba(255, 0, 0, .1);*/
+    }
+
+    .entries {
+        align-items: end;
+        display: flex;
+    }
+}
+
+.workbook {
+    .area * {
+        box-sizing: border-box;
+    }
+    .page {
+        position: relative;
+        background: white;
+        box-shadow: var(--cg-page-shadow);
+        height: var(--cg-page-height);
+        padding: var(--cg-page-indent);
+        width: var(--cg-page-width);
+    }
+
+    .fence {
+        max-height: var(--cg-worksheet-fence-height);
+        position: relative;
+        margin: var(--cg-worksheet-fence-margin) 0;
+        overflow: hidden;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        .main {
+            border-bottom: 1px solid red;
+            border-top: 1px solid red;
+            background: rgba(0, 0, 0, .03);
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            z-index: 90;
+        }
+
+        .base {
+            border-top: 1px solid green;
+            border-bottom: 1px solid green;
+            height: var(--cg-worksheet-base-height);
+            top: var(--cg-worksheet-base-top);
+
+            width: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            position: absolute;
+        }
+
+        .fractions {
+            position: absolute;
+            z-index: 80;
+            height: 100%;
+            width: 100%;
+        }
+
+        .fraction {
+            border-top: 1px solid blue;
+            height: var(--cg-worksheet-fraction-height);
+        }
+    }
+}
+
+@font-face {
+    font-family: 'Gloria script';
+    src: url('/font/Gloriascript.woff2') format('woff2'),
+         url('/font/Gloriascript.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/*@font-face {*/
+/*    font-family: <name_u_choose>;*/
+/*    src: url('~@/assets/fonts/<static_font_file>.ttf');*/
+/*}*/

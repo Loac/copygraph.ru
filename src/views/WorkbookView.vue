@@ -3,6 +3,7 @@
   <TheWorkbook
     :line-count="count"
     :style="style"
+    :fence="fence"
   />
 
   <v-navigation-drawer location="right">
@@ -16,11 +17,39 @@
           type="number"
         ></v-text-field>
         <v-text-field
-          v-model="lineHeight"
+          v-model="fence.fenceHeight"
+          label="Fence height"
+          type="number"
+          @input="fence.update()"
+        ></v-text-field>
+        <v-text-field
+          v-model="fence.fenceMargin"
+          label="Fence space"
+          type="number"
           :rules="rules"
-          @input="someMethod2"
-          label="Line height"
-          suffix="mm"
+          @input="fence.update()"
+        ></v-text-field>
+        <v-text-field
+          v-model="fence.fractions"
+          label="Fractions"
+          type="number"
+          @input="fence.update()"
+        ></v-text-field>
+<!--        <v-color-picker></v-color-picker>-->
+
+
+
+        <v-text-field
+          v-model="fence.basePosition"
+          label="Base position"
+          type="number"
+          @input="fence.update()"
+        ></v-text-field>
+        <v-text-field
+          v-model="fence.baseCoverage"
+          label="Base coverage"
+          type="number"
+          @input="fence.update()"
         ></v-text-field>
 
         <v-btn type="submit" block class="mt-2" @click="someMethod">Submit</v-btn>
@@ -33,6 +62,7 @@
 <script lang="ts">
   import {defineComponent, ref} from 'vue'
   import TheWorkbook from "@/components/workbook/TheWorkbook.vue";
+  import {Fence} from "@/components/workbook/Fence";
 
   export default defineComponent({
     components: {
@@ -44,14 +74,17 @@
         type: String
       },
     },
+    mounted: function() {
+      this.root = document.documentElement;
+    },
     methods: {
       someMethod() {
-        this.count++;
-        this.lineHeight = 50;
+        // this.count++;
+        // this.lineHeight = 50;
       },
       someMethod2() {
-        if (this.lineHeight > 50)
-          this.lineHeight = 50;
+        // if (this.lineHeight > 50)
+        //   this.lineHeight = 50;
       }
     },
     computed: {
@@ -59,6 +92,9 @@
         return {
           height: this.lineHeight + "mm"
         }
+      },
+      cssFenceHeight: function (): string {
+        return this.fenceHeight + "mm"
       },
       // height: {
       //   get(): string {
@@ -82,20 +118,27 @@
 
         ],
         blah2: "blah2",
+        root: document.documentElement
       }
     },
     setup(props, ctx) {
+
       let count = ref(5);
       let lineHeight = ref(50);
+      let lineCount = count.value;
+      let fenceHeight = ref(10);
 
-      let lineCount = count.value
+      let fence = ref(new Fence());
+      fence.value.update();
 
-      return { count, lineCount, lineHeight }
+      return { fenceHeight, count, lineCount, lineHeight, fence }
     },
   })
 </script>
 
-
-<style scoped>
-
+<style>
+  .bbb {
+    background: red;
+    height: v-bind(cssFenceHeight);
+  }
 </style>
