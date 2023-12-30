@@ -36,19 +36,49 @@
         ></v-text-field>
 
 
-        <v-menu v-model="menu"  :close-on-content-click="false">
-          <template v-slot:activator="{ props }">
-            <v-btn v-bind="props" :style="swatchStyle" elevation="0"></v-btn>
-          </template>
-          <v-card>
-            <v-card-text class="pa-0">
-              <v-color-picker v-model="color"
-                              :hide-inputs="true"
-                              :modes="['rgb']"
-                              flat />
-            </v-card-text>
-          </v-card>
-        </v-menu>
+        <div class="d-flex pa-5 align-end">
+          <v-text-field
+            label="Width"
+            variant="underlined"
+            hide-details
+            @input="fence.update()"
+          ></v-text-field>
+
+          <v-select
+            label="Style"
+            variant="underlined"
+            hide-details
+            :items="[{
+              title: 'Dotted',
+              value: 'dotted'
+            }, {
+              title: 'Dashed',
+              value: 'dashed'
+            }, {
+              title: 'Solid',
+              value: 'solid'
+            }]"
+          ></v-select>
+
+          <v-menu v-model="menu"  :close-on-content-click="false">
+            <template v-slot:activator="{ props }">
+              <v-btn v-bind="props" :style="swatchStyle" elevation="0"></v-btn>
+            </template>
+            <v-card>
+              <v-card-text class="pa-0">
+                <v-color-picker v-model="color"
+                                :hide-inputs="true"
+                                :modes="['rgb']"
+                                flat />
+              </v-card-text>
+            </v-card>
+          </v-menu>
+        </div>
+
+
+
+
+
 
         <v-text-field
           v-model="fence.basePosition"
