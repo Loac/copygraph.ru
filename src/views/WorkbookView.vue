@@ -1,5 +1,4 @@
 <template>
-
   <TheWorkbook
     :line-count="count"
     :style="style"
@@ -35,9 +34,21 @@
           type="number"
           @input="fence.update()"
         ></v-text-field>
-<!--        <v-color-picker></v-color-picker>-->
 
 
+        <v-menu v-model="menu"  :close-on-content-click="false">
+          <template v-slot:activator="{ props }">
+            <v-btn v-bind="props" :style="swatchStyle" elevation="0"></v-btn>
+          </template>
+          <v-card>
+            <v-card-text class="pa-0">
+              <v-color-picker v-model="color"
+                              :hide-inputs="true"
+                              :modes="['rgb']"
+                              flat />
+            </v-card-text>
+          </v-card>
+        </v-menu>
 
         <v-text-field
           v-model="fence.basePosition"
@@ -96,6 +107,14 @@
       cssFenceHeight: function (): string {
         return this.fenceHeight + "mm"
       },
+      swatchStyle() {
+        const { color } = this
+        return {
+          backgroundColor: color,
+          cursor: 'pointer',
+          minWidth: 'var(--v-btn-height)',
+        }
+      }
       // height: {
       //   get(): string {
       //     return this.blah2 + "mm";
@@ -118,7 +137,11 @@
 
         ],
         blah2: "blah2",
-        root: document.documentElement
+        root: document.documentElement,
+        color: '#1976D2FF',
+        mask: '!#XXXXXXXX',
+        menu: false,
+        picker: true,
       }
     },
     setup(props, ctx) {
@@ -139,6 +162,7 @@
 <style>
   .bbb {
     background: red;
+    width: var(--v-btn-height);
     height: v-bind(cssFenceHeight);
   }
 </style>
