@@ -89,13 +89,13 @@
       }
 
       .base {
-        border-top: 1px solid green;
-        border-bottom: 1px solid green;
+        border-top: v-bind('fence.baseBorderWidthPx()') v-bind('fence.baseBorderStyle') v-bind('fence.baseBorderColor');
+        border-bottom: v-bind('fence.baseBorderWidthPx()') v-bind('fence.baseBorderStyle') v-bind('fence.baseBorderColor');
         height: calc(v-bind('fence.baseHeightMm()') + 1px);
         top: v-bind('fence.baseTopMm()');
 
         width: 100%;
-        background: rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.1);
         z-index: 90;
         position: absolute;
       }

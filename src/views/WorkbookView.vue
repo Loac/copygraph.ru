@@ -37,17 +37,37 @@
 
 
         <div class="d-flex pa-5 align-end">
-          <v-text-field
-            label="Width"
-            variant="underlined"
-            hide-details
-            @input="fence.update()"
-          ></v-text-field>
+          <v-menu :close-on-content-click="false" :location="'center'">
+            <template v-slot:activator="{ props }">
+              <v-text-field
+                label="Width"
+                variant="underlined"
+                hide-details
+                v-bind="props"
+                v-model="fence.baseBorderWidth"
+                :readonly="true"
+                @input="fence.update()"
+                style="cursor: pointer"
+              ></v-text-field>
+            </template>
+            <v-card>
+              <v-card-text class="pa-5">
+                <v-slider
+                  v-model="fence.baseBorderWidth"
+                  direction="vertical"
+                  :min="0"
+                  :max="5"
+                  :step="1"
+                ></v-slider>
+              </v-card-text>
+            </v-card>
+          </v-menu>
 
           <v-select
             label="Style"
             variant="underlined"
             hide-details
+            v-model="fence.baseBorderStyle"
             :items="[{
               title: 'Dotted',
               value: 'dotted'
@@ -60,13 +80,13 @@
             }]"
           ></v-select>
 
-          <v-menu v-model="menu"  :close-on-content-click="false">
+          <v-menu :close-on-content-click="false">
             <template v-slot:activator="{ props }">
-              <v-btn v-bind="props" :style="swatchStyle" elevation="0"></v-btn>
+              <v-btn v-bind="props" :style="swatchStyle(fence.baseBorderColor)" elevation="0"></v-btn>
             </template>
             <v-card>
               <v-card-text class="pa-0">
-                <v-color-picker v-model="color"
+                <v-color-picker v-model="fence.baseBorderColor"
                                 :hide-inputs="true"
                                 :modes="['rgb']"
                                 flat />
@@ -126,6 +146,14 @@
       someMethod2() {
         // if (this.lineHeight > 50)
         //   this.lineHeight = 50;
+      },
+      swatchStyle(color: string) {
+        // const { color } = this
+        return {
+          backgroundColor: color,
+          cursor: 'pointer',
+          minWidth: 'var(--v-btn-height)',
+        }
       }
     },
     computed: {
@@ -137,14 +165,7 @@
       cssFenceHeight: function (): string {
         return this.fenceHeight + "mm"
       },
-      swatchStyle() {
-        const { color } = this
-        return {
-          backgroundColor: color,
-          cursor: 'pointer',
-          minWidth: 'var(--v-btn-height)',
-        }
-      }
+
       // height: {
       //   get(): string {
       //     return this.blah2 + "mm";
@@ -169,9 +190,8 @@
         blah2: "blah2",
         root: document.documentElement,
         color: '#1976D2FF',
-        mask: '!#XXXXXXXX',
         menu: false,
-        picker: true,
+        sliderValue: 10
       }
     },
     setup(props, ctx) {

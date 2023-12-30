@@ -8,6 +8,9 @@ export class Fence {
   basePosition: number = 3;
   baseHeight: number = 10;
   baseTop: number = 10;
+  baseBorderColor: string = "green";
+  baseBorderStyle: string = "solid";
+  baseBorderWidth: number = 1;
 
   fenceHeightMm(): string {
     return this.fenceHeight + 'mm';
@@ -27,6 +30,10 @@ export class Fence {
 
   baseTopMm(): string {
     return this.baseTop + 'mm';
+  }
+
+  baseBorderWidthPx(): string {
+    return this.baseBorderWidth + 'px';
   }
 
   update(): void {
