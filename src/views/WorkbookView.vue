@@ -27,19 +27,14 @@
         @input="fenceUpdate"
       ></NumberSlider>
 
-<!--      <v-text-field-->
-<!--        v-model="fence.fenceHeight"-->
-<!--        label="Fence height"-->
-<!--        type="number"-->
-<!--        @input="fence.update()"-->
-<!--      ></v-text-field>-->
-      <v-text-field
+      <NumberSlider
         v-model="fence.fenceMargin"
         label="Fence space"
-        type="number"
-        :rules="rules"
+        :min="0"
+        :max="20"
+        :step="1"
         @input="fenceUpdate"
-      ></v-text-field>
+      ></NumberSlider>
 
       <v-form @submit.prevent>
         <v-expansion-panels

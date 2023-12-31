@@ -55,19 +55,15 @@
     }
   });
 
-  const emit = defineEmits(['input'])
+  const emit = defineEmits<{
+    input: []
+  }>()
 
   const updateModelValue = function() {
     emit('input');
   }
 
-  // blah();
 
-  // const emit = defineEmits<{
-  //   input: []
-  //   // change: [id: number]
-  //   // update: [value: string]
-  // }>()
 </script>
 
 
