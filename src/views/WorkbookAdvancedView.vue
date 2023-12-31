@@ -1,5 +1,5 @@
 <template>
-  <TheWorkbook2 />
+  <Workbook />
 
   <v-navigation-drawer location="right">
     <v-list>
@@ -11,7 +11,7 @@
 
     <div class="layers">
       <div class="layer" v-for="(layer, index) in layers" :key="index">
-        <WbLayer v-model="layers[index].value" />
+        <WorkbookLayer v-model="layers[index].value" />
       </div>
     </div>
 
@@ -19,9 +19,9 @@
 </template>
 
 <script setup lang="ts">
-  import TheWorkbook2 from "@/components/workbook2/TheWorkbook2.vue";
+  import Workbook from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
+  import WorkbookLayer from "@/components/workbookAdvanced/WorkbookLayer.vue";
   import {ref} from "vue";
-  import WbLayer from "@/components/workbook2/WbLayer.vue";
 
   class Layer {
     value: number = 0;
