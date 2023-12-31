@@ -9,26 +9,36 @@
     <v-list>
       <v-list-item title="Navigation drawer"></v-list-item>
 
-      <NumberSlider v-model="count"></NumberSlider>
-
-
-      <v-text-field
-        v-model.number="count"
+      <NumberSlider
+        v-model="count"
         label="Count"
-        type="number"
-      ></v-text-field>
-      <v-text-field
+        :min="0"
+        :max="5"
+        :step="1"
+        @input="fenceUpdate"
+      ></NumberSlider>
+
+      <NumberSlider
         v-model="fence.fenceHeight"
         label="Fence height"
-        type="number"
-        @input="fence.update()"
-      ></v-text-field>
+        :min="10"
+        :max="50"
+        :step="1"
+        @input="fenceUpdate"
+      ></NumberSlider>
+
+<!--      <v-text-field-->
+<!--        v-model="fence.fenceHeight"-->
+<!--        label="Fence height"-->
+<!--        type="number"-->
+<!--        @input="fence.update()"-->
+<!--      ></v-text-field>-->
       <v-text-field
         v-model="fence.fenceMargin"
         label="Fence space"
         type="number"
         :rules="rules"
-        @input="fence.update()"
+        @input="fenceUpdate"
       ></v-text-field>
 
       <v-form @submit.prevent>
@@ -135,7 +145,7 @@
         </v-expansion-panels>
 
 
-        <v-btn type="submit" block class="mt-2" @click="someMethod">Submit</v-btn>
+        <v-btn type="submit" block class="mt-2" @click="someMethod2">Submit</v-btn>
       </v-form>
     </v-list>
   </v-navigation-drawer>
@@ -163,9 +173,9 @@
       this.root = document.documentElement;
     },
     methods: {
-      someMethod() {
-        // this.count++;
-        // this.lineHeight = 50;
+      fenceUpdate() {
+        this.fence.update();
+        console.log("fenceUpdate")
       },
       someMethod2() {
         // if (this.lineHeight > 50)

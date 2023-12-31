@@ -2,13 +2,12 @@
   <v-menu :close-on-content-click="false" :location="'center'">
     <template v-slot:activator="{ props }">
       <v-text-field
-        label="Width"
+        :label="label"
+        :readonly="true"
         variant="underlined"
         hide-details
         v-bind="props"
         v-model="model"
-        :readonly="true"
-
         style="cursor: pointer"
       ></v-text-field>
     </template>
@@ -18,64 +17,59 @@
         <v-slider
           v-model="model"
           direction="vertical"
-          :min="0"
-          :max="5"
-          :step="1"
+          :min="min"
+          :max="max"
+          :step="step"
+          @update:modelValue="updateModelValue"
         ></v-slider>
       </v-card-text>
     </v-card>
   </v-menu>
+
 </template>
 
-<script lang="ts" setup>
-  // import { defineModel } from "vue";
-  // const model = defineModel();
-  // console.log(model);
+<script setup lang="ts">
+  import { defineModel, defineProps, defineEmits } from "vue";
 
-  import { computed } from "vue";
+  const model = defineModel();
 
   const props = defineProps({
-    modelValue: {
-      type: [String, Number],
+    label: {
+      type: String,
       default: ''
-    }
-  })
-
-
-  const emit = defineEmits(['update:modelValue'])
-  const model = computed({
-    get () {
-      return props.modelValue
     },
-    set (value) {
-      return emit('update:modelValue', value)
+    min: {
+      type: Number,
+      default: 0,
+    },
+    max: {
+      type: Number,
+      default: 5,
+    },
+    step: {
+      type: Number,
+      default: 1,
+    },
+    input1: {
+      type: Function
     }
-  })
+  });
+
+  const emit = defineEmits(['input'])
+
+  const updateModelValue = function() {
+    emit('input');
+  }
+
+  // blah();
+
+  // const emit = defineEmits<{
+  //   input: []
+  //   // change: [id: number]
+  //   // update: [value: string]
+  // }>()
 </script>
-<!--<script lang="ts">-->
-<!--  import { defineComponent, defineModel } from "vue";-->
 
-
-<!--  // let vModel = defineModel('value', {-->
-<!--  //   required: true,-->
-<!--  //   type: Number-->
-<!--  // });-->
-
-
-<!--  export default defineComponent({-->
-<!--    props: {-->
-
-<!--    },-->
-
-<!--    setup(props, ctx) {-->
-<!--      let model = defineModel();-->
-
-<!--      return () => {-->
-<!--        model: model-->
-<!--      };-->
-<!--    },-->
-<!--  });-->
-<!--</script>-->
 
 <style scoped>
 
