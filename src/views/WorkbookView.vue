@@ -77,21 +77,11 @@
                   v-model="fence.baseBorderStyle"
                 ></StylePicker>
 
-                <v-menu :close-on-content-click="false">
-                  <template v-slot:activator="{ props }">
-                    <v-btn v-bind="props" :style="swatchStyle(fence.baseBorderColor)" elevation="0"></v-btn>
-                  </template>
-                  <v-card>
-                    <v-card-text class="pa-0">
-                      <v-color-picker
-                        v-model="fence.baseBorderColor"
-                        :hide-inputs="true"
-                        :modes="['rgb']"
-                        flat
-                      />
-                    </v-card-text>
-                  </v-card>
-                </v-menu>
+                <ColorPicker
+                  variant="underlined"
+                  hide-details
+                  v-model="fence.baseBorderColor"
+                />
               </div>
 
               <v-text-field
