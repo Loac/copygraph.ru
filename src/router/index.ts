@@ -24,6 +24,11 @@ const routes = [
         name: 'Workbook',
         component: () => import('@/views/WorkbookView.vue'),
       },
+      {
+        path: 'workbook2',
+        name: 'Workbook2',
+        component: () => import('@/views/Workbook2View.vue'),
+      },
     ],
   },
 ]
