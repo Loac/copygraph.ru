@@ -9,6 +9,12 @@
     <v-list>
       <v-list-item title="Navigation drawer"></v-list-item>
 
+      <ColorPicker
+        variant="underlined"
+        hide-details
+        v-model="fence.baseBorderColor"
+      />
+
       <v-form @submit.prevent>
         <v-expansion-panels
           variant="accordion"
@@ -118,9 +124,11 @@
   import {Fence} from "@/components/workbook/Fence";
   import NumberPicker from "@/components/NumberPicker.vue";
   import StylePicker from "@/components/StylePicker.vue";
+  import ColorPicker from "@/components/ColorPicker.vue";
 
   export default defineComponent({
     components: {
+      ColorPicker,
       StylePicker,
       NumberPicker,
       TheWorkbook

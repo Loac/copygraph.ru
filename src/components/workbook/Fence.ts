@@ -8,7 +8,7 @@ export class Fence {
   basePosition: number = 3;
   baseHeight: number = 10;
   baseTop: number = 10;
-  baseBorderColor: string = "green";
+  baseBorderColor: string = "#AA4444";
   baseBorderStyle: string = "solid";
   baseBorderWidth: number = 1;
 
