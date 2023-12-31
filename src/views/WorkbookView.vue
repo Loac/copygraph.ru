@@ -16,29 +16,29 @@
           <v-expansion-panel elevation="1">
             <v-expansion-panel-title>Fence</v-expansion-panel-title>
             <v-expansion-panel-text>
-              <NumberSlider
+              <NumberPicker
                 v-model="count"
                 label="Count"
                 :min="0"
                 :max="20"
                 @input="fenceUpdate"
-              ></NumberSlider>
+              ></NumberPicker>
 
-              <NumberSlider
+              <NumberPicker
                 v-model="fence.fenceHeight"
                 label="Fence height"
                 :min="10"
                 :max="50"
                 @input="fenceUpdate"
-              ></NumberSlider>
+              ></NumberPicker>
 
-              <NumberSlider
+              <NumberPicker
                 v-model="fence.fenceMargin"
                 label="Fence space"
                 :min="0"
                 :max="20"
                 @input="fenceUpdate"
-              ></NumberSlider>
+              ></NumberPicker>
             </v-expansion-panel-text>
           </v-expansion-panel>
 
@@ -58,13 +58,13 @@
             <v-expansion-panel-title>Base</v-expansion-panel-title>
             <v-expansion-panel-text>
               <div class="d-flex align-end">
-                <NumberSlider
+                <NumberPicker
                   v-model="fence.baseBorderWidth"
                   label="Fence height"
                   :min="0"
                   :max="5"
                   @input="fenceUpdate"
-                ></NumberSlider>
+                ></NumberPicker>
 
                 <StylePicker
                   label="Style"
@@ -114,13 +114,13 @@
   import {defineComponent, ref} from 'vue'
   import TheWorkbook from "@/components/workbook/TheWorkbook.vue";
   import {Fence} from "@/components/workbook/Fence";
-  import NumberSlider from "@/components/NumberSlider.vue";
+  import NumberPicker from "@/components/NumberPicker.vue";
   import StylePicker from "@/components/StylePicker.vue";
 
   export default defineComponent({
     components: {
       StylePicker,
-      NumberSlider,
+      NumberPicker,
       TheWorkbook
     },
     props: {
