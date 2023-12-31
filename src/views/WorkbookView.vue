@@ -60,7 +60,7 @@
               <div class="d-flex align-end">
                 <NumberPicker
                   v-model="fence.baseBorderWidth"
-                  label="Fence height"
+                  label="Width"
                   :min="0"
                   :max="5"
                   @input="fenceUpdate"
@@ -77,10 +77,12 @@
                   </template>
                   <v-card>
                     <v-card-text class="pa-0">
-                      <v-color-picker v-model="fence.baseBorderColor"
-                                      :hide-inputs="true"
-                                      :modes="['rgb']"
-                                      flat />
+                      <v-color-picker
+                        v-model="fence.baseBorderColor"
+                        :hide-inputs="true"
+                        :modes="['rgb']"
+                        flat
+                      />
                     </v-card-text>
                   </v-card>
                 </v-menu>
@@ -135,7 +137,6 @@
     methods: {
       fenceUpdate() {
         this.fence.update();
-        console.log("fenceUpdate")
       },
       someMethod2() {
         // if (this.lineHeight > 50)
