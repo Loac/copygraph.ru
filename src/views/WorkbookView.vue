@@ -9,33 +9,6 @@
     <v-list>
       <v-list-item title="Navigation drawer"></v-list-item>
 
-      <NumberSlider
-        v-model="count"
-        label="Count"
-        :min="0"
-        :max="5"
-        :step="1"
-        @input="fenceUpdate"
-      ></NumberSlider>
-
-      <NumberSlider
-        v-model="fence.fenceHeight"
-        label="Fence height"
-        :min="10"
-        :max="50"
-        :step="1"
-        @input="fenceUpdate"
-      ></NumberSlider>
-
-      <NumberSlider
-        v-model="fence.fenceMargin"
-        label="Fence space"
-        :min="0"
-        :max="20"
-        :step="1"
-        @input="fenceUpdate"
-      ></NumberSlider>
-
       <v-form @submit.prevent>
         <v-expansion-panels
           variant="accordion"
@@ -43,8 +16,29 @@
           <v-expansion-panel elevation="1">
             <v-expansion-panel-title>Fence</v-expansion-panel-title>
             <v-expansion-panel-text>
+              <NumberSlider
+                v-model="count"
+                label="Count"
+                :min="0"
+                :max="20"
+                @input="fenceUpdate"
+              ></NumberSlider>
 
+              <NumberSlider
+                v-model="fence.fenceHeight"
+                label="Fence height"
+                :min="10"
+                :max="50"
+                @input="fenceUpdate"
+              ></NumberSlider>
 
+              <NumberSlider
+                v-model="fence.fenceMargin"
+                label="Fence space"
+                :min="0"
+                :max="20"
+                @input="fenceUpdate"
+              ></NumberSlider>
             </v-expansion-panel-text>
           </v-expansion-panel>
 
@@ -64,49 +58,18 @@
             <v-expansion-panel-title>Base</v-expansion-panel-title>
             <v-expansion-panel-text>
               <div class="d-flex align-end">
-                <v-menu :close-on-content-click="false" :location="'center'">
-                  <template v-slot:activator="{ props }">
-                    <v-text-field
-                      label="Width"
-                      variant="underlined"
-                      hide-details
-                      v-bind="props"
-                      v-model="fence.baseBorderWidth"
-                      :readonly="true"
-                      @input="fence.update()"
-                      style="cursor: pointer"
-                    ></v-text-field>
-                  </template>
+                <NumberSlider
+                  v-model="fence.baseBorderWidth"
+                  label="Fence height"
+                  :min="0"
+                  :max="5"
+                  @input="fenceUpdate"
+                ></NumberSlider>
 
-                  <v-card>
-                    <v-card-text class="pa-5">
-                      <v-slider
-                        v-model="fence.baseBorderWidth"
-                        direction="vertical"
-                        :min="0"
-                        :max="5"
-                        :step="1"
-                      ></v-slider>
-                    </v-card-text>
-                  </v-card>
-                </v-menu>
-
-                <v-select
+                <StylePicker
                   label="Style"
-                  variant="underlined"
-                  hide-details
                   v-model="fence.baseBorderStyle"
-                  :items="[{
-                      title: 'Dotted',
-                      value: 'dotted'
-                    }, {
-                      title: 'Dashed',
-                      value: 'dashed'
-                    }, {
-                      title: 'Solid',
-                      value: 'solid'
-                    }]"
-                  ></v-select>
+                ></StylePicker>
 
                 <v-menu :close-on-content-click="false">
                   <template v-slot:activator="{ props }">
@@ -152,9 +115,11 @@
   import TheWorkbook from "@/components/workbook/TheWorkbook.vue";
   import {Fence} from "@/components/workbook/Fence";
   import NumberSlider from "@/components/NumberSlider.vue";
+  import StylePicker from "@/components/StylePicker.vue";
 
   export default defineComponent({
     components: {
+      StylePicker,
       NumberSlider,
       TheWorkbook
     },
