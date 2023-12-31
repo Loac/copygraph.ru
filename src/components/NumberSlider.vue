@@ -28,13 +28,32 @@
 </template>
 
 <script lang="ts" setup>
-  import { defineModel } from "vue";
-  const model = defineModel();
-  console.log(model);
-</script>
+  // import { defineModel } from "vue";
+  // const model = defineModel();
+  // console.log(model);
 
+  import { computed } from "vue";
+
+  const props = defineProps({
+    modelValue: {
+      type: [String, Number],
+      default: ''
+    }
+  })
+
+
+  const emit = defineEmits(['update:modelValue'])
+  const model = computed({
+    get () {
+      return props.modelValue
+    },
+    set (value) {
+      return emit('update:modelValue', value)
+    }
+  })
+</script>
 <!--<script lang="ts">-->
-<!--  import { defineComponent } from "vue";-->
+<!--  import { defineComponent, defineModel } from "vue";-->
 
 
 <!--  // let vModel = defineModel('value', {-->
@@ -42,34 +61,19 @@
 <!--  //   type: Number-->
 <!--  // });-->
 
+
 <!--  export default defineComponent({-->
 <!--    props: {-->
-<!--      model: {}-->
+
 <!--    },-->
-<!--    data () {-->
-<!--      console.log(this.model);-->
-<!--      return {-->
-<!--        content: this.model-->
-<!--      }-->
+
+<!--    setup(props, ctx) {-->
+<!--      let model = defineModel();-->
+
+<!--      return () => {-->
+<!--        model: model-->
+<!--      };-->
 <!--    },-->
-<!--    methods: {-->
-<!--      handleInput (e) {-->
-<!--        this.$emit('input', this.content)-->
-<!--      }-->
-<!--    },-->
-<!--    // props: {-->
-<!--    //   // value: {-->
-<!--    //   //   type: Number,-->
-<!--    //   //   required: true,-->
-<!--    //   // },-->
-<!--    //   //       myMod: {-->
-<!--    //   //-->
-<!--    //   //   type: Number-->
-<!--    //   // },-->
-<!--    //   input: {-->
-<!--    //     type: Function-->
-<!--    //   },-->
-<!--    // },-->
 <!--  });-->
 <!--</script>-->
 
