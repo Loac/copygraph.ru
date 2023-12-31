@@ -9,6 +9,27 @@
     <v-list>
       <v-list-item title="Navigation drawer"></v-list-item>
 
+      <NumberSlider v-model="count"></NumberSlider>
+
+      <v-text-field
+        v-model.number="count"
+        label="Count"
+        type="number"
+      ></v-text-field>
+      <v-text-field
+        v-model="fence.fenceHeight"
+        label="Fence height"
+        type="number"
+        @input="fence.update()"
+      ></v-text-field>
+      <v-text-field
+        v-model="fence.fenceMargin"
+        label="Fence space"
+        type="number"
+        :rules="rules"
+        @input="fence.update()"
+      ></v-text-field>
+
       <v-form @submit.prevent>
         <v-expansion-panels
           variant="accordion"
@@ -16,24 +37,8 @@
           <v-expansion-panel elevation="1">
             <v-expansion-panel-title>Fence</v-expansion-panel-title>
             <v-expansion-panel-text>
-              <v-text-field
-                v-model.number="count"
-                label="Count"
-                type="number"
-              ></v-text-field>
-              <v-text-field
-                v-model="fence.fenceHeight"
-                label="Fence height"
-                type="number"
-                @input="fence.update()"
-              ></v-text-field>
-              <v-text-field
-                v-model="fence.fenceMargin"
-                label="Fence space"
-                type="number"
-                :rules="rules"
-                @input="fence.update()"
-              ></v-text-field>
+
+
             </v-expansion-panel-text>
           </v-expansion-panel>
 
@@ -140,9 +145,11 @@
   import {defineComponent, ref} from 'vue'
   import TheWorkbook from "@/components/workbook/TheWorkbook.vue";
   import {Fence} from "@/components/workbook/Fence";
+  import NumberSlider from "@/components/NumberSlider.vue";
 
   export default defineComponent({
     components: {
+      NumberSlider,
       TheWorkbook
     },
     props: {
