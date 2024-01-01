@@ -37,7 +37,7 @@
   defineProps({
     workbook: Workbook
   });
-  
+
   // Равный интервал.
   // let rhythmDelay: number = 4;
   // let rhythm: Array<number> = [6,2,2,2,2];

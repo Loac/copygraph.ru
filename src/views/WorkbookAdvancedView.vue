@@ -29,6 +29,7 @@
             <v-card-text>
               <WorkbookOffset v-model="layer.offset" label="Offset" />
               <WorkbookRhythm v-model.rhythm="layer.rhythm" label="Rhythm" />
+              <LineStyleField v-model="layer.lineStyle" />
             </v-card-text>
             <v-divider></v-divider>
           </v-card>
@@ -50,6 +51,7 @@
   import WorkbookOffset from "@/components/workbookAdvanced/WorkbookOffset.vue";
   import WorkbookRhythm from "@/components/workbookAdvanced/WorkbookRhythm.vue";
   import { ref } from "vue";
+  import LineStyleField from "@/components/LineStyleField.vue";
 
 
 
