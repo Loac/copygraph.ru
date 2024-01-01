@@ -11,7 +11,7 @@
 
     <div class="layers">
       <div class="layer" v-for="(layer, index) in workbook.layers" :key="index">
-        <WorkbookLayer v-model="layer.offset" label="" />
+        <WorkbookOffset v-model="layer.offset" label="Offset" />
         <WorkbookRhythm v-model.rhythm="layer.rhythm" label="Rhythm" />
       </div>
     </div>
@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
   import WorkbookAdvanced, { Workbook, Layer } from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
-  import WorkbookLayer from "@/components/workbookAdvanced/WorkbookLayer.vue";
+  import WorkbookOffset from "@/components/workbookAdvanced/WorkbookOffset.vue";
   import { ref } from "vue";
   import WorkbookRhythm from "@/components/workbookAdvanced/WorkbookRhythm.vue";
 

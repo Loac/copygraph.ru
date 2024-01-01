@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import {defineModel, defineProps} from "vue";
+  import {defineModel, defineProps} from "vue";
 
   const [model, modifiers] = defineModel({
     set(value: string) {
