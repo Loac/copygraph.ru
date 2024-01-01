@@ -11,7 +11,8 @@
 
     <div class="layers">
       <div class="layer" v-for="(layer, index) in workbook.layers" :key="index">
-        <WorkbookLayer v-model="workbook.layers[index].offset" />
+        <WorkbookLayer v-model="layer.offset" label="" />
+        <WorkbookRhythm v-model.rhythm="layer.rhythm" label="Rhythm" />
       </div>
     </div>
 
@@ -21,7 +22,8 @@
 <script setup lang="ts">
   import WorkbookAdvanced, { Workbook, Layer } from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
   import WorkbookLayer from "@/components/workbookAdvanced/WorkbookLayer.vue";
-  import {ref, CSSProperties} from "vue";
+  import { ref } from "vue";
+  import WorkbookRhythm from "@/components/workbookAdvanced/WorkbookRhythm.vue";
 
 
   const workbook = ref(new Workbook());
@@ -50,7 +52,7 @@
 
   const printLayers = () => {
     for (let index in workbook.value.layers) {
-      console.log(workbook.value.layers[index].offset);
+      console.log(workbook.value.layers[index].rhythm.values());
     }
   }
 </script>
