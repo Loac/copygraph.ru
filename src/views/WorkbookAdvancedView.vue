@@ -28,11 +28,19 @@
             :key="index"
           >
             <v-card-text>
-              <WorkbookOffset v-model="layer.offset" label="Offset" />
+              <NumberPicker v-model="layer.offset" label="Offset" :max="16" />
               <WorkbookRhythm v-model.rhythm="layer.rhythm" label="Rhythm" />
               <LineStyleField v-model="layer.lineStyle" />
             </v-card-text>
             <v-card-actions>
+              <v-btn
+                rounded="xs"
+                size="small"
+                variant="text"
+                :prepend-icon="layer.visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
+                :color="layer.visible ? 'blue' : 'grey'"
+                @click="showLayer(index)"
+              >Visible</v-btn>
               <v-btn
                 rounded="xs"
                 size="small"
@@ -53,10 +61,10 @@
 <script setup lang="ts">
   import { Layer, Workbook } from "@/components/copygraph/WorkbookAdvanced";
   import WorkbookAdvanced from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
-  import WorkbookOffset from "@/components/workbookAdvanced/WorkbookOffset.vue";
   import WorkbookRhythm from "@/components/workbookAdvanced/WorkbookRhythm.vue";
-  import { ref } from "vue";
+  import {onMounted, ref} from "vue";
   import LineStyleField from "@/components/LineStyleField.vue";
+  import NumberPicker from "@/components/NumberPicker.vue";
 
 
   const workbook = ref(new Workbook());
@@ -70,21 +78,14 @@
     layer.lineStyle.color = '#AAAAAA';
 
     workbook.value.layers.push(layer);
-
-    // let layer2 = new Layer();
-    // layer2.offset = 4;
-    // layer2.rhythm = [4, 12];
-    // layer2.lineStyle = {
-    //   style: 'solid',
-    //   width: 1,
-    //   color: '#555555'
-    // }
-    //
-    // workbook.value.layers.push(layer2);
   }
 
   const removeLayer = (index: number) => {
     workbook.value.layers.splice(index, 1);
+  }
+
+  const showLayer = (index: number) => {
+    workbook.value.layers[index].visible = !workbook.value.layers[index].visible;
   }
 
   const printLayers = () => {
@@ -92,6 +93,24 @@
       console.log(workbook.value.layers[index].rhythm.values());
     }
   }
+
+  onMounted(() => {
+    addLayer();
+
+    let layer2 = new Layer();
+    layer2.offset = 4;
+    layer2.rhythm = [4, 12];
+    layer2.lineStyle = {
+      style: 'solid',
+      width: 1,
+      color: '#555555'
+    }
+
+    // перенести методы для работы со слоями в класс.
+    // добавить возможность скрыть показать слой v-if или как-то иначе. нан можно через атрибут компонента.
+
+    workbook.value.layers.push(layer2);
+  })
 </script>
 
 <style>

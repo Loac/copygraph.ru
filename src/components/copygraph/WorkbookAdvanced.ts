@@ -13,6 +13,7 @@ export class Workbook {
  * Слой со строками. Содержит параметры линии, размер отступа и ритм отображения.
  */
 export class Layer {
+    visible: boolean = true;
     offset: number = 0;
     rhythm: Array<number> = [];
     lineStyle: LineStyle = new LineStyle();

@@ -5,18 +5,22 @@
         <div class="worksheet">
           <div
             v-for="(layer, index) in workbook?.layers"
+            :visible="layer.visible"
             class="layer"
             :style="layerStyle(layer.offset)"
             :key="index"
           >
-            <div class="bar" v-for="index in 10" :key="index">
-              <div
-                v-for="(offset, index) in layer.rhythm"
-                class="line"
-                :style="lineStyle(offset, layer.lineStyle)"
-                :key="index"
-              ></div>
+            <div v-if="layer.visible">
+              <div class="bar" v-for="index in 10" :key="index">
+                <div
+                  v-for="(offset, index) in layer.rhythm"
+                  class="line"
+                  :style="lineStyle(offset, layer.lineStyle)"
+                  :key="index"
+                ></div>
+              </div>
             </div>
+
           </div>
 <!--          <div class="layer" :style="layerStyle(rhythm2Delay)">-->
 <!--            <div class="bar" v-for="index in 10" :key="index">-->
