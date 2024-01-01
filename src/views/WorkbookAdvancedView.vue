@@ -1,7 +1,12 @@
 <template>
   <WorkbookAdvanced :workbook="workbook"/>
 
-  <v-navigation-drawer location="right">
+  <v-navigation-drawer
+    location="right"
+    class="workbook-advanced-drawer"
+    :permanent="true"
+    :width="300"
+  >
     <v-list>
       <v-list-item title="Navigation drawer"></v-list-item>
     </v-list>
@@ -9,12 +14,35 @@
     <v-btn @click="addLayer">Add</v-btn>
     <v-btn @click="printLayers">Print</v-btn>
 
-    <div class="layers">
-      <div class="layer" v-for="(layer, index) in workbook.layers" :key="index">
-        <WorkbookOffset v-model="layer.offset" label="Offset" />
-        <WorkbookRhythm v-model.rhythm="layer.rhythm" label="Rhythm" />
-      </div>
-    </div>
+    <v-expansion-panels
+      variant="accordion"
+      class="no-padding"
+      :multiple="true">
+      <v-expansion-panel elevation="0">
+        <v-expansion-panel-title>Layers</v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <v-card
+            v-for="(layer, index) in workbook.layers"
+            variant="flat"
+            :key="index"
+          >
+            <template v-slot:append>
+
+            </template>
+            <v-card-text>
+              <WorkbookOffset v-model="layer.offset" label="Offset" />
+              <WorkbookRhythm v-model.rhythm="layer.rhythm" label="Rhythm" />
+            </v-card-text>
+            <v-divider></v-divider>
+          </v-card>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+    </v-expansion-panels>
+
+
+
+
+
 
   </v-navigation-drawer>
 </template>
@@ -57,6 +85,8 @@
   }
 </script>
 
-<style scoped>
-
+<style>
+  .workbook-advanced-drawer .v-expansion-panel-text__wrapper {
+    padding: 0 !important;
+  }
 </style>

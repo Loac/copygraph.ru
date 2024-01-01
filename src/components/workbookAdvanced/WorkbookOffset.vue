@@ -2,6 +2,7 @@
   <v-text-field
     v-model.number="model"
     variant="underlined"
+    hide-details
     :label="label"
   ></v-text-field>
 </template>
