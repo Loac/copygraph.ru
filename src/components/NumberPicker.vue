@@ -29,9 +29,9 @@
 </template>
 
 <script setup lang="ts">
-  import { defineModel, defineProps, defineEmits } from "vue";
+  import { defineModel, defineProps, defineEmits, ModelRef } from "vue";
 
-  const model = defineModel();
+  const model:ModelRef<number> = defineModel({ required: true });
 
   const props = defineProps({
     label: {

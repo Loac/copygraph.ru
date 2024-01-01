@@ -22,9 +22,9 @@
 </template>
 
 <script setup lang="ts">
-  import { defineModel } from "vue";
+  import { defineModel, ModelRef } from "vue";
 
-  const model = defineModel();
+  const model:ModelRef<string> = defineModel({ required: true });
 
   const swatchStyle = function(model: any) {
       return {
