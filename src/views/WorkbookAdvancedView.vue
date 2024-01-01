@@ -17,7 +17,8 @@
     <v-expansion-panels
       variant="accordion"
       class="no-padding"
-      :multiple="true">
+      :multiple="true"
+    >
       <v-expansion-panel elevation="0">
         <v-expansion-panel-title>Layers</v-expansion-panel-title>
         <v-expansion-panel-text>
@@ -31,17 +32,21 @@
               <WorkbookRhythm v-model.rhythm="layer.rhythm" label="Rhythm" />
               <LineStyleField v-model="layer.lineStyle" />
             </v-card-text>
+            <v-card-actions>
+              <v-btn
+                rounded="xs"
+                size="small"
+                prepend-icon="mdi-close-thick"
+                color="red-darken-1"
+                variant="text"
+                @click="removeLayer(index)"
+              >Remove</v-btn>
+            </v-card-actions>
             <v-divider></v-divider>
           </v-card>
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
-
-
-
-
-
-
   </v-navigation-drawer>
 </template>
 
@@ -52,7 +57,6 @@
   import WorkbookRhythm from "@/components/workbookAdvanced/WorkbookRhythm.vue";
   import { ref } from "vue";
   import LineStyleField from "@/components/LineStyleField.vue";
-
 
 
   const workbook = ref(new Workbook());
@@ -77,6 +81,10 @@
     // }
     //
     // workbook.value.layers.push(layer2);
+  }
+
+  const removeLayer = (index: number) => {
+    workbook.value.layers.splice(index, 1);
   }
 
   const printLayers = () => {
