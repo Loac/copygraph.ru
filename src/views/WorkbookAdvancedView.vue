@@ -26,9 +26,6 @@
             variant="flat"
             :key="index"
           >
-            <template v-slot:append>
-
-            </template>
             <v-card-text>
               <WorkbookOffset v-model="layer.offset" label="Offset" />
               <WorkbookRhythm v-model.rhythm="layer.rhythm" label="Rhythm" />
@@ -48,10 +45,12 @@
 </template>
 
 <script setup lang="ts">
-  import WorkbookAdvanced, { Workbook, Layer } from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
+  import { Layer, Workbook } from "@/components/copygraph/WorkbookAdvanced";
+  import WorkbookAdvanced from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
   import WorkbookOffset from "@/components/workbookAdvanced/WorkbookOffset.vue";
-  import { ref } from "vue";
   import WorkbookRhythm from "@/components/workbookAdvanced/WorkbookRhythm.vue";
+  import { ref } from "vue";
+
 
 
   const workbook = ref(new Workbook());

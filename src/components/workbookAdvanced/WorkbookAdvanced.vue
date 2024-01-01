@@ -30,13 +30,14 @@
 </template>
 
 <script setup lang="ts">
+  import { Workbook } from "@/components/copygraph/WorkbookAdvanced";
+
   let fractionHeight: number = 2;
 
   defineProps({
     workbook: Workbook
   });
-
-
+  
   // Равный интервал.
   // let rhythmDelay: number = 4;
   // let rhythm: Array<number> = [6,2,2,2,2];
@@ -72,29 +73,10 @@
 </script>
 
 <script lang="ts">
-  export class Workbook {
-    fractionHeight: number = 3;
-    pageHeight: number = 0;
-    pageWidth: number = 0;
-    pagePadding: number = 0;
-    layers: Array<Layer> = [];
-  }
-
-  /**
-   * Слой со строками. Содержит параметры линии, размер отступа и ритм отображения.
-   */
-  export class Layer {
-    offset: number = 0;
-    rhythm: Array<number> = [];
-    lineStyle: LineStyle = new LineStyle();
-  }
+  import {LineStyle} from "@/components/copygraph/Copygraph";
 
 
-  export class LineStyle {
-    width: number = 1;
-    style: string = 'solid';
-    color: string = '#000000';
-  }
+
 </script>
 
 <style scoped>
