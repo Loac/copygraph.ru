@@ -3,16 +3,26 @@
     <div class="workbook">
       <div class="page">
         <div class="worksheet">
-          <div class="layer" :style="layerStyle(rhythmDelay)">
+          <div
+            v-for="(layer, index) in workbook?.layers"
+            class="layer"
+            :style="layerStyle(layer.offset)"
+            :key="index"
+          >
             <div class="bar" v-for="index in 10" :key="index">
-              <div class="line" v-for="(beat, index) in rhythm" :style="lineStyle(beat)" :key="index"></div>
+              <div
+                v-for="(offset, index) in layer.rhythm"
+                class="line"
+                :style="lineStyle(offset, layer.lineStyle)"
+                :key="index"
+              ></div>
             </div>
           </div>
-          <div class="layer" :style="layerStyle(rhythm2Delay)">
-            <div class="bar" v-for="index in 10" :key="index">
-              <div class="line2" v-for="(beat, index) in rhythm2" :style="lineStyle(beat)" :key="index"></div>
-            </div>
-          </div>
+<!--          <div class="layer" :style="layerStyle(rhythm2Delay)">-->
+<!--            <div class="bar" v-for="index in 10" :key="index">-->
+<!--              <div class="line2" v-for="(beat, index) in rhythm2" :style="lineStyle(beat)" :key="index"></div>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
       </div>
     </div>
@@ -21,6 +31,11 @@
 
 <script setup lang="ts">
   let fractionHeight: number = 2;
+
+  defineProps({
+    workbook: Workbook
+  });
+
 
   // Равный интервал.
   // let rhythmDelay: number = 4;
@@ -35,26 +50,51 @@
   // let rhythm2: Array<number> = [1, 12];
 
   // С увеличенный интервал.
-  let rhythmDelay: number = 6;
-  let rhythm: Array<number> = [8,2,2,2,2];
-  let rhythm2Delay: number = 4;
-  let rhythm2: Array<number> = [4, 12];
+  // let rhythmDelay: number = 6;
+  // let rhythm: Array<number> = [8,2,2,2,2];
+  // let rhythm2Delay: number = 4;
+  // let rhythm2: Array<number> = [4, 12];
 
-  // rhythm, beat, tempo, pulse, meter
-
-  const layerStyle = (delay: number) => {
+  const layerStyle = (offset: number) => {
     return {
-      marginTop: (fractionHeight * delay - fractionHeight) * -1 + 'mm'
+      marginTop: (fractionHeight * offset - fractionHeight) * -1 + 'mm'
     }
   }
 
-  const lineStyle = (beat: number) => {
+  const lineStyle = (offset: number, lineStyle: LineStyle) => {
+
     return {
       height: fractionHeight + 'mm',
-      marginTop: (fractionHeight * beat - fractionHeight) + 'mm'
+      marginTop: (fractionHeight * offset - fractionHeight) + 'mm',
+      borderTop: lineStyle.width + 'px ' + lineStyle.style + ' ' + lineStyle.color
     }
   }
+</script>
 
+<script lang="ts">
+  export class Workbook {
+    fractionHeight: number = 3;
+    pageHeight: number = 0;
+    pageWidth: number = 0;
+    pagePadding: number = 0;
+    layers: Array<Layer> = [];
+  }
+
+  /**
+   * Слой со строками. Содержит параметры линии, размер отступа и ритм отображения.
+   */
+  export class Layer {
+    offset: number = 0;
+    rhythm: Array<number> = [];
+    lineStyle: LineStyle = new LineStyle();
+  }
+
+
+  export class LineStyle {
+    width: number = 1;
+    style: string = 'solid';
+    color: string = '#000000';
+  }
 </script>
 
 <style scoped>
@@ -82,14 +122,6 @@
     .layer {
       position: absolute;
       width: 100%;
-    }
-
-    .line {
-      border-top: 1px dashed #999999;
-    }
-
-    .line2 {
-      border-top: 1px solid #000000;
     }
 
     .bar:nth-child(1n) {
