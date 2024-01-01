@@ -38,23 +38,7 @@
     workbook: Workbook
   });
 
-  // Равный интервал.
-  // let rhythmDelay: number = 4;
-  // let rhythm: Array<number> = [6,2,2,2,2];
-  // let rhythm2Delay: number = 2;
-  // let rhythm2: Array<number> = [2, 12];
 
-  // С уменьшенный интервал.
-  // let rhythmDelay: number = 3;
-  // let rhythm: Array<number> = [5,2,2,2,2];
-  // let rhythm2Delay: number = 1;
-  // let rhythm2: Array<number> = [1, 12];
-
-  // С увеличенный интервал.
-  // let rhythmDelay: number = 6;
-  // let rhythm: Array<number> = [8,2,2,2,2];
-  // let rhythm2Delay: number = 4;
-  // let rhythm2: Array<number> = [4, 12];
 
   const layerStyle = (offset: number) => {
     return {
@@ -74,9 +58,6 @@
 
 <script lang="ts">
   import {LineStyle} from "@/components/copygraph/Copygraph";
-
-
-
 </script>
 
 <style scoped>
@@ -113,5 +94,4 @@
       background: rgba(200, 0, 0, .0);
     }
   }
-
 </style>

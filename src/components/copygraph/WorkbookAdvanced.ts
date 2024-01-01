@@ -5,6 +5,7 @@ export class Workbook {
     pageHeight: number = 0;
     pageWidth: number = 0;
     pagePadding: number = 0;
+    pageOrientation: string = 'portrait';
     layers: Array<Layer> = [];
 }
 
