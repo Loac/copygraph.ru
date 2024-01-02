@@ -26,7 +26,6 @@
   import ColorPicker from "@/components/ColorPicker.vue";
   import { defineModel } from "vue";
   import {LineStyle} from "@/components/copygraph/Copygraph";
-  import {tr} from "vuetify/locale";
 
   const model = defineModel<LineStyle>({
     required: true

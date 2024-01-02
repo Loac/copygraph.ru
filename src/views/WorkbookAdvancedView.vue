@@ -28,9 +28,15 @@
             :key="index"
           >
             <v-card-text>
-              <NumberPicker v-model="layer.offset" label="Offset" :max="16" />
-              <WorkbookRhythm v-model.rhythm="layer.rhythm" label="Rhythm" />
-              <LineStyleField v-model="layer.lineStyle" />
+              <v-form>
+                <div class="d-flex">
+                  <NumberPicker v-model="layer.offset" label="Offset" :max="16" />
+                  <WorkbookRhythm v-model.rhythm="layer.rhythm" label="Rhythm" />
+                </div>
+                <div class="div mt-4">
+                  <LineStyleField v-model="layer.lineStyle" />
+                </div>
+              </v-form>
             </v-card-text>
             <v-card-actions>
               <v-btn
