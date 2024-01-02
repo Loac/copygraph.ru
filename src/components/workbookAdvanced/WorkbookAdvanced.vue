@@ -6,7 +6,7 @@
           <div
             v-for="(layer, index) in workbook.layers"
             class="layer"
-            :style="layerStyle(layer.offset)"
+            :style="workbook.layerStyle(layer.offset)"
             :key="index"
           >
             <template v-if="layer.visible">
@@ -14,7 +14,7 @@
                 <div
                   v-for="(offset, index) in layer.rhythm"
                   class="line"
-                  :style="lineStyle(offset, layer.lineStyle)"
+                  :style="workbook.lineStyle(offset, layer.lineStyle)"
                   :key="index"
                 ></div>
               </div>
@@ -29,33 +29,16 @@
 <script setup lang="ts">
   import { Workbook } from "@/components/copygraph/WorkbookAdvanced";
 
-  let fractionHeight: number = 2;
-
   defineProps({
     workbook: {
       required: true,
       type: Workbook
     }
   });
-
-
-  const layerStyle = (offset: number) => {
-    return {
-      marginTop: (fractionHeight * offset - fractionHeight) * -1 + 'mm'
-    }
-  }
-
-  const lineStyle = (offset: number, lineStyle: LineStyle) => {
-    return {
-      height: fractionHeight + 'mm',
-      marginTop: (fractionHeight * offset - fractionHeight) + 'mm',
-      borderTop: lineStyle.width + 'px ' + lineStyle.style + ' ' + lineStyle.color
-    }
-  }
 </script>
 
 <script lang="ts">
-  import { LineStyle } from "@/components/copygraph/Copygraph";
+
 </script>
 
 <style scoped>
@@ -76,6 +59,7 @@
     .worksheet {
       position: relative;
       border: 1px solid #ddd;
+      overflow: hidden;
       width: 100%;
       height: 100%;
     }

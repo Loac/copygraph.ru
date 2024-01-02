@@ -1,11 +1,12 @@
 import { LineStyle } from "@/components/copygraph/Copygraph";
 import {th} from "vuetify/locale";
+import {StyleValue} from "vue";
 
 export class Workbook {
     fractionHeight: number = 3;
     pageHeight: number = 297;
     pageWidth: number = 210;
-    pagePadding: number = 0;
+    pagePadding: number = 10;
     pageOrientation: string = 'portrait';
     layers: Array<Layer> = [];
 
@@ -39,6 +40,19 @@ export class Workbook {
 
     addLayer(layer: Layer): void {
       this.layers.push(layer);
+    }
+
+    layerStyle(offset: number): StyleValue {
+      return {
+        marginTop: (this.fractionHeight * offset - this.fractionHeight) * -1 + 'mm'
+      }
+    }
+    lineStyle(offset: number, lineStyle: LineStyle): StyleValue {
+      return {
+        height: this.fractionHeight + 'mm',
+        marginTop: (this.fractionHeight * offset - this.fractionHeight) + 'mm',
+        borderTop: lineStyle.width + 'px ' + lineStyle.style + ' ' + lineStyle.color
+      }
     }
 }
 

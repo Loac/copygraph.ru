@@ -44,6 +44,24 @@
                   :disabled="true"
                 />
               </div>
+              <div class="d-flex mt-4 ga-4">
+                <NumberPicker
+                  v-model="workbook.pagePadding"
+                  label="Padding"
+                  suffix="mm"
+                  :min="0"
+                  :max="20"
+                  :step="1"
+                />
+                <NumberPicker
+                  v-model="workbook.fractionHeight"
+                  label="Fraction"
+                  suffix="mm"
+                  :min="0.5"
+                  :max="10"
+                  :step="0.1"
+                />
+              </div>
             </v-card-text>
           </v-card>
         </v-expansion-panel-text>
