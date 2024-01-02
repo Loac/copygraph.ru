@@ -59,8 +59,13 @@
             <v-card-text>
               <v-form>
                 <div class="d-flex">
-                  <NumberPicker v-model="layer.offset" label="Offset" :max="16" />
-                  <WorkbookRhythm v-model.rhythm="layer.rhythm" label="Rhythm" />
+                  <NumberPicker
+                    v-model="layer.offset"
+                    label="Offset"
+                    :max="16" />
+                  <WorkbookRhythm
+                    v-model.rhythm="layer.rhythm"
+                    label="Rhythm" />
                 </div>
                 <div class="div mt-4">
                   <LineStyleField v-model="layer.lineStyle" />

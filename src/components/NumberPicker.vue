@@ -7,6 +7,7 @@
         variant="underlined"
         hide-details
         style="cursor: pointer"
+        :suffix="suffix"
         :label="label"
         :readonly="true"
       ></v-text-field>
@@ -50,8 +51,9 @@
       type: Number,
       default: 1,
     },
-    input1: {
-      type: Function
+    suffix: {
+      type: String,
+      default: '',
     }
   });
 
