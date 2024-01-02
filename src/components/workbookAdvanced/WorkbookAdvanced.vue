@@ -4,13 +4,12 @@
       <div class="page">
         <div class="worksheet">
           <div
-            v-for="(layer, index) in workbook?.layers"
-            :visible="layer.visible"
+            v-for="(layer, index) in workbook.layers"
             class="layer"
             :style="layerStyle(layer.offset)"
             :key="index"
           >
-            <div v-if="layer.visible">
+            <template v-if="layer.visible">
               <div class="bar" v-for="index in 10" :key="index">
                 <div
                   v-for="(offset, index) in layer.rhythm"
@@ -19,14 +18,8 @@
                   :key="index"
                 ></div>
               </div>
-            </div>
-
+            </template>
           </div>
-<!--          <div class="layer" :style="layerStyle(rhythm2Delay)">-->
-<!--            <div class="bar" v-for="index in 10" :key="index">-->
-<!--              <div class="line2" v-for="(beat, index) in rhythm2" :style="lineStyle(beat)" :key="index"></div>-->
-<!--            </div>-->
-<!--          </div>-->
         </div>
       </div>
     </div>
@@ -39,9 +32,11 @@
   let fractionHeight: number = 2;
 
   defineProps({
-    workbook: Workbook
+    workbook: {
+      required: true,
+      type: Workbook
+    }
   });
-
 
 
   const layerStyle = (offset: number) => {
@@ -51,7 +46,6 @@
   }
 
   const lineStyle = (offset: number, lineStyle: LineStyle) => {
-
     return {
       height: fractionHeight + 'mm',
       marginTop: (fractionHeight * offset - fractionHeight) + 'mm',
@@ -61,7 +55,7 @@
 </script>
 
 <script lang="ts">
-  import {LineStyle} from "@/components/copygraph/Copygraph";
+  import { LineStyle } from "@/components/copygraph/Copygraph";
 </script>
 
 <style scoped>
