@@ -3,8 +3,8 @@ import {th} from "vuetify/locale";
 
 export class Workbook {
     fractionHeight: number = 3;
-    pageHeight: number = 0;
-    pageWidth: number = 0;
+    pageHeight: number = 297;
+    pageWidth: number = 210;
     pagePadding: number = 0;
     pageOrientation: string = 'portrait';
     layers: Array<Layer> = [];

@@ -20,6 +20,35 @@
       :multiple="true"
     >
       <v-expansion-panel elevation="0">
+        <v-expansion-panel-title>Page</v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <v-card variant="flat">
+            <v-card-text>
+              <div class="d-flex ga-4">
+                <v-text-field
+                  v-model="workbook.pageWidth"
+                  label="Height"
+                  variant="underlined"
+                  suffix="mm"
+                  hide-details
+                  :readonly="true"
+                  :disabled="true"
+                />
+                <v-text-field
+                  v-model="workbook.pageHeight"
+                  label="Width"
+                  variant="underlined"
+                  suffix="mm"
+                  hide-details
+                  :readonly="true"
+                  :disabled="true"
+                />
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+      <v-expansion-panel elevation="0">
         <v-expansion-panel-title>Layers</v-expansion-panel-title>
         <v-expansion-panel-text>
           <v-card

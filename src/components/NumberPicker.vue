@@ -2,13 +2,13 @@
   <v-menu :close-on-content-click="false" :location="'center'">
     <template v-slot:activator="{ props }">
       <v-text-field
-        :label="label"
-        :readonly="true"
+        v-model="model"
+        v-bind="props"
         variant="underlined"
         hide-details
-        v-bind="props"
-        v-model="model"
         style="cursor: pointer"
+        :label="label"
+        :readonly="true"
       ></v-text-field>
     </template>
 
