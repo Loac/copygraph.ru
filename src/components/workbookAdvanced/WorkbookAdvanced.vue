@@ -10,7 +10,7 @@
             :key="index"
           >
             <template v-if="layer.visible">
-              <div class="bar" v-for="index in 10" :key="index">
+              <div class="bar" v-for="index in workbook.lineCount()" :key="index">
                 <div
                   v-for="(offset, index) in layer.rhythm"
                   class="line"
@@ -90,6 +90,10 @@
         marginTop: (this.fractionHeight * offset - this.fractionHeight) + 'mm',
         borderTop: lineStyle.width + 'px ' + lineStyle.style + ' ' + lineStyle.color
       }
+    }
+
+    lineCount():number {
+      return Math.round(this.pageHeight / this.fractionHeight);
     }
   }
 
