@@ -7,7 +7,7 @@ export const printToPdf = (): void => {
     // Преобразовать `HTMLCollectionOf<Element>` в `HTMLElement[]`.
     // Это необязательно, но TS ругается на несоответсвие типов данных.
     // Непонятно, но с преобразованием, для параметров метода `html2PDF()` отваливается параметр `margin`.
-    for (let i = 0; i < nodes.length; i++) {
+    for (let i: number = 0; i < nodes.length; i++) {
       const page: Element | null = nodes.item(i);
       if (page instanceof HTMLElement)
         pages.push(page);
