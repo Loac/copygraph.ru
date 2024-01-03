@@ -11,6 +11,11 @@
       <v-btn @click="printToPdf()" text="Print" />
     </v-toolbar>
 
+    <v-select
+      label="Preset"
+      :items="presetList"
+    />
+
     <v-expansion-panels
       variant="accordion"
       class="no-padding"
@@ -139,11 +144,33 @@
   import LineStyleField from "@/components/LineStyleField.vue";
   import NumberPicker from "@/components/NumberPicker.vue";
   import {printToPdf} from "@/components/copygraph/Print";
+  import preset from "@/assets/presets/A4-6x6.json";
 
   const workbook = ref(new Workbook());
 
+  const readPresets = (): Array<string> => {
+    const presets = import.meta.glob('@/assets/presets/*.json');
+    let presetList: Array<string> = [];
+
+    for (let path in presets) {
+      presets[path]().then((preset) => {
+        //  Сформировать объект из JSON
+        // let data: PresetData = CopybookJson;
+        // console.log(path, preset);
+        presetList.push(preset.name);
+      });
+    }
+
+    return presetList;
+  }
+
+  let presetList = readPresets();
+
   onMounted(() => {
-    workbook.value.addNewLayer()
+    workbook.value.addNewLayer();
+
+    console.log(readPresets());
+
 
     let layer = new Layer();
     layer.offset = 4;
