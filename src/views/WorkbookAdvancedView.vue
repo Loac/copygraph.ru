@@ -56,7 +56,8 @@
                   suffix="mm"
                   :min="0.5"
                   :max="10"
-                  :step="0.1"
+                  :step="0.01"
+                  :readonly="false"
                 />
               </div>
             </v-card-text>

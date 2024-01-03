@@ -1,0 +1,31 @@
+{
+  "format": "0.2",
+  "name": "A4 6x6",
+  "fractionHeight": 3,
+  "pageHeight": 297,
+  "pageWidth": 210,
+  "pagePadding": 10,
+  "pageOrientation": "portrait",
+  "layers": [
+    {
+      "visible": true,
+      "offset": 6,
+      "rhythm": [8,2,2,2,2],
+      "lineStyle": {
+        "width": 1,
+        "style": "solid",
+        "color": "#999999"
+      }
+    },
+    {
+      "visible": true,
+      "offset": 4,
+      "rhythm": [4,12],
+      "lineStyle": {
+        "width": 1,
+        "style": "solid",
+        "color": "#000000"
+      }
+    }
+  ]
+}

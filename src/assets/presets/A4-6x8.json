@@ -1,10 +1,7 @@
 {
   "format": "0.2",
-  "name": "Example",
-  "style": {
-    "font": "Gloria script"
-  },
-  "fractionHeight": 3,
+  "name": "A4 6x8",
+  "fractionHeight": 2.68,
   "pageHeight": 297,
   "pageWidth": 210,
   "pagePadding": 10,
@@ -12,8 +9,8 @@
   "layers": [
     {
       "visible": true,
-      "offset": 6,
-      "rhythm": [8,2,2,2,2],
+      "offset": 3,
+      "rhythm": [5,2,2,2,2],
       "lineStyle": {
         "width": 1,
         "style": "solid",
@@ -22,8 +19,8 @@
     },
     {
       "visible": true,
-      "offset": 4,
-      "rhythm": [4,12],
+      "offset": 1,
+      "rhythm": [1,12],
       "lineStyle": {
         "width": 1,
         "style": "solid",

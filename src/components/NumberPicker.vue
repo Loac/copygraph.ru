@@ -9,7 +9,7 @@
         style="cursor: pointer"
         :suffix="suffix"
         :label="label"
-        :readonly="true"
+        :readonly="readonly"
       ></v-text-field>
     </template>
 
@@ -39,21 +39,25 @@
       type: String,
       default: ''
     },
+    readonly: {
+      type: Boolean,
+      default: true,
+    },
     min: {
       type: Number,
-      default: 0,
+      default: 0
     },
     max: {
       type: Number,
-      default: 5,
+      default: 5
     },
     step: {
       type: Number,
-      default: 1,
+      default: 1
     },
     suffix: {
       type: String,
-      default: '',
+      default: ''
     }
   });
 
