@@ -106,6 +106,14 @@
     rhythm: Array<number> = [];
     lineStyle: LineStyle = new LineStyle();
   }
+
+  export function px(value: number):string {
+    return value + 'px';
+  }
+
+  export function mm(value: number):string {
+    return value + 'mm';
+  }
 </script>
 
 <style scoped>
@@ -115,17 +123,17 @@
     }
 
     .page {
-      position: relative;
       background: white;
+      position: relative;
       box-shadow: var(--cg-page-shadow);
-      height: var(--cg-page-height);
-      padding: var(--cg-page-indent);
-      width: var(--cg-page-width);
+      width: v-bind('mm(workbook.pageWidth)');
+      height: v-bind('mm(workbook.pageHeight)');
+      padding: v-bind('mm(workbook.pagePadding)');
     }
 
     .worksheet {
       position: relative;
-      border: 1px solid #ddd;
+      border: 0 solid #ddd;
       overflow: hidden;
       width: 100%;
       height: 100%;

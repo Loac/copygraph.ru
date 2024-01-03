@@ -27,7 +27,7 @@
               <div class="d-flex ga-4">
                 <v-text-field
                   v-model="workbook.pageWidth"
-                  label="Height"
+                  label="Width"
                   variant="underlined"
                   suffix="mm"
                   hide-details
@@ -36,7 +36,7 @@
                 />
                 <v-text-field
                   v-model="workbook.pageHeight"
-                  label="Width"
+                  label="Height"
                   variant="underlined"
                   suffix="mm"
                   hide-details
