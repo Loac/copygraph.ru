@@ -117,7 +117,7 @@
 </template>
 
 <script setup lang="ts">
-  import { Layer, Workbook } from "@/components/copygraph/WorkbookAdvanced";
+  import { Layer, Workbook } from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
   import WorkbookAdvanced from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
   import WorkbookRhythm from "@/components/workbookAdvanced/WorkbookRhythm.vue";
   import {onMounted, ref} from "vue";
