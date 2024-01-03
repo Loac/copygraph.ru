@@ -11,6 +11,8 @@
   "dependencies": {
     "@mdi/font": "7.0.96",
     "core-js": "^3.29.0",
+    "jspdf": "^2.5.1",
+    "jspdf-html2canvas": "^1.5.1",
     "markdown-it": "^14.0.0",
     "raw-loader": "^4.0.2",
     "roboto-fontface": "*",
@@ -22,6 +24,7 @@
   },
   "devDependencies": {
     "@babel/types": "^7.21.4",
+    "@types/jspdf": "^2.0.0",
     "@types/markdown-it": "^13.0.7",
     "@types/node": "^18.15.0",
     "@vitejs/plugin-vue": "^4.0.0",

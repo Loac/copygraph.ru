@@ -12,7 +12,7 @@
     </v-list>
 
     <v-btn @click="workbook.addNewLayer()">Add</v-btn>
-    <v-btn @click="printLayers">Print</v-btn>
+    <v-btn @click="printToPdf()">Print</v-btn>
 
     <v-expansion-panels
       variant="accordion"
@@ -123,15 +123,9 @@
   import {onMounted, ref} from "vue";
   import LineStyleField from "@/components/LineStyleField.vue";
   import NumberPicker from "@/components/NumberPicker.vue";
-
+  import {printToPdf} from "@/components/copygraph/Print";
 
   const workbook = ref(new Workbook());
-
-  const printLayers = () => {
-    for (let index in workbook.value.layers) {
-      console.log(workbook.value.layers[index].rhythm.values());
-    }
-  }
 
   onMounted(() => {
     workbook.value.addNewLayer()
@@ -146,7 +140,7 @@
     }
 
     workbook.value.addLayer(layer);
-  })
+  });
 </script>
 
 <style>
