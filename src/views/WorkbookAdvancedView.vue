@@ -119,7 +119,7 @@
 <script setup lang="ts">
   import { Layer, Workbook } from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
   import WorkbookAdvanced from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
-  import WorkbookRhythm from "@/components/workbookAdvanced/WorkbookRhythm.vue";
+  import WorkbookRhythm from "@/components/workbookAdvanced/form/WorkbookRhythm.vue";
   import {onMounted, ref} from "vue";
   import LineStyleField from "@/components/LineStyleField.vue";
   import NumberPicker from "@/components/NumberPicker.vue";
