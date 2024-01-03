@@ -7,12 +7,9 @@
     :permanent="true"
     :width="300"
   >
-    <v-list>
-      <v-list-item title="Navigation drawer"></v-list-item>
-    </v-list>
-
-    <v-btn @click="workbook.addNewLayer()">Add</v-btn>
-    <v-btn @click="printToPdf()">Print</v-btn>
+    <v-toolbar>
+      <v-btn @click="printToPdf()" text="Print" />
+    </v-toolbar>
 
     <v-expansion-panels
       variant="accordion"
@@ -69,47 +66,64 @@
       <v-expansion-panel elevation="0">
         <v-expansion-panel-title>Layers</v-expansion-panel-title>
         <v-expansion-panel-text>
+          <v-card variant="flat">
+            <v-card-actions>
+              <v-btn
+                rounded="xs"
+                size="small"
+                prepend-icon="mdi-plus"
+                color="green-darken-1"
+                variant="text"
+                text="Add"
+                @click="workbook.addNewLayer()"
+              />
+            </v-card-actions>
+          </v-card>
+
           <v-card
             v-for="(layer, index) in workbook.layers"
             variant="flat"
             :key="index"
           >
+            <v-divider></v-divider>
             <v-card-text>
-              <v-form>
-                <div class="d-flex">
-                  <NumberPicker
-                    v-model="layer.offset"
-                    label="Offset"
-                    :max="16" />
-                  <WorkbookRhythm
-                    v-model.rhythm="layer.rhythm"
-                    label="Rhythm" />
-                </div>
-                <div class="div mt-4">
-                  <LineStyleField v-model="layer.lineStyle" />
-                </div>
-              </v-form>
+              <div class="d-flex">
+                <NumberPicker
+                  v-model="layer.offset"
+                  label="Offset"
+                  :max="16"
+                />
+                <WorkbookRhythm
+                  v-model.rhythm="layer.rhythm"
+                  label="Rhythm"
+                />
+              </div>
+              <div class="div mt-4">
+                <LineStyleField v-model="layer.lineStyle" />
+              </div>
             </v-card-text>
             <v-card-actions>
               <v-btn
                 rounded="xs"
                 size="small"
                 variant="text"
+                text="Visible"
                 :prepend-icon="layer.visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
                 :color="layer.visible ? 'blue' : 'grey'"
                 @click="workbook.showLayer(layer)"
-              >Visible</v-btn>
+              />
               <v-btn
                 rounded="xs"
                 size="small"
                 prepend-icon="mdi-close-thick"
                 color="red-darken-1"
                 variant="text"
+                text="Remove"
                 @click="workbook.removeLayer(layer)"
-              >Remove</v-btn>
+              />
             </v-card-actions>
-            <v-divider></v-divider>
           </v-card>
+
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
