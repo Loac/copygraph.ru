@@ -105,6 +105,7 @@
       this.fractionHeight = preset.fractionHeight;
       this.pageHeight = preset.pageHeight;
       this.pageWidth = preset.pageWidth;
+      this.pagePadding = preset.pagePadding;
       this.pageOrientation = preset.pageOrientation;
 
       this.removeLayerAll();
@@ -130,6 +131,7 @@
     fractionHeight: number = 3;
     pageHeight: number = 297;
     pageWidth: number = 210;
+    pagePadding: number = 10;
     pageOrientation: string = 'portrait';
     layers: Array<Layer> = [];
   }
