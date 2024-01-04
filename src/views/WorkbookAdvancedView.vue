@@ -9,21 +9,33 @@
   >
     <v-toolbar>
       <v-btn @click="printToPdf" text="Print" />
+      <v-btn @click="savePreset" text="Save" />
+      <v-btn @click="loadPreset" text="Load" />
     </v-toolbar>
-
-    <v-select
-      v-model="activePreset"
-      label="Preset"
-      item-title="name"
-      :items="presets"
-      @update:modelValue="acceptPreset"
-    />
 
     <v-expansion-panels
       variant="accordion"
       class="no-padding"
       :multiple="true"
     >
+      <v-expansion-panel elevation="0">
+        <v-expansion-panel-title>Preset</v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <v-card variant="flat">
+            <v-card-text>
+              <v-select
+                v-model="activePreset"
+                label="Preset"
+                item-title="name"
+                variant="underlined"
+                :items="presets"
+                @update:modelValue="acceptPreset"
+              />
+            </v-card-text>
+          </v-card>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+
       <v-expansion-panel elevation="0">
         <v-expansion-panel-title>Page</v-expansion-panel-title>
         <v-expansion-panel-text>
@@ -140,17 +152,28 @@
 </template>
 
 <script setup lang="ts">
-import {Preset, Workbook} from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
+  import {Preset, Workbook} from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
   import WorkbookAdvanced from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
   import WorkbookRhythm from "@/components/workbookAdvanced/form/WorkbookRhythm.vue";
   import {onMounted, ref} from "vue";
   import LineStyleField from "@/components/LineStyleField.vue";
   import NumberPicker from "@/components/NumberPicker.vue";
   import {printToPdf} from "@/components/copygraph/Print";
+  import { useCookies } from "vue3-cookies";
 
   const workbook = ref(new Workbook());
   const presets = ref<Array<Preset>>([]);
   const activePreset = ref('');
+  const { cookies } = useCookies();
+
+  const savePreset = (): void => {
+    cookies.set('preset', JSON.stringify(presets.value[0]));
+  }
+
+  const loadPreset = (): void => {
+    let preset = cookies.get("preset");
+    console.log(preset);
+  }
 
   const readPresets = async (): Promise<unknown> => {
     const presets = import.meta.glob('@/assets/presets/*.json');
