@@ -107,6 +107,12 @@
     lineStyle: LineStyle = new LineStyle();
   }
 
+  export class Preset {
+    format: string = '';
+    name: string = '';
+    fractionHeight: number = 3;
+  }
+
   export function px(value: number):string {
     return value + 'px';
   }

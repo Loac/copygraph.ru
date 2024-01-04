@@ -16,8 +16,6 @@
       :items="presetList"
     />
 
-    <div v-for="preset in presetList"> {{preset}} </div>
-
     <v-expansion-panels
       variant="accordion"
       class="no-padding"
@@ -139,14 +137,13 @@
 </template>
 
 <script setup lang="ts">
-  import { Layer, Workbook } from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
+import {Layer, Preset, Workbook} from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
   import WorkbookAdvanced from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
   import WorkbookRhythm from "@/components/workbookAdvanced/form/WorkbookRhythm.vue";
   import {onMounted, ref} from "vue";
   import LineStyleField from "@/components/LineStyleField.vue";
   import NumberPicker from "@/components/NumberPicker.vue";
   import {printToPdf} from "@/components/copygraph/Print";
-  import preset from "@/assets/presets/A4-6x6.json";
 
   const workbook = ref(new Workbook());
 
@@ -154,28 +151,28 @@
     const presets = import.meta.glob('@/assets/presets/*.json');
 
     let promises = [];
-    for (let path in presets) {
+    for (let path in presets)
       promises.push(presets[path]());
-    }
 
     return Promise.all(promises);
   }
 
   // let presetList = readPresets();
-  let presetList = ref([]);
+  let presetList = ref<Array<string>>([]);
   // console.log(presetList);
 
   onMounted(() => {
     workbook.value.addNewLayer();
 
-    let aa = readPresets();
-    aa.then((data) => {
-      console.log("ALL");
-      console.log(data);
-      data.forEach((item) => {
-        presetList.value.push(item.name);
-      })
-    })
+    let presets = readPresets();
+    presets.then((data) => {
+      if (data instanceof Array) {
+        data.forEach((item) => {
+          const preset: Preset = item;
+          presetList.value.push(preset.name);
+        });
+      }
+    });
 
 
     // presetList.value = readPresets();
