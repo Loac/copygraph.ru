@@ -16,6 +16,8 @@
       :items="presetList"
     />
 
+    <div v-for="preset in presetList"> {{preset}} </div>
+
     <v-expansion-panels
       variant="accordion"
       class="no-padding"
@@ -148,28 +150,37 @@
 
   const workbook = ref(new Workbook());
 
-  const readPresets = (): Array<string> => {
+  const readPresets = async (): Promise<unknown> => {
     const presets = import.meta.glob('@/assets/presets/*.json');
-    let presetList: Array<string> = [];
 
+    let promises = [];
     for (let path in presets) {
-      presets[path]().then((preset) => {
-        //  Сформировать объект из JSON
-        // let data: PresetData = CopybookJson;
-        // console.log(path, preset);
-        presetList.push(preset.name);
-      });
+      promises.push(presets[path]());
     }
 
-    return presetList;
+    return Promise.all(promises);
   }
 
-  let presetList = readPresets();
+  // let presetList = readPresets();
+  let presetList = ref([]);
+  // console.log(presetList);
 
   onMounted(() => {
     workbook.value.addNewLayer();
 
-    console.log(readPresets());
+    let aa = readPresets();
+    aa.then((data) => {
+      console.log("ALL");
+      console.log(data);
+      data.forEach((item) => {
+        presetList.value.push(item.name);
+      })
+    })
+
+
+    // presetList.value = readPresets();
+    // console.log('after readPresets');
+    // console.log(presetList);
 
 
     let layer = new Layer();
