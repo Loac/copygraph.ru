@@ -54,6 +54,10 @@
       }
     }
 
+    removeLayerAll(): void {
+      this.layers = [];
+    }
+
     showLayer(layer: Layer): void {
       const index: number = this.layers.indexOf(layer);
       if (index !== -1) {
@@ -95,6 +99,19 @@
     lineCount():number {
       return Math.round(this.pageHeight / this.fractionHeight);
     }
+
+    acceptPreset(preset: Preset) {
+      this.fractionHeight = preset.fractionHeight;
+      this.fractionHeight = preset.fractionHeight;
+      this.pageHeight = preset.pageHeight;
+      this.pageWidth = preset.pageWidth;
+      this.pageOrientation = preset.pageOrientation;
+
+      this.removeLayerAll();
+      preset.layers.forEach((layer) => {
+        this.addLayer(layer);
+      });
+    }
   }
 
   /**
@@ -111,6 +128,10 @@
     format: string = '';
     name: string = '';
     fractionHeight: number = 3;
+    pageHeight: number = 297;
+    pageWidth: number = 210;
+    pageOrientation: string = 'portrait';
+    layers: Array<Layer> = [];
   }
 
   export function px(value: number):string {

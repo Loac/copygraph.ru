@@ -13,7 +13,7 @@
       "rhythm": [8,2,2,2,2],
       "lineStyle": {
         "width": 1,
-        "style": "solid",
+        "style": "dashed",
         "color": "#999999"
       }
     },

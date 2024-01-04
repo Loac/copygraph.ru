@@ -8,12 +8,15 @@
     :width="300"
   >
     <v-toolbar>
-      <v-btn @click="printToPdf()" text="Print" />
+      <v-btn @click="printToPdf" text="Print" />
     </v-toolbar>
 
     <v-select
+      v-model="activePreset"
       label="Preset"
-      :items="presetList"
+      item-title="name"
+      :items="presets"
+      @update:modelValue="acceptPreset"
     />
 
     <v-expansion-panels
@@ -137,7 +140,7 @@
 </template>
 
 <script setup lang="ts">
-import {Layer, Preset, Workbook} from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
+import {Preset, Workbook} from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
   import WorkbookAdvanced from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
   import WorkbookRhythm from "@/components/workbookAdvanced/form/WorkbookRhythm.vue";
   import {onMounted, ref} from "vue";
@@ -146,50 +149,39 @@ import {Layer, Preset, Workbook} from "@/components/workbookAdvanced/WorkbookAdv
   import {printToPdf} from "@/components/copygraph/Print";
 
   const workbook = ref(new Workbook());
+  const presets = ref<Array<Preset>>([]);
+  const activePreset = ref('');
 
   const readPresets = async (): Promise<unknown> => {
     const presets = import.meta.glob('@/assets/presets/*.json');
-
-    let promises = [];
-    for (let path in presets)
+    const promises = [];
+    for (let path in presets) {
       promises.push(presets[path]());
-
+    }
     return Promise.all(promises);
   }
 
-  // let presetList = readPresets();
-  let presetList = ref<Array<string>>([]);
-  // console.log(presetList);
+  const acceptPreset = (presetName: string): void => {
+    const preset: Preset | undefined = presets.value.find((item) => item.name == presetName);
+    if (preset != undefined)
+      workbook.value.acceptPreset(preset);
+  }
 
   onMounted(() => {
-    workbook.value.addNewLayer();
-
-    let presets = readPresets();
-    presets.then((data) => {
+    let presetData = readPresets();
+    presetData.then((data) => {
       if (data instanceof Array) {
         data.forEach((item) => {
           const preset: Preset = item;
-          presetList.value.push(preset.name);
+          presets.value.push(preset);
         });
       }
+
+      if (presets.value.length > 0) {
+        activePreset.value = presets.value[0].name;
+        acceptPreset(activePreset.value);
+      }
     });
-
-
-    // presetList.value = readPresets();
-    // console.log('after readPresets');
-    // console.log(presetList);
-
-
-    let layer = new Layer();
-    layer.offset = 4;
-    layer.rhythm = [4, 12];
-    layer.lineStyle = {
-      style: 'solid',
-      width: 1,
-      color: '#555555'
-    }
-
-    workbook.value.addLayer(layer);
   });
 </script>
 
