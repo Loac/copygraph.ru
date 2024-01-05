@@ -1,6 +1,6 @@
 <template>
   <v-app-bar>
-    <v-app-bar-title>copygraph.ru</v-app-bar-title>
+    <v-app-bar-title>copygraph</v-app-bar-title>
 
     <router-link to="/">
       <v-btn prepend-icon="mdi-home-roof">Home</v-btn>
