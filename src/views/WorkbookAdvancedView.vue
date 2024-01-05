@@ -195,9 +195,22 @@
     presetData.then((data) => {
       if (data instanceof Array) {
         data.forEach((item) => {
-          const preset: Preset = item;
+          const preset: Preset = Preset.fromData(item);
+          // console.log(preset.constructor.name);
+          // console.log(data);
+          // console.log(preset);
+
+          const a: Array<number> = [1,2,3];
+          const b: Array<number> = [...a];
+          // a.forEach((item) => b.push(item));
+
+          b.push(4);
+          console.log(a);
+          console.log(b);
+
           presets.value.push(preset);
         });
+
       }
 
       if (presets.value.length > 0) {

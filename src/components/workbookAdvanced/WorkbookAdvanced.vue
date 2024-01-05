@@ -110,7 +110,7 @@
 
       this.removeLayerAll();
       preset.layers.forEach((layer) => {
-        this.addLayer(layer);
+        this.addLayer(Layer.fromData(layer));
       });
     }
   }
@@ -123,6 +123,18 @@
     offset: number = 0;
     rhythm: Array<number> = [];
     lineStyle: LineStyle = new LineStyle();
+
+    /**
+     * Сформировать новый слой из данных другого объекта.
+     */
+    static fromData(data: Layer): Layer {
+      const layer: Layer = new Layer();
+      layer.visible = data.visible;
+      layer.offset = data.offset;
+      layer.rhythm = [...data.rhythm];
+      layer.lineStyle = LineStyle.fromData(data.lineStyle);
+      return layer;
+    }
   }
 
   export class Preset {
@@ -134,6 +146,25 @@
     pagePadding: number = 10;
     pageOrientation: string = 'portrait';
     layers: Array<Layer> = [];
+
+    /**
+     * Сформировать новый пресет из данных другого объекта.
+     */
+    static fromData(data: Preset): Preset {
+      const preset: Preset = new Preset();
+      preset.name = data.name;
+      preset.fractionHeight = data.fractionHeight;
+      preset.pageHeight = data.pageHeight;
+      preset.pageWidth = data.pageWidth;
+      preset.pagePadding = data.pagePadding;
+      preset.pageOrientation = data.pageOrientation;
+
+      data.layers.forEach((item) => {
+        preset.layers.push(Layer.fromData(item));
+      });
+
+      return preset;
+    }
   }
 
   export function px(value: number):string {
