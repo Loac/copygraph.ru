@@ -54,6 +54,7 @@
                 v-model="activePreset"
                 label="Preset"
                 item-title="name"
+                item-value="id"
                 variant="underlined"
                 hide-details
                 :items="presets"
@@ -215,7 +216,11 @@
     console.log(preset);
   }
 
-  const readPresets = async (): Promise<unknown> => {
+  /**
+   * Загрузить пресеты из JSON-файлов. Метод вернет Promise,
+   * с загруженными данными.
+   */
+  const importPresets = async (): Promise<unknown> => {
     const presets = import.meta.glob('@/assets/presets/*.json');
     const promises = [];
     for (let path in presets) {
@@ -224,14 +229,11 @@
     return Promise.all(promises);
   }
 
-  const acceptPreset = (presetName: string): void => {
-    const preset: Preset | undefined = presets.value.find((item) => item.name == presetName);
-    if (preset != undefined)
-      workbook.value.acceptPreset(preset);
-  }
-
-  onMounted(() => {
-    let presetData = readPresets();
+  /**
+   * Обработать импорт пресетов и сформировать массив объектов Preset.
+   */
+  const buildPresets = (): void => {
+    let presetData = importPresets();
     presetData.then((data) => {
       if (data instanceof Array) {
         data.forEach((item) => presets.value.push(Preset.fromData(item)));
@@ -242,6 +244,19 @@
         acceptPreset(activePreset.value);
       }
     });
+  }
+
+  /**
+   * Найти и применить пресет к Workbook.
+   */
+  const acceptPreset = (presetName: string): void => {
+    const preset: Preset | undefined = presets.value.find((item) => item.name == presetName);
+    if (preset != undefined)
+      workbook.value.acceptPreset(preset);
+  }
+
+  onMounted(() => {
+    buildPresets();
   });
 </script>
 
