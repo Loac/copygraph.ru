@@ -65,6 +65,9 @@
       }
     }
 
+    /**
+     * Создать новый слой с базовыми значениями.
+     */
     newLayer(): Layer {
       const layer: Layer = new Layer();
       layer.offset = 6;
@@ -75,19 +78,32 @@
       return layer;
     }
 
+    /**
+     * Создать новый слой и добавить его в Workbook.
+     */
     addNewLayer(): void {
-      this.layers.push(this.newLayer());
+      this.addLayer(this.newLayer());
     }
 
+    /**
+     * Добавить слой в Workbook.
+     */
     addLayer(layer: Layer): void {
       this.layers.push(layer);
     }
 
+    /**
+     * Сформировать стиль отображения слоя.
+     */
     layerStyle(offset: number): StyleValue {
       return {
         marginTop: (this.fractionHeight * offset - this.fractionHeight) * -1 + 'mm'
       }
     }
+
+    /**
+     * Сформировать столь отображения линии.
+     */
     lineStyle(offset: number, lineStyle: LineStyle): StyleValue {
       return {
         height: this.fractionHeight + 'mm',
@@ -96,10 +112,16 @@
       }
     }
 
+    /**
+     * Вычислить количество линий на страницу.
+     */
     lineCount():number {
       return Math.round(this.pageHeight / this.fractionHeight);
     }
 
+    /**
+     * Применить пресет к Workbook.
+     */
     acceptPreset(preset: Preset) {
       this.fractionHeight = preset.fractionHeight;
       this.fractionHeight = preset.fractionHeight;
@@ -152,6 +174,7 @@
      */
     static fromData(data: Preset): Preset {
       const preset: Preset = new Preset();
+      preset.format = data.format;
       preset.name = data.name;
       preset.fractionHeight = data.fractionHeight;
       preset.pageHeight = data.pageHeight;
