@@ -9,8 +9,35 @@
   >
     <v-toolbar>
       <v-btn @click="printToPdf" text="Print" />
-      <v-btn @click="savePreset" text="Save" />
-      <v-btn @click="loadPreset" text="Load" />
+
+      <v-dialog
+        v-model="saveDialog"
+        width="auto"
+      >
+        <v-card>
+          <v-card-text>
+            <v-text-field
+              label="Name"
+              variant="underlined"
+              style="min-width: 200px"
+              hint="Preset are saved in cookies and will be available only you."
+              :persistent-hint="true"
+            />
+          </v-card-text>
+          <v-card-actions class="justify-end pr-3">
+            <v-btn
+              color="blue"
+              @click="saveDialog = false"
+              text="Save"
+            />
+            <v-btn
+              color="red-darken-1"
+              @click="saveDialog = false"
+              text="Cancel"
+            />
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-toolbar>
 
     <v-expansion-panels
@@ -28,10 +55,22 @@
                 label="Preset"
                 item-title="name"
                 variant="underlined"
+                hide-details
                 :items="presets"
                 @update:modelValue="acceptPreset"
               />
             </v-card-text>
+            <v-card-actions>
+              <v-btn
+                rounded="xs"
+                size="small"
+                variant="text"
+                text="Save"
+                color="blue"
+                prepend-icon="mdi-book-outline"
+                @click="saveDialog = true"
+              />
+            </v-card-actions>
           </v-card>
         </v-expansion-panel-text>
       </v-expansion-panel>
@@ -165,6 +204,7 @@
   const presets = ref<Array<Preset>>([]);
   const activePreset = ref('');
   const { cookies } = useCookies();
+  const saveDialog: boolean = ref(false);
 
   const savePreset = (): void => {
     cookies.set('preset', JSON.stringify(presets.value[0]));
