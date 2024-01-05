@@ -184,7 +184,6 @@
               />
             </v-card-actions>
           </v-card>
-
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
@@ -192,7 +191,6 @@
 </template>
 
 <script setup lang="ts">
-  import {Preset, Workbook} from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
   import WorkbookAdvanced from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
   import WorkbookRhythm from "@/components/workbookAdvanced/form/WorkbookRhythm.vue";
   import {onMounted, ref} from "vue";
@@ -200,6 +198,7 @@
   import NumberPicker from "@/components/NumberPicker.vue";
   import {printToPdf} from "@/components/copygraph/Print";
   import { useCookies } from "vue3-cookies";
+  import { Preset, Workbook } from "@/components/copygraph/Copygraph";
 
   const workbook = ref(new Workbook());
   const presets = ref<Array<Preset>>([]);
