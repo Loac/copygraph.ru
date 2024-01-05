@@ -1,5 +1,5 @@
 <template>
-  <WorkbookAdvanced :workbook="workbook"/>
+  <WorkbookAdvanced :workbook="copygraph.workbook" />
 
   <v-navigation-drawer
     location="right"
@@ -51,13 +51,13 @@
           <v-card variant="flat">
             <v-card-text>
               <v-select
-                v-model="activePreset"
+                v-model="copygraph.activePreset"
                 label="Preset"
                 item-title="name"
                 item-value="id"
                 variant="underlined"
                 hide-details
-                :items="presets"
+                :items="copygraph.presets"
                 @update:modelValue="acceptPreset"
               />
             </v-card-text>
@@ -83,7 +83,7 @@
             <v-card-text>
               <div class="d-flex ga-4">
                 <v-text-field
-                  v-model="workbook.pageWidth"
+                  v-model="copygraph.workbook.pageWidth"
                   label="Width"
                   variant="underlined"
                   suffix="mm"
@@ -92,7 +92,7 @@
                   :disabled="true"
                 />
                 <v-text-field
-                  v-model="workbook.pageHeight"
+                  v-model="copygraph.workbook.pageHeight"
                   label="Height"
                   variant="underlined"
                   suffix="mm"
@@ -103,7 +103,7 @@
               </div>
               <div class="d-flex mt-4 ga-4">
                 <NumberPicker
-                  v-model="workbook.pagePadding"
+                  v-model="copygraph.workbook.pagePadding"
                   label="Padding"
                   suffix="mm"
                   :min="0"
@@ -111,7 +111,7 @@
                   :step="1"
                 />
                 <NumberPicker
-                  v-model="workbook.fractionHeight"
+                  v-model="copygraph.workbook.fractionHeight"
                   label="Fraction"
                   suffix="mm"
                   :min="0.5"
@@ -136,13 +136,13 @@
                 color="green-darken-1"
                 variant="text"
                 text="Add"
-                @click="workbook.addNewLayer()"
+                @click="copygraph.workbook.addNewLayer()"
               />
             </v-card-actions>
           </v-card>
 
           <v-card
-            v-for="(layer, index) in workbook.layers"
+            v-for="(layer, index) in copygraph.workbook.layers"
             variant="flat"
             :key="index"
           >
@@ -171,7 +171,7 @@
                 text="Visible"
                 :prepend-icon="layer.visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
                 :color="layer.visible ? 'blue' : 'grey'"
-                @click="workbook.showLayer(layer)"
+                @click="copygraph.workbook.showLayer(layer)"
               />
               <v-btn
                 rounded="xs"
@@ -180,7 +180,7 @@
                 color="red-darken-1"
                 variant="text"
                 text="Remove"
-                @click="workbook.removeLayer(layer)"
+                @click="copygraph.workbook.removeLayer(layer)"
               />
             </v-card-actions>
           </v-card>
@@ -191,72 +191,45 @@
 </template>
 
 <script setup lang="ts">
-  import WorkbookAdvanced from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
-  import WorkbookRhythm from "@/components/workbookAdvanced/form/WorkbookRhythm.vue";
-  import {onMounted, ref} from "vue";
-  import LineStyleField from "@/components/LineStyleField.vue";
-  import NumberPicker from "@/components/NumberPicker.vue";
-  import {printToPdf} from "@/components/copygraph/Print";
-  import { useCookies } from "vue3-cookies";
-  import { Preset, Workbook } from "@/components/copygraph/Copygraph";
+    import WorkbookAdvanced from "@/components/workbookAdvanced/WorkbookAdvanced.vue";
+    import WorkbookRhythm from "@/components/workbookAdvanced/form/WorkbookRhythm.vue";
+    import LineStyleField from "@/components/LineStyleField.vue";
+    import NumberPicker from "@/components/NumberPicker.vue";
+    import { onMounted, ref } from "vue";
+    import { printToPdf } from "@/components/copygraph/Print";
+    import { useCookies } from "vue3-cookies";
+    import { Copygraph } from "@/components/copygraph/Copygraph";
 
-  const workbook = ref(new Workbook());
-  const presets = ref<Array<Preset>>([]);
-  const activePreset = ref('');
-  const { cookies } = useCookies();
-  const saveDialog: boolean = ref(false);
+    const { cookies } = useCookies();
+    const copygraph = ref(new Copygraph());
+    const saveDialog: boolean = ref(false);
 
-  const savePreset = (): void => {
-    cookies.set('preset', JSON.stringify(presets.value[0]));
-  }
-
-  const loadPreset = (): void => {
-    let preset = cookies.get("preset");
-    console.log(preset);
-  }
-
-  /**
-   * Загрузить пресеты из JSON-файлов. Метод вернет Promise,
-   * с загруженными данными.
-   */
-  const importPresets = async (): Promise<unknown> => {
-    const presets = import.meta.glob('@/assets/presets/*.json');
-    const promises = [];
-    for (let path in presets) {
-      promises.push(presets[path]());
+    const savePreset = (): void => {
+        cookies.set('preset', JSON.stringify(copygraph.value.presets[0]));
     }
-    return Promise.all(promises);
-  }
 
-  /**
-   * Обработать импорт пресетов и сформировать массив объектов Preset.
-   */
-  const buildPresets = (): void => {
-    let presetData = importPresets();
-    presetData.then((data) => {
-      if (data instanceof Array) {
-        data.forEach((item) => presets.value.push(Preset.fromData(item)));
-      }
+    const loadPreset = (): void => {
+        let preset = cookies.get("preset");
+    }
 
-      if (presets.value.length > 0) {
-        activePreset.value = presets.value[0].name;
-        acceptPreset(activePreset.value);
-      }
+    /**
+     * Костыль `workbook.fractionHeight`. Не понимаю, как еще
+     * заставить Vue перерисовать компонент.
+     */
+    const acceptPreset = (presetName: string): void => {
+        copygraph.value.workbook.fractionHeight = 1;
+        copygraph.value.acceptPreset(presetName);
+    }
+
+    onMounted(() => {
+        new Promise(() => {
+            copygraph.value.buildPresets().then((): void => {
+                copygraph.value.workbook.fractionHeight = 1;
+                copygraph.value.acceptPreset('A4 6x6');
+            });
+        });
     });
-  }
 
-  /**
-   * Найти и применить пресет к Workbook.
-   */
-  const acceptPreset = (presetName: string): void => {
-    const preset: Preset | undefined = presets.value.find((item) => item.name == presetName);
-    if (preset != undefined)
-      workbook.value.acceptPreset(preset);
-  }
-
-  onMounted(() => {
-    buildPresets();
-  });
 </script>
 
 <style>

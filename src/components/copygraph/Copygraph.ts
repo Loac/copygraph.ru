@@ -1,5 +1,52 @@
 import { StyleValue } from "vue";
 
+export class Copygraph {
+    presets: Array<Preset> = [];
+    activePreset: string = '';
+    workbook: Workbook = new Workbook();
+
+    /**
+     * Загрузить пресеты из JSON-файлов. Метод вернет Promise,
+     * с загруженными данными.
+     */
+    importPresets = async (): Promise<unknown> => {
+        const presets = import.meta.glob('@/assets/presets/*.json');
+        const promises: any[] = [];
+        for (const path in presets) {
+            promises.push(presets[path]());
+        }
+        return Promise.all(promises);
+    }
+
+    /**
+     * Обработать импорт пресетов и сформировать массив объектов Preset.
+     */
+    buildPresets = (): Promise<unknown> => {
+        const presetData: Promise<unknown> = this.importPresets();
+        return presetData.then((data): void => {
+            if (data instanceof Array) {
+                data.forEach((item) => this.presets.push(Preset.fromData(item)));
+            }
+
+            if (this.presets.length > 0) {
+                this.activePreset = this.presets[0].name;
+                this.acceptPreset(this.activePreset);
+            }
+        });
+    }
+
+    /**
+     * Найти и применить пресет к Workbook.
+     */
+    acceptPreset = (presetName: string): void => {
+        this.activePreset = presetName;
+        const preset: Preset | undefined = this.presets.find((item: Preset): boolean => item.name == presetName);
+        if (preset != undefined) {
+            this.workbook.acceptPreset(preset);
+        }
+    }
+}
+
 /**
  * Параметры стиля для линии разметки.
  */
