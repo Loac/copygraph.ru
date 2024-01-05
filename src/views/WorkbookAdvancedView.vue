@@ -10,10 +10,7 @@
     <v-toolbar>
       <v-btn @click="printToPdf" text="Print" />
 
-      <v-dialog
-        v-model="saveDialog"
-        width="auto"
-      >
+      <v-dialog v-model="saveDialog" width="auto">
         <v-card>
           <v-card-text>
             <v-text-field
@@ -25,26 +22,14 @@
             />
           </v-card-text>
           <v-card-actions class="justify-end pr-3">
-            <v-btn
-              color="blue"
-              @click="saveDialog = false"
-              text="Save"
-            />
-            <v-btn
-              color="red-darken-1"
-              @click="saveDialog = false"
-              text="Cancel"
-            />
+            <v-btn color="blue" text="Save" @click="saveDialog = false" />
+            <v-btn color="red-darken-1" text="Cancel" @click="saveDialog = false" />
           </v-card-actions>
         </v-card>
       </v-dialog>
     </v-toolbar>
 
-    <v-expansion-panels
-      variant="accordion"
-      class="no-padding"
-      :multiple="true"
-    >
+    <v-expansion-panels variant="accordion" class="no-padding" :multiple="true">
       <v-expansion-panel elevation="0">
         <v-expansion-panel-title>Preset</v-expansion-panel-title>
         <v-expansion-panel-text>
