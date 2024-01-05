@@ -71,11 +71,36 @@ export class Workbook {
     }
 
     /**
+     * Применить пресет к Workbook.
+     */
+    acceptPreset(preset: Preset): void {
+        this.fractionHeight = preset.fractionHeight;
+        this.fractionHeight = preset.fractionHeight;
+        this.pageHeight = preset.pageHeight;
+        this.pageWidth = preset.pageWidth;
+        this.pagePadding = preset.pagePadding;
+        this.pageOrientation = preset.pageOrientation;
+
+        this.removeLayerAll();
+        preset.layers.forEach((layer: Layer): void => {
+            this.addLayer(Layer.fromData(layer));
+        });
+    }
+
+    pageStyle(): StyleValue {
+        return {
+            width: this.pageWidth + 'mm',
+            height: this.pageHeight + 'mm',
+            padding: this.pagePadding + 'mm'
+        }
+    }
+
+    /**
      * Сформировать стиль отображения слоя.
      */
     layerStyle(offset: number): StyleValue {
         return {
-           marginTop: (this.fractionHeight * offset - this.fractionHeight) * -1 + 'mm'
+            marginTop: (this.fractionHeight * offset - this.fractionHeight) * -1 + 'mm'
         }
     }
 
@@ -91,27 +116,39 @@ export class Workbook {
     }
 
     /**
-     * Вычислить количество линий на страницу.
+     * Сформировать список объектов страницы для вывода.
+     * Необходимо сгенерировать столько линий, чтобы они
+     * заполнили весь лист. Для этого, необходимо подсчитывать
+     * примерную высоту каждой линии.
      */
-    lineCount(): number {
-        return Math.round(this.pageHeight / this.fractionHeight);
-    }
+    render(): RPage {
+        const rPage: RPage = new RPage();
+        rPage.style = this.pageStyle();
+        const lineHeight: number = this.fractionHeight;
 
-    /**
-     * Применить пресет к Workbook.
-     */
-    acceptPreset(preset: Preset): void {
-        this.fractionHeight = preset.fractionHeight;
-        this.fractionHeight = preset.fractionHeight;
-        this.pageHeight = preset.pageHeight;
-        this.pageWidth = preset.pageWidth;
-        this.pagePadding = preset.pagePadding;
-        this.pageOrientation = preset.pageOrientation;
+        this.layers
+            .filter((layer: Layer) => layer.visible)
+            .forEach((layer: Layer): void => {
+                const rLayer: RLayer = new RLayer();
+                rLayer.style = this.layerStyle(layer.offset);
 
-        this.removeLayerAll();
-        preset.layers.forEach((layer: Layer): void => {
-            this.addLayer(Layer.fromData(layer));
-        });
+                let height: number = 0;
+                while (height < this.pageHeight) {
+                    const rBar: RBar = new RBar();
+                    for (const key in layer.rhythm) {
+                        const rLine: RLine = new RLine();
+                        rLine.style = this.lineStyle(layer.rhythm[key], layer.lineStyle);
+
+                        rBar.addLine(rLine);
+                        height += lineHeight * layer.rhythm[key];
+                    }
+
+                    rLayer.addBar(rBar);
+                }
+                rPage.worksheet.addLayer(rLayer);
+            });
+
+        return rPage;
     }
 }
 
@@ -166,4 +203,38 @@ export class Preset {
 
         return preset;
     }
+}
+
+export class RPage {
+    style: StyleValue;
+    worksheet: RWorksheet = new RWorksheet();
+}
+
+export class RWorksheet {
+    layers: Array<RLayer> = [];
+
+    addLayer(layer: RLayer): void {
+        this.layers.push(layer);
+    }
+}
+
+export class RLayer {
+    style: StyleValue;
+    bars: Array<RBar> = [];
+
+    addBar(bar: RBar): void {
+        this.bars.push(bar);
+    }
+}
+
+export class RBar {
+    lines: Array<RLine> = [];
+
+    addLine(line: RLine): void {
+        this.lines.push(line);
+    }
+}
+
+export class RLine {
+    style: StyleValue;
 }

@@ -1,24 +1,12 @@
 <template>
   <div class="area">
     <div class="workbook">
-      <div class="page">
+      <div class="page" :style="page.style">
         <div class="worksheet">
-          <div
-            v-for="(layer, index) in workbook.layers"
-            class="layer"
-            :style="workbook.layerStyle(layer.offset)"
-            :key="index"
-          >
-            <template v-if="layer.visible">
-              <div class="bar" v-for="index in workbook.lineCount()" :key="index">
-                <div
-                  v-for="(offset, index) in layer.rhythm"
-                  class="line"
-                  :style="workbook.lineStyle(offset, layer.lineStyle)"
-                  :key="index"
-                ></div>
-              </div>
-            </template>
+          <div v-for="(layer, index) in page.worksheet.layers" class="layer" :style="layer.style" :key="index">
+            <div v-for="(bar, index) in layer.bars" class="bar" :key="index">
+              <div v-for="(line, index) in bar.lines" class="line" :style="line.style" :key="index"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -28,23 +16,20 @@
 
 <script setup lang="ts">
   import { Workbook } from "@/components/copygraph/Copygraph";
+  import { computed } from "vue";
 
-  defineProps({
+  const props = defineProps({
     workbook: {
       required: true,
       type: Workbook
     }
   });
-</script>
 
-<script lang="ts">
-  export function px(value: number):string {
-    return value + 'px';
-  }
-
-  export function mm(value: number):string {
-    return value + 'mm';
-  }
+  const page = computed({
+    get() {
+      return props.workbook.render();
+    }
+  });
 </script>
 
 <style scoped>
@@ -57,9 +42,6 @@
       background: white;
       position: relative;
       box-shadow: var(--cg-page-shadow);
-      width: v-bind('mm(workbook.pageWidth)');
-      height: v-bind('mm(workbook.pageHeight)');
-      padding: v-bind('mm(workbook.pagePadding)');
     }
 
     .worksheet {
