@@ -24,11 +24,6 @@ const routes = [
         name: 'Workbook',
         component: () => import('@/views/WorkbookView.vue'),
       },
-      {
-        path: 'workbook-advanced',
-        name: 'Workbook Advanced',
-        component: () => import('@/views/WorkbookAdvancedView.vue'),
-      },
     ],
   },
 ]

@@ -1,211 +1,267 @@
 <template>
-  <TheWorkbook
-    :line-count="count"
-    :style="style"
-    :fence="fence"
-  />
+  <WorkbookAdvanced :workbook="copygraph.workbook" />
 
-  <v-navigation-drawer location="right">
-    <v-list>
-      <v-list-item title="Navigation drawer"></v-list-item>
+  <v-navigation-drawer
+    location="right"
+    class="workbook-advanced-drawer"
+    :permanent="true"
+    :width="300"
+  >
+    <v-toolbar>
+      <v-btn @click="printToPdf" text="Print" />
+    </v-toolbar>
 
-      <ColorPicker
-        variant="underlined"
-        hide-details
-        v-model="fence.baseBorderColor"
-      />
+    <v-expansion-panels variant="accordion" class="no-padding" :multiple="true">
+      <v-expansion-panel elevation="0">
+        <v-expansion-panel-title>Preset</v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <v-card variant="flat">
+            <v-card-text>
+              <v-select
+                v-model="copygraph.activePresetName"
+                label="Preset"
+                item-title="name"
+                variant="underlined"
+                hide-details
+                :items="listPreset()"
+                @update:modelValue="acceptPreset"
+              />
+            </v-card-text>
+            <v-card-actions>
+              <v-btn
+                rounded="xs"
+                size="small"
+                variant="text"
+                text="Save"
+                color="blue"
+                prepend-icon="mdi-book-outline"
+                @click="savePreset()"
+              />
+              <v-btn
+                rounded="xs"
+                size="small"
+                variant="text"
+                text="Download"
+                color="blue"
+                prepend-icon="mdi-download"
+                @click="downloadPreset()"
+              />
 
-      <v-form @submit.prevent>
-        <v-expansion-panels
-          variant="accordion"
-          :multiple="true">
-          <v-expansion-panel elevation="1">
-            <v-expansion-panel-title>Fence</v-expansion-panel-title>
-            <v-expansion-panel-text>
-              <NumberPicker
-                v-model="count"
-                label="Count"
-                :min="0"
-                :max="20"
-                @input="fenceUpdate"
-              ></NumberPicker>
+              <v-btn
+                rounded="xs"
+                size="small"
+                variant="text"
+                text="Load"
+                color="blue"
+                prepend-icon="mdi-upload"
+                @click="uploadPresetDialog()"
+              />
+              <v-file-input
+                v-model="selectFile"
+                id="uploadPreset"
+                accept=".json"
+                class="d-none"
+                @change="uploadPreset"
+              />
+            </v-card-actions>
+          </v-card>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
 
-              <NumberPicker
-                v-model="fence.fenceHeight"
-                label="Fence height"
-                :min="10"
-                :max="50"
-                @input="fenceUpdate"
-              ></NumberPicker>
-
-              <NumberPicker
-                v-model="fence.fenceMargin"
-                label="Fence space"
-                :min="0"
-                :max="20"
-                @input="fenceUpdate"
-              ></NumberPicker>
-            </v-expansion-panel-text>
-          </v-expansion-panel>
-
-          <v-expansion-panel elevation="1">
-            <v-expansion-panel-title>Fractions</v-expansion-panel-title>
-            <v-expansion-panel-text>
-              <v-text-field
-                v-model="fence.fractions"
-                label="Fractions"
-                type="number"
-                @input="fence.update()"
-              ></v-text-field>
-            </v-expansion-panel-text>
-          </v-expansion-panel>
-
-          <v-expansion-panel elevation="1">
-            <v-expansion-panel-title>Base</v-expansion-panel-title>
-            <v-expansion-panel-text>
-              <div class="d-flex align-end">
-                <NumberPicker
-                  v-model="fence.baseBorderWidth"
+      <v-expansion-panel elevation="0">
+        <v-expansion-panel-title>Page</v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <v-card variant="flat">
+            <v-card-text>
+              <div class="d-flex ga-4">
+                <v-text-field
+                  v-model="copygraph.workbook.pageWidth"
                   label="Width"
-                  :min="0"
-                  :max="5"
-                  @input="fenceUpdate"
-                ></NumberPicker>
-
-                <StylePicker
-                  label="Style"
-                  v-model="fence.baseBorderStyle"
-                ></StylePicker>
-
-                <ColorPicker
                   variant="underlined"
+                  suffix="mm"
                   hide-details
-                  v-model="fence.baseBorderColor"
+                  :readonly="true"
+                  :disabled="true"
+                />
+                <v-text-field
+                  v-model="copygraph.workbook.pageHeight"
+                  label="Height"
+                  variant="underlined"
+                  suffix="mm"
+                  hide-details
+                  :readonly="true"
+                  :disabled="true"
                 />
               </div>
+              <div class="d-flex mt-4 ga-4">
+                <NumberPicker
+                  v-model="copygraph.workbook.pagePadding"
+                  label="Padding"
+                  suffix="mm"
+                  :min="0"
+                  :max="20"
+                  :step="0.1"
+                />
+                <NumberPicker
+                  v-model="copygraph.workbook.fractionHeight"
+                  label="Fraction"
+                  suffix="mm"
+                  :min="1"
+                  :max="10"
+                  :step="0.01"
+                />
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+      <v-expansion-panel elevation="0">
+        <v-expansion-panel-title>Layers</v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <v-card variant="flat">
+            <v-card-actions>
+              <v-btn
+                rounded="xs"
+                size="small"
+                prepend-icon="mdi-plus"
+                color="green-darken-1"
+                variant="text"
+                text="Add"
+                @click="copygraph.workbook.addNewLayer()"
+              />
+            </v-card-actions>
+          </v-card>
 
-              <v-text-field
-                v-model="fence.basePosition"
-                label="Base position"
-                type="number"
-                @input="fence.update()"
-              ></v-text-field>
-              <v-text-field
-                v-model="fence.baseCoverage"
-                label="Base coverage"
-                type="number"
-                @input="fence.update()"
-              ></v-text-field>
-            </v-expansion-panel-text>
-          </v-expansion-panel>
-        </v-expansion-panels>
-
-
-        <v-btn type="submit" block class="mt-2" @click="someMethod2">Submit</v-btn>
-      </v-form>
-    </v-list>
+          <v-card
+            v-for="(layer, index) in copygraph.workbook.layers"
+            variant="flat"
+            :key="index"
+          >
+            <v-divider></v-divider>
+            <v-card-text>
+              <div class="d-flex">
+                <NumberPicker
+                  v-model="layer.offset"
+                  label="Offset"
+                  :max="16"
+                />
+                <WorkbookRhythm
+                  v-model.rhythm="layer.rhythm"
+                  label="Rhythm"
+                />
+              </div>
+              <div class="div mt-4">
+                <LineStyleField v-model="layer.lineStyle" />
+              </div>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn
+                rounded="xs"
+                size="small"
+                variant="text"
+                text="Visible"
+                :prepend-icon="layer.visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
+                :color="layer.visible ? 'blue' : 'grey'"
+                @click="copygraph.workbook.showLayer(layer)"
+              />
+              <v-btn
+                rounded="xs"
+                size="small"
+                prepend-icon="mdi-close-thick"
+                color="red-darken-1"
+                variant="text"
+                text="Remove"
+                @click="copygraph.workbook.removeLayer(layer)"
+              />
+            </v-card-actions>
+          </v-card>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </v-navigation-drawer>
 
+    <v-snackbar v-model="presetSaveSnackbar" :timeout="3000">
+        Preset are saved in cookies and will be available only you.
+    </v-snackbar>
+    <v-snackbar v-model="presetParseError" color="red" :timeout="3000">
+        <div class="text-center">Wrong preset format.</div>
+    </v-snackbar>
 </template>
 
-<script lang="ts">
-  import {defineComponent, ref} from 'vue'
-  import TheWorkbook from "@/components/workbook/TheWorkbook.vue";
-  import {Fence} from "@/components/workbook/Fence";
-  import NumberPicker from "@/components/NumberPicker.vue";
-  import StylePicker from "@/components/StylePicker.vue";
-  import ColorPicker from "@/components/ColorPicker.vue";
+<script setup lang="ts">
+    import WorkbookAdvanced from "@/components/workbook/Workbook.vue";
+    import WorkbookRhythm from "@/components/workbook/form/WorkbookRhythm.vue";
+    import LineStyleField from "@/components/LineStyleField.vue";
+    import NumberPicker from "@/components/NumberPicker.vue";
+    import { onMounted, ref } from "vue";
+    import { download, printToPdf } from "@/components/copygraph/Utils";
+    import { useCookies } from "vue3-cookies";
+    import { Copygraph } from "@/components/copygraph/Copygraph";
 
-  export default defineComponent({
-    components: {
-      ColorPicker,
-      StylePicker,
-      NumberPicker,
-      TheWorkbook
-    },
-    props: {
-      blah: {
-        default: "Blah",
-        type: String
-      },
-    },
-    mounted: function() {
-      this.root = document.documentElement;
-    },
-    methods: {
-      fenceUpdate() {
-        this.fence.update();
-      },
-      someMethod2() {
-        // if (this.lineHeight > 50)
-        //   this.lineHeight = 50;
-      },
-      swatchStyle(color: string) {
-        // const { color } = this
-        return {
-          backgroundColor: color,
-          cursor: 'pointer',
-          minWidth: 'var(--v-btn-height)',
+    const { cookies } = useCookies();
+    const copygraph = ref(new Copygraph());
+    const presetSaveSnackbar = ref(false);
+    const presetParseError = ref(false);
+    const selectFile = ref(null);
+
+    const downloadPreset = (): void => {
+        download(copygraph.value.extractPreset('[Custom]'), 'preset.json');
+    }
+
+    const uploadPresetDialog = (): void => {
+        document.getElementById("uploadPreset").click()
+    }
+
+    const uploadPreset = (): void => {
+        if (null == selectFile.value) {
+            return;
         }
-      }
-    },
-    computed: {
-      style: function (): object {
-        return {
-          height: this.lineHeight + "mm"
+
+        const reader = new FileReader();
+        reader.readAsText(selectFile.value[0]);
+        reader.onload = () => {
+            if (!copygraph.value.acceptPresetFromJson(reader.result)) {
+                presetParseError.value = true;
+            }
+            selectFile.value = null;
         }
-      },
-      cssFenceHeight: function (): string {
-        return this.fenceHeight + "mm"
-      },
+    }
 
-      // height: {
-      //   get(): string {
-      //     return this.blah2 + "mm";
-      //   },
-      //   set(value: string): void {
-      //     this.blah2 = value;
-      //   }
-      // }
-    },
-    data() {
-      return {
-        rules: [
-          // (value: number) => {
-          //   if (value > 1 && value < 50) {
-          //     return true;
-          //   }
-          //   return "Wrong value";
-          // },
-          (value: number) => (value > 1 && value <= 50) || "Wrong value"
+    const savePreset = (): void => {
+        try {
+            copygraph.value.savePreset('[Custom]');
+            cookies.set('preset', copygraph.value.exportPresetToJson('[Custom]'));
+            presetSaveSnackbar.value = true;
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
-        ],
-        blah2: "blah2",
-        root: document.documentElement,
-        color: '#1976D2FF',
-        menu: false,
-        sliderValue: 10
-      }
-    },
-    setup(props, ctx) {
+    const loadPreset = (): void => {
+        copygraph.value.addPresetFromData(cookies.get('preset'));
+    }
 
-      let count = ref(5);
-      let lineHeight = ref(50);
-      let lineCount = count.value;
-      let fenceHeight = ref(10);
+    const listPreset = (): Array<string> => {
+        return copygraph.value.listPreset();
+    }
 
-      let fence = ref(new Fence());
-      fence.value.update();
+    /**
+     * Костыль `workbook.fractionHeight`. Не понимаю, как еще
+     * заставить Vue перерисовать компонент.
+     */
+    const acceptPreset = (presetName: string): void => {
+        copygraph.value.workbook.fractionHeight = 1;
+        copygraph.value.acceptPresetByName(presetName);
+    }
 
-      return { fenceHeight, count, lineCount, lineHeight, fence }
-    },
-  })
+    onMounted(() => {
+        new Promise(() => {
+            copygraph.value.buildPresets().then((): void => {
+                loadPreset();
+                copygraph.value.workbook.fractionHeight = 1;
+                copygraph.value.acceptPresetByName('A4 6x6');
+                listPreset();
+            });
+        });
+    });
 </script>
-
-<style>
-  .bbb {
-    background: red;
-    width: var(--v-btn-height);
-    height: v-bind(cssFenceHeight);
-  }
-</style>
