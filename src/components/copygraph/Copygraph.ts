@@ -1,4 +1,5 @@
 import { StyleValue } from "vue";
+import {da} from "vuetify/locale";
 
 export class Copygraph {
     presets: Array<Preset> = [];
@@ -44,6 +45,29 @@ export class Copygraph {
         if (preset != undefined) {
             this.workbook.acceptPreset(preset);
         }
+    }
+
+    addPreset(data: Preset): void {
+        this.presets.push(Preset.fromData(data));
+    }
+
+    removePreset(presetName: string): void {
+        this.presets.forEach((preset: Preset): void => {
+           if (preset.name == presetName) {
+               this.presets.slice();
+           }
+        });
+    }
+
+    /**
+     * Добавить или перезаписать пользовательский пресет.
+     */
+    savePreset(presetName: string): void {
+        this.presets.forEach((preset: Preset): void => {
+            if (preset.name == presetName && preset.type == 'static') {
+                 throw new Error('You can\'t rewrite static preset');
+            }
+        });
     }
 }
 
@@ -122,7 +146,6 @@ export class Workbook {
      */
     acceptPreset(preset: Preset): void {
         this.fractionHeight = preset.fractionHeight;
-        this.fractionHeight = preset.fractionHeight;
         this.pageHeight = preset.pageHeight;
         this.pageWidth = preset.pageWidth;
         this.pagePadding = preset.pagePadding;
@@ -132,6 +155,12 @@ export class Workbook {
         preset.layers.forEach((layer: Layer): void => {
             this.addLayer(Layer.fromData(layer));
         });
+    }
+
+    extractPreset(): Preset {
+        const preset: Preset = Preset.fromData(this);
+        preset.format = '0.2';
+        return preset;
     }
 
     pageStyle(): StyleValue {
@@ -221,9 +250,14 @@ export class Layer {
     }
 }
 
+/**
+ * format – не используется.
+ * type – тип пресета (static: основной, user: пользовательский, external: загружен из файла);
+ */
 export class Preset {
     format: string = '';
     name: string = '';
+    type: string = '';
     fractionHeight: number = 3;
     pageHeight: number = 297;
     pageWidth: number = 210;
@@ -238,6 +272,7 @@ export class Preset {
         const preset: Preset = new Preset();
         preset.format = data.format;
         preset.name = data.name;
+        preset.type = data.type;
         preset.fractionHeight = data.fractionHeight;
         preset.pageHeight = data.pageHeight;
         preset.pageWidth = data.pageWidth;

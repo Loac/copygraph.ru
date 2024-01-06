@@ -10,23 +10,7 @@
     <v-toolbar>
       <v-btn @click="printToPdf" text="Print" />
 
-      <v-dialog v-model="saveDialog" width="auto">
-        <v-card>
-          <v-card-text>
-            <v-text-field
-              label="Name"
-              variant="underlined"
-              style="min-width: 200px"
-              hint="Preset are saved in cookies and will be available only you."
-              :persistent-hint="true"
-            />
-          </v-card-text>
-          <v-card-actions class="justify-end pr-3">
-            <v-btn color="blue" text="Save" @click="saveDialog = false" />
-            <v-btn color="red-darken-1" text="Cancel" @click="saveDialog = false" />
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+
     </v-toolbar>
 
     <v-expansion-panels variant="accordion" class="no-padding" :multiple="true">
@@ -183,18 +167,39 @@
     import { onMounted, ref } from "vue";
     import { printToPdf } from "@/components/copygraph/Print";
     import { useCookies } from "vue3-cookies";
-    import { Copygraph } from "@/components/copygraph/Copygraph";
+    import { Copygraph, Preset } from "@/components/copygraph/Copygraph";
 
     const { cookies } = useCookies();
     const copygraph = ref(new Copygraph());
-    const saveDialog: boolean = ref(false);
+
+    // const saveDialogRules = [value => value != '' || 'Field is required'];
+
 
     const savePreset = (): void => {
-        cookies.set('preset', JSON.stringify(copygraph.value.presets[0]));
+        try {
+            copygraph.value.savePreset('[Custom]');
+        } catch (e) {
+            errorDialog.value = true;
+        }
+
+        // Извлечь пресет из Workbook.
+        const preset: Preset = copygraph.value.workbook.extractPreset();
+        preset.name = saveDialogName.value;
+        preset.type = 'user';
+
+        // Добавить пресет в список пресетов.
+
+        // Сохранить пресет.
+        // const data: string = JSON.stringify();
+        // cookies.set('presets', data);
+        console.log('saved');
+
+        saveDialogName.value = '';
     }
 
-    const loadPreset = (): void => {
-        let preset = cookies.get("preset");
+    const loadPreset = (): Array<Preset> => {
+        const presets = JSON.parse(cookies.get("presets"));
+        return presets == null ? [] : presets;
     }
 
     /**
@@ -209,6 +214,9 @@
     onMounted(() => {
         new Promise(() => {
             copygraph.value.buildPresets().then((): void => {
+                loadPreset().forEach((preset) => {
+                   copygraph.value.addPreset(preset);
+                });
                 copygraph.value.workbook.fractionHeight = 1;
                 copygraph.value.acceptPreset('A4 6x6');
             });
