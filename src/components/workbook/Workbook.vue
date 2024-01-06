@@ -17,21 +17,21 @@
 </template>
 
 <script setup lang="ts">
-  import { Workbook } from "@/components/copygraph/Copygraph";
-  import { computed } from "vue";
+    import { Workbook } from "@/components/copygraph/Copygraph";
+    import { computed } from "vue";
 
-  const props = defineProps({
-    workbook: {
-      required: true,
-      type: Workbook
-    }
-  });
+    const props = defineProps({
+        workbook: {
+            required: true,
+            type: Workbook
+        }
+    });
 
-  const page = computed({
-    get() {
-      return props.workbook.render();
-    }
-  });
+    const page = computed({
+        get() {
+            return props.workbook.render();
+        }
+    });
 </script>
 
 <style scoped>
