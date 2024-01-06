@@ -51,9 +51,10 @@ export class Copygraph {
     /**
      * Получить и применить пресет из JSON-строки.
      */
-    acceptPresetFromJson(data: string): boolean {
+    acceptPresetFromJson(json: string): boolean {
         try {
-            const preset: Preset = JSON.parse(data);
+            const data: any = JSON.parse(json);
+            const preset: Preset = Preset.fromData(data);
             this.acceptPreset(preset);
             return true;
         } catch (e) {
@@ -63,26 +64,49 @@ export class Copygraph {
 
     /**
      * Применить параметры Preset к Workbook.
-     * @param preset
      */
     acceptPreset(preset: Preset): void {
         this.activePresetName = preset.name;
         this.workbook.acceptPreset(preset);
     }
 
-    addPreset(data: any): void {
+    addPresetFromJson(json: string): void {
+        if (null == json) {
+            return;
+        }
+
+        try {
+            const data: any = JSON.parse(json);
+            this.addPresetFromData(data);
+        } catch (e) {
+            console.error('Can\'t add preset from JSON.')
+        }
+    }
+
+    addPresetFromData(data: any): void {
+        if (null == data) {
+            return;
+        }
+
         try {
             const preset: Preset = Preset.fromData(data);
-            this.presets.set(data.name, preset);
+            this.addPreset(preset);
         } catch (e) {
-            console.error('Can\'t add preset.');
+            console.error('Can\'t add preset from Data.')
         }
+    }
+
+    /**
+     * Добавить пресет в список пресетов.
+     */
+    addPreset(preset: Preset): void {
+        this.presets.set(preset.name, preset);
     }
 
     /**
      * Удалить пресет, если он существует и не является статическим.
      */
-    removePreset(presetName: string): void {
+    removePresetByName(presetName: string): void {
         const preset: Preset = this.presets.get(presetName);
 
         if (null == preset)

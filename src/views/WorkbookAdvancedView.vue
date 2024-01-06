@@ -230,20 +230,15 @@
     const savePreset = (): void => {
         try {
             const preset: Preset = copygraph.value.savePreset('[Custom]');
-            cookies.set('presets', JSON.stringify([preset]));
+            cookies.set('preset', JSON.stringify(preset));
             presetSaveSnackbar.value = true;
         } catch (e) {
             console.log(e);
         }
     }
 
-    const loadPreset = (): Array<Preset> => {
-        try {
-            const presets = JSON.parse(cookies.get('presets'));
-            return presets == null ? [] : presets;
-        } catch (e) {
-            return [];
-        }
+    const loadPreset = (): void => {
+        copygraph.value.addPresetFromData(cookies.get('preset'));
     }
 
     const listPreset = (): Array<string> => {
@@ -266,9 +261,7 @@
     onMounted(() => {
         new Promise(() => {
             copygraph.value.buildPresets().then((): void => {
-                loadPreset().forEach((preset) => {
-                   copygraph.value.addPreset(preset);
-                });
+                loadPreset();
                 copygraph.value.workbook.fractionHeight = 1;
                 copygraph.value.acceptPresetByName('A4 6x6');
                 listPreset();
