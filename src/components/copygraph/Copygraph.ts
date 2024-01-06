@@ -48,6 +48,9 @@ export class Copygraph {
         return true;
     }
 
+    /**
+     * Получить и применить пресет из JSON-строки.
+     */
     acceptPresetFromJson(data: string): boolean {
         try {
             const preset: Preset = JSON.parse(data);
@@ -58,13 +61,22 @@ export class Copygraph {
         }
     }
 
+    /**
+     * Применить параметры Preset к Workbook.
+     * @param preset
+     */
     acceptPreset(preset: Preset): void {
         this.activePresetName = preset.name;
         this.workbook.acceptPreset(preset);
     }
 
-    addPreset(data: Preset): void {
-        this.presets.set(data.name, Preset.fromData(data));
+    addPreset(data: any): void {
+        try {
+            const preset: Preset = Preset.fromData(data);
+            this.presets.set(data.name, preset);
+        } catch (e) {
+            console.error('Can\'t add preset.');
+        }
     }
 
     /**
@@ -91,13 +103,14 @@ export class Copygraph {
         if (null != preset && preset.isStatic())
             throw new Error('You can\'t rewrite static preset');
 
-
-        this.presets.set(presetName, this.extractPreset(presetName));
-        return preset;
+        const extract: Preset = this.extractPreset(presetName);
+        this.presets.set(presetName, extract);
+        return extract;
     }
 
     /**
      * Сформировать Preset из Workbook.
+     * Метод также добавит имя пресету и выставит ему пользовательский тип.
      */
     extractPreset(presetName: string): Preset {
         const preset: Preset = this.workbook.extractPreset();

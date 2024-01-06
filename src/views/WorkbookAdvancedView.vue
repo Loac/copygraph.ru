@@ -239,7 +239,7 @@
 
     const loadPreset = (): Array<Preset> => {
         try {
-            const presets = JSON.parse(cookies.get("presets"));
+            const presets = JSON.parse(cookies.get('presets'));
             return presets == null ? [] : presets;
         } catch (e) {
             return [];
