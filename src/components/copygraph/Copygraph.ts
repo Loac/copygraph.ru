@@ -30,7 +30,7 @@ export class Copygraph {
 
             if (this.presets.length > 0) {
                 this.activePresetName = 'A4 6x6';
-                this.acceptPreset(this.activePresetName);
+                this.acceptPresetByName(this.activePresetName);
             }
         });
     }
@@ -38,12 +38,29 @@ export class Copygraph {
     /**
      * Найти и применить пресет к Workbook.
      */
-    acceptPreset(presetName: string): void {
+    acceptPresetByName(presetName: string): boolean {
         const preset: Preset | undefined = this.presets.get(presetName);
-        if (preset != undefined) {
-            this.activePresetName = presetName;
-            this.workbook.acceptPreset(preset);
+        if (preset == undefined) {
+            return false;
         }
+
+        this.acceptPreset(preset);
+        return true;
+    }
+
+    acceptPresetFromJson(data: string): boolean {
+        try {
+            const preset: Preset = JSON.parse(data);
+            this.acceptPreset(preset);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    acceptPreset(preset: Preset): void {
+        this.activePresetName = preset.name;
+        this.workbook.acceptPreset(preset);
     }
 
     addPreset(data: Preset): void {

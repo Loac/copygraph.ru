@@ -43,8 +43,25 @@
                 variant="text"
                 text="Download"
                 color="blue"
-                prepend-icon="mdi-book-outline"
+                prepend-icon="mdi-download"
                 @click="downloadPreset()"
+              />
+
+              <v-btn
+                rounded="xs"
+                size="small"
+                variant="text"
+                text="Load"
+                color="blue"
+                prepend-icon="mdi-upload"
+                @click="uploadPresetDialog()"
+              />
+              <v-file-input
+                v-model="selectFile"
+                id="uploadPreset"
+                accept=".json"
+                class="d-none"
+                @change="uploadPreset"
               />
             </v-card-actions>
           </v-card>
@@ -166,6 +183,9 @@
     <v-snackbar v-model="presetSaveSnackbar" :timeout="3000">
         Preset are saved in cookies and will be available only you.
     </v-snackbar>
+    <v-snackbar v-model="presetParseError" color="red" :timeout="3000">
+        <div class="text-center">Wrong preset format.</div>
+    </v-snackbar>
 </template>
 
 <script setup lang="ts">
@@ -181,9 +201,30 @@
     const { cookies } = useCookies();
     const copygraph = ref(new Copygraph());
     const presetSaveSnackbar = ref(false);
+    const presetParseError = ref(false);
+    const selectFile = ref(null);
 
     const downloadPreset = (): void => {
         download(copygraph.value.extractPreset('[Custom]'), 'preset.json');
+    }
+
+    const uploadPresetDialog = (): void => {
+        document.getElementById("uploadPreset").click()
+    }
+
+    const uploadPreset = (): void => {
+        if (null == selectFile.value) {
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.readAsText(selectFile.value[0]);
+        reader.onload = () => {
+            if (!copygraph.value.acceptPresetFromJson(reader.result)) {
+                presetParseError.value = true;
+            }
+            selectFile.value = null;
+        }
     }
 
     const savePreset = (): void => {
@@ -219,7 +260,7 @@
      */
     const acceptPreset = (presetName: string): void => {
         copygraph.value.workbook.fractionHeight = 1;
-        copygraph.value.acceptPreset(presetName);
+        copygraph.value.acceptPresetByName(presetName);
     }
 
     onMounted(() => {
@@ -229,7 +270,7 @@
                    copygraph.value.addPreset(preset);
                 });
                 copygraph.value.workbook.fractionHeight = 1;
-                copygraph.value.acceptPreset('A4 6x6');
+                copygraph.value.acceptPresetByName('A4 6x6');
                 listPreset();
             });
         });
