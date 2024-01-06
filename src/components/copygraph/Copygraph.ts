@@ -120,16 +120,22 @@ export class Copygraph {
     /**
      * Добавить или перезаписать пользовательский пресет.
      */
-    savePreset(presetName: string): Preset {
+    savePreset(presetName: string): void {
         const preset: Preset = this.presets.get(presetName);
         this.activePresetName = presetName;
 
         if (null != preset && preset.isStatic())
             throw new Error('You can\'t rewrite static preset');
 
-        const extract: Preset = this.extractPreset(presetName);
-        this.presets.set(presetName, extract);
-        return extract;
+        this.presets.set(presetName, this.extractPreset(presetName));
+    }
+
+    listPreset(): Array<string> {
+        const list: Array<string> = [];
+        this.presets.forEach((value: Preset): void => {
+            list.push(value.name);
+        });
+        return list;
     }
 
     /**
@@ -141,6 +147,15 @@ export class Copygraph {
         preset.type = 'user';
         preset.name = presetName;
         return preset;
+    }
+
+    exportPresetToJson(presetName: string): string {
+        const preset: Preset = this.presets.get(presetName);
+        if (null == preset) {
+            throw new Error('Preset not found.');
+        }
+
+        return JSON.stringify(preset);
     }
 }
 

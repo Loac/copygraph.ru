@@ -196,7 +196,7 @@
     import { onMounted, ref } from "vue";
     import { download, printToPdf } from "@/components/copygraph/Utils";
     import { useCookies } from "vue3-cookies";
-    import { Copygraph, Preset } from "@/components/copygraph/Copygraph";
+    import { Copygraph } from "@/components/copygraph/Copygraph";
 
     const { cookies } = useCookies();
     const copygraph = ref(new Copygraph());
@@ -229,8 +229,8 @@
 
     const savePreset = (): void => {
         try {
-            const preset: Preset = copygraph.value.savePreset('[Custom]');
-            cookies.set('preset', JSON.stringify(preset));
+            copygraph.value.savePreset('[Custom]');
+            cookies.set('preset', copygraph.value.exportPresetToJson('[Custom]'));
             presetSaveSnackbar.value = true;
         } catch (e) {
             console.log(e);
@@ -242,11 +242,7 @@
     }
 
     const listPreset = (): Array<string> => {
-        const list: Array<string> = [];
-        copygraph.value.presets.forEach((value) => {
-            list.push(value.name);
-        });
-        return list;
+        return copygraph.value.listPreset();
     }
 
     /**
@@ -268,11 +264,4 @@
             });
         });
     });
-
 </script>
-
-<style>
-  .workbook-advanced-drawer .v-expansion-panel-text__wrapper {
-    padding: 0 !important;
-  }
-</style>
