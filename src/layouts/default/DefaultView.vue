@@ -1,5 +1,5 @@
 <template>
-  <v-main class="d-flex" style="min-height: 300px;">
+  <v-main class="d-flex h-screen" style="min-height: 300px;">
     <router-view />
   </v-main>
 </template>
