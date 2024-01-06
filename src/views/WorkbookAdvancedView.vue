@@ -9,8 +9,6 @@
   >
     <v-toolbar>
       <v-btn @click="printToPdf" text="Print" />
-
-
     </v-toolbar>
 
     <v-expansion-panels variant="accordion" class="no-padding" :multiple="true">
@@ -20,13 +18,12 @@
           <v-card variant="flat">
             <v-card-text>
               <v-select
-                v-model="copygraph.activePreset"
+                v-model="copygraph.activePresetName"
                 label="Preset"
                 item-title="name"
-                item-value="id"
                 variant="underlined"
                 hide-details
-                :items="copygraph.presets"
+                :items="listPreset()"
                 @update:modelValue="acceptPreset"
               />
             </v-card-text>
@@ -38,7 +35,7 @@
                 text="Save"
                 color="blue"
                 prepend-icon="mdi-book-outline"
-                @click="saveDialog = true"
+                @click="savePreset()"
               />
             </v-card-actions>
           </v-card>
@@ -157,6 +154,10 @@
       </v-expansion-panel>
     </v-expansion-panels>
   </v-navigation-drawer>
+
+    <v-snackbar v-model="presetSaveSnackbar" :timeout="3000">
+        Preset are saved in cookies and will be available only you.
+    </v-snackbar>
 </template>
 
 <script setup lang="ts">
@@ -171,35 +172,33 @@
 
     const { cookies } = useCookies();
     const copygraph = ref(new Copygraph());
-
-    // const saveDialogRules = [value => value != '' || 'Field is required'];
-
-
+    const presetSaveSnackbar = ref(false);
+    
     const savePreset = (): void => {
         try {
-            copygraph.value.savePreset('[Custom]');
+            const preset: Preset = copygraph.value.savePreset('[Custom]');
+            cookies.set('presets', JSON.stringify([preset]));
+            presetSaveSnackbar.value = true;
         } catch (e) {
-            errorDialog.value = true;
+            console.log(e);
         }
-
-        // Извлечь пресет из Workbook.
-        const preset: Preset = copygraph.value.workbook.extractPreset();
-        preset.name = saveDialogName.value;
-        preset.type = 'user';
-
-        // Добавить пресет в список пресетов.
-
-        // Сохранить пресет.
-        // const data: string = JSON.stringify();
-        // cookies.set('presets', data);
-        console.log('saved');
-
-        saveDialogName.value = '';
     }
 
     const loadPreset = (): Array<Preset> => {
-        const presets = JSON.parse(cookies.get("presets"));
-        return presets == null ? [] : presets;
+        try {
+            const presets = JSON.parse(cookies.get("presets"));
+            return presets == null ? [] : presets;
+        } catch (e) {
+            return [];
+        }
+    }
+
+    const listPreset = (): Array<string> => {
+        const list: Array<string> = [];
+        copygraph.value.presets.forEach((value) => {
+            list.push(value.name);
+        });
+        return list;
     }
 
     /**
@@ -219,6 +218,7 @@
                 });
                 copygraph.value.workbook.fractionHeight = 1;
                 copygraph.value.acceptPreset('A4 6x6');
+                listPreset();
             });
         });
     });

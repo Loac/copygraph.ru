@@ -1,6 +1,7 @@
 {
   "format": "0.2",
   "name": "A4 6x6",
+  "type": "static",
   "fractionHeight": 3,
   "pageHeight": 297,
   "pageWidth": 210,

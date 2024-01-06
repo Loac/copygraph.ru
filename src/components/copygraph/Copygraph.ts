@@ -1,9 +1,10 @@
 import { StyleValue } from "vue";
-import {da} from "vuetify/locale";
+import {teal} from "vuetify/util/colors";
+import {th} from "vuetify/locale";
 
 export class Copygraph {
-    presets: Array<Preset> = [];
-    activePreset: string = '';
+    presets: Map<string, Preset> = new Map();
+    activePresetName: string = '';
     workbook: Workbook = new Workbook();
 
     /**
@@ -26,12 +27,12 @@ export class Copygraph {
         const presetData: Promise<unknown> = this.importPresets();
         return presetData.then((data): void => {
             if (data instanceof Array) {
-                data.forEach((item) => this.presets.push(Preset.fromData(item)));
+                data.forEach((item: Preset) => this.presets.set(item.name, Preset.fromData(item)));
             }
 
             if (this.presets.length > 0) {
-                this.activePreset = this.presets[0].name;
-                this.acceptPreset(this.activePreset);
+                this.activePresetName = 'A4 6x6';
+                this.acceptPreset(this.activePresetName);
             }
         });
     }
@@ -40,34 +41,46 @@ export class Copygraph {
      * Найти и применить пресет к Workbook.
      */
     acceptPreset = (presetName: string): void => {
-        this.activePreset = presetName;
-        const preset: Preset | undefined = this.presets.find((item: Preset): boolean => item.name == presetName);
+        const preset: Preset | undefined = this.presets.get(presetName);
         if (preset != undefined) {
+            this.activePresetName = presetName;
             this.workbook.acceptPreset(preset);
         }
     }
 
     addPreset(data: Preset): void {
-        this.presets.push(Preset.fromData(data));
+        this.presets.set(data.name, Preset.fromData(data));
     }
 
+    /**
+     * Удалить пресет, если он существует и не является статическим.
+     */
     removePreset(presetName: string): void {
-        this.presets.forEach((preset: Preset): void => {
-           if (preset.name == presetName) {
-               this.presets.slice();
-           }
-        });
+        const preset: Preset = this.presets.get(presetName);
+
+        if (null == preset)
+            return;
+        if (preset.isStatic())
+            throw new Error('You can\'t remove static preset');
+
+        this.presets.delete(presetName);
     }
 
     /**
      * Добавить или перезаписать пользовательский пресет.
      */
-    savePreset(presetName: string): void {
-        this.presets.forEach((preset: Preset): void => {
-            if (preset.name == presetName && preset.type == 'static') {
-                 throw new Error('You can\'t rewrite static preset');
-            }
-        });
+    savePreset(presetName: string): Preset {
+        const preset: Preset = this.presets.get(presetName);
+        this.activePresetName = presetName;
+
+        if (null != preset && preset.isStatic())
+            throw new Error('You can\'t rewrite static preset');
+
+        const extract: Preset = this.workbook.extractPreset();
+        extract.type = 'user';
+        extract.name = presetName;
+        this.presets.set(presetName, extract);
+        return extract;
     }
 }
 
@@ -160,6 +173,7 @@ export class Workbook {
     extractPreset(): Preset {
         const preset: Preset = Preset.fromData(this);
         preset.format = '0.2';
+        preset.type = 'user';
         return preset;
     }
 
@@ -264,6 +278,10 @@ export class Preset {
     pagePadding: number = 10;
     pageOrientation: string = 'portrait';
     layers: Array<Layer> = [];
+
+    isStatic(): boolean {
+        return this.type == 'static';
+    }
 
     /**
      * Сформировать новый пресет из данных другого объекта.
