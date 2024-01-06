@@ -76,7 +76,7 @@ export class Copygraph {
 
 
         this.presets.set(presetName, this.extractPreset(presetName));
-        return extract;
+        return preset;
     }
 
     /**
