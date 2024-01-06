@@ -74,16 +74,15 @@
                   suffix="mm"
                   :min="0"
                   :max="20"
-                  :step="1"
+                  :step="0.1"
                 />
                 <NumberPicker
                   v-model="copygraph.workbook.fractionHeight"
                   label="Fraction"
                   suffix="mm"
-                  :min="0.5"
+                  :min="1"
                   :max="10"
                   :step="0.01"
-                  :readonly="false"
                 />
               </div>
             </v-card-text>
@@ -173,7 +172,7 @@
     const { cookies } = useCookies();
     const copygraph = ref(new Copygraph());
     const presetSaveSnackbar = ref(false);
-    
+
     const savePreset = (): void => {
         try {
             const preset: Preset = copygraph.value.savePreset('[Custom]');

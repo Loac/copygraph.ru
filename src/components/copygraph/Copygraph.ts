@@ -215,6 +215,9 @@ export class Workbook {
         const rPage: RPage = new RPage();
         rPage.style = this.pageStyle();
         const lineHeight: number = this.fractionHeight;
+        if (lineHeight < 1) {
+            return rPage;
+        }
 
         this.layers
             .filter((layer: Layer) => layer.visible)

@@ -41,7 +41,7 @@
     },
     readonly: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     min: {
       type: Number,

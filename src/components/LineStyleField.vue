@@ -5,6 +5,7 @@
       label="Width"
       :min="0"
       :max="5"
+      :step="1"
     ></NumberPicker>
 
     <StylePicker
