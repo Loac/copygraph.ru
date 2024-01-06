@@ -1,6 +1,4 @@
 import { StyleValue } from "vue";
-import {teal} from "vuetify/util/colors";
-import {th} from "vuetify/locale";
 
 export class Copygraph {
     presets: Map<string, Preset> = new Map();
@@ -40,7 +38,7 @@ export class Copygraph {
     /**
      * Найти и применить пресет к Workbook.
      */
-    acceptPreset = (presetName: string): void => {
+    acceptPreset(presetName: string): void {
         const preset: Preset | undefined = this.presets.get(presetName);
         if (preset != undefined) {
             this.activePresetName = presetName;
@@ -76,11 +74,19 @@ export class Copygraph {
         if (null != preset && preset.isStatic())
             throw new Error('You can\'t rewrite static preset');
 
-        const extract: Preset = this.workbook.extractPreset();
-        extract.type = 'user';
-        extract.name = presetName;
-        this.presets.set(presetName, extract);
+
+        this.presets.set(presetName, this.extractPreset(presetName));
         return extract;
+    }
+
+    /**
+     * Сформировать Preset из Workbook.
+     */
+    extractPreset(presetName: string): Preset {
+        const preset: Preset = this.workbook.extractPreset();
+        preset.type = 'user';
+        preset.name = presetName;
+        return preset;
     }
 }
 

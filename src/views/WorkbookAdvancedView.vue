@@ -37,6 +37,15 @@
                 prepend-icon="mdi-book-outline"
                 @click="savePreset()"
               />
+              <v-btn
+                rounded="xs"
+                size="small"
+                variant="text"
+                text="Download"
+                color="blue"
+                prepend-icon="mdi-book-outline"
+                @click="downloadPreset()"
+              />
             </v-card-actions>
           </v-card>
         </v-expansion-panel-text>
@@ -165,13 +174,17 @@
     import LineStyleField from "@/components/LineStyleField.vue";
     import NumberPicker from "@/components/NumberPicker.vue";
     import { onMounted, ref } from "vue";
-    import { printToPdf } from "@/components/copygraph/Print";
+    import { download, printToPdf } from "@/components/copygraph/Utils";
     import { useCookies } from "vue3-cookies";
     import { Copygraph, Preset } from "@/components/copygraph/Copygraph";
 
     const { cookies } = useCookies();
     const copygraph = ref(new Copygraph());
     const presetSaveSnackbar = ref(false);
+
+    const downloadPreset = (): void => {
+        download(copygraph.value.extractPreset('[Custom]'), 'preset.json');
+    }
 
     const savePreset = (): void => {
         try {
