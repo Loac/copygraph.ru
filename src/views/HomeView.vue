@@ -1,7 +1,16 @@
 <template>
-  <div>
+  <v-container>
     <MarkdownIt :source="readme" />
-  </div>
+  </v-container>
+
+    <v-navigation-drawer
+        location="right"
+        class="workbook-advanced-drawer"
+        :permanent="true"
+        :width="300"
+    >
+
+    </v-navigation-drawer>
 </template>
 
 <script lang="ts" setup>
