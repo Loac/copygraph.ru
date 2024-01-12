@@ -116,7 +116,7 @@
         </v-expansion-panel-text>
       </v-expansion-panel>
       <v-expansion-panel elevation="0">
-        <v-expansion-panel-title>Layers</v-expansion-panel-title>
+        <v-expansion-panel-title>Rules</v-expansion-panel-title>
         <v-expansion-panel-text>
           <v-card variant="flat">
             <v-card-actions>
@@ -141,16 +141,37 @@
             <v-card-text>
               <div class="d-flex">
                 <NumberPicker
-                  v-model="layer.offset"
-                  label="Offset"
-                  :max="16"
+                  v-model="layer.barHeight"
+                  label="Height"
+                  :min="1"
+                  :max="36"
+                />
+                <NumberPicker
+                  v-model="layer.barMargin"
+                  label="Margin"
+                  :min="0"
+                  :max="36"
+                />
+                <NumberPicker
+                  v-model="layer.barPadding"
+                  label="Padding"
+                  :min="0"
+                  :max="36"
+                />
+              </div>
+              <div class="d-flex mt-4">
+                <NumberPicker
+                  v-model="layer.lineAngle"
+                  label="Angle"
+                  :min="0"
+                  :max="180"
                 />
                 <WorkbookRhythm
                   v-model.rhythm="layer.rhythm"
                   label="Rhythm"
                 />
               </div>
-              <div class="div mt-4">
+              <div class="mt-4">
                 <LineStyleField v-model="layer.lineStyle" />
               </div>
             </v-card-text>
@@ -177,6 +198,11 @@
           </v-card>
         </v-expansion-panel-text>
       </v-expansion-panel>
+      <v-expansion-panel  elevation="0">
+        <v-expansion-panel-title>Letters</v-expansion-panel-title>
+        <v-expansion-panel-text>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
     </v-expansion-panels>
   </v-navigation-drawer>
 
@@ -191,7 +217,7 @@
 <script setup lang="ts">
     import WorkbookAdvanced from "@/components/workbook/Workbook.vue";
     import WorkbookRhythm from "@/components/workbook/form/WorkbookRhythm.vue";
-    import LineStyleField from "@/components/LineStyleField.vue";
+    import LineStyleField from "@/components/fields/LineStyleField.vue";
     import NumberPicker from "@/components/NumberPicker.vue";
     import { onMounted, ref } from "vue";
     import { download, printToPdf } from "@/components/copygraph/Utils";

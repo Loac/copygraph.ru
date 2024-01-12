@@ -22,6 +22,55 @@
     display: flex;
     justify-content: center;
     padding: 10mm;
+
+    .page {
+        background: white;
+        position: relative;
+        box-shadow: var(--cg-page-shadow);
+    }
+
+    .worksheet {
+        position: relative;
+        border: 0 solid #ddd;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+    }
+
+    .layer {
+        position: absolute;
+        width: 100%;
+    }
+
+    // Отменить отступ первого блока.
+    .bar:first-child {
+        margin-top: 0 !important;
+    }
+
+    // Параметры для блока и линий, если указан наклон линий.
+    .guides {
+        .bar {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .line {
+            transform-origin: top left;
+            top: 0;
+            left: 0;
+            position: absolute;
+            width: 100%;
+        }
+    }
+
+    // Раскраска блоков для отладки.
+    .bar:nth-child(1n) {
+        background: rgba(0, 200, 0, .05);
+    }
+
+    .bar:nth-child(2n) {
+        background: rgba(200, 0, 0, .05);
+    }
 }
 
 .workbook-advanced-drawer .v-expansion-panel-text__wrapper {

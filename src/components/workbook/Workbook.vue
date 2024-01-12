@@ -4,8 +4,8 @@
             <div class="workbook">
                 <div class="page" :style="page.style">
                     <div class="worksheet">
-                        <div v-for="(layer, index) in page.worksheet.layers" class="layer" :style="layer.style" :key="index">
-                            <div v-for="(bar, index) in layer.bars" class="bar" :key="index">
+                        <div v-for="(layer, index) in page.worksheet.layers" class="layer" :class="layer.class" :style="layer.style" :key="index">
+                            <div v-for="(bar, index) in layer.bars" class="bar" :style="bar.style" :key="index">
                                 <div v-for="(line, index) in bar.lines" class="line" :style="line.style" :key="index"></div>
                             </div>
                         </div>
@@ -35,37 +35,3 @@
         }
     });
 </script>
-
-<style scoped>
-  .workbook {
-    .area * {
-      box-sizing: border-box;
-    }
-
-    .page {
-      background: white;
-      position: relative;
-      box-shadow: var(--cg-page-shadow);
-    }
-
-    .worksheet {
-      position: relative;
-      border: 0 solid #ddd;
-      overflow: hidden;
-      width: 100%;
-      height: 100%;
-    }
-
-    .layer {
-      position: absolute;
-      width: 100%;
-    }
-
-    .bar:nth-child(1n) {
-      background: rgba(0, 200, 0, .0);
-    }
-    .bar:nth-child(2n) {
-      background: rgba(200, 0, 0, .0);
-    }
-  }
-</style>

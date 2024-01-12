@@ -1,32 +1,51 @@
 {
-  "format": "0.2",
-  "name": "A4 6x8",
-  "type": "static",
-  "fractionHeight": 2.68,
-  "pageHeight": 297,
-  "pageWidth": 210,
-  "pagePadding": 10,
-  "pageOrientation": "portrait",
-  "layers": [
-    {
-      "visible": true,
-      "offset": 3,
-      "rhythm": [5,2,2,2,2],
-      "lineStyle": {
-        "width": 1,
-        "style": "solid",
-        "color": "#999999"
-      }
-    },
-    {
-      "visible": true,
-      "offset": 1,
-      "rhythm": [1,12],
-      "lineStyle": {
-        "width": 1,
-        "style": "solid",
-        "color": "#000000"
-      }
-    }
-  ]
+    "format": "0.2",
+    "name": "A4 6x8",
+    "type": "user",
+    "fractionHeight": "2.50",
+    "pageHeight": 297,
+    "pageWidth": 210,
+    "pagePadding": 10,
+    "pageOrientation": "portrait",
+    "layers": [
+        {
+            "visible": true,
+            "barHeight": 30,
+            "barMargin": 2,
+            "barPadding": 2,
+            "lineAngle": 0,
+            "rhythm": [2, 4, 2, 2],
+            "lineStyle": {
+                "width": 1,
+                "style": "dashed",
+                "color": "#999999"
+            }
+        },
+        {
+            "visible": true,
+            "barHeight": 30,
+            "barMargin": 2,
+            "barPadding": 0,
+            "lineAngle": 0,
+            "rhythm": [12, 0],
+            "lineStyle": {
+                "width": 1,
+                "style": "solid",
+                "color": "#000000"
+            }
+        },
+        {
+            "visible": true,
+            "barHeight": 30,
+            "barMargin": 2,
+            "barPadding": 0,
+            "lineAngle": 55,
+            "rhythm": [8, 8, 8, 8, 8, 8, 8, 8, 8, 8],
+            "lineStyle": {
+                "width": 1,
+                "style": "dashed",
+                "color": "#999999"
+            }
+        }
+    ]
 }
