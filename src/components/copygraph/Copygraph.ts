@@ -21,14 +21,14 @@ export class Copygraph {
     /**
      * Обработать импорт пресетов и сформировать массив объектов Preset.
      */
-    buildPresets = (): Promise<unknown> => {
+    buildPresets = async (): Promise<unknown> => {
         const presetData: Promise<unknown> = this.importPresets();
         return presetData.then((data): void => {
             if (data instanceof Array) {
                 data.forEach((item: Preset) => this.presets.set(item.name, Preset.fromData(item)));
             }
 
-            if (this.presets.length > 0) {
+            if (this.presets.size > 0) {
                 this.activePresetName = 'A4 6x6';
                 this.acceptPresetByName(this.activePresetName);
             }
@@ -107,9 +107,9 @@ export class Copygraph {
      * Удалить пресет, если он существует и не является статическим.
      */
     removePresetByName(presetName: string): void {
-        const preset: Preset = this.presets.get(presetName);
+        const preset: Preset | undefined = this.presets.get(presetName);
 
-        if (null == preset)
+        if (undefined == preset)
             return;
         if (preset.isStatic())
             throw new Error('You can\'t remove static preset');
@@ -121,7 +121,7 @@ export class Copygraph {
      * Добавить или перезаписать пользовательский пресет.
      */
     savePreset(presetName: string): void {
-        const preset: Preset = this.presets.get(presetName);
+        const preset: Preset | undefined = this.presets.get(presetName);
         this.activePresetName = presetName;
 
         if (null != preset && preset.isStatic())
@@ -150,8 +150,8 @@ export class Copygraph {
     }
 
     exportPresetToJson(presetName: string): string {
-        const preset: Preset = this.presets.get(presetName);
-        if (null == preset) {
+        const preset: Preset | undefined = this.presets.get(presetName);
+        if (undefined == preset) {
             throw new Error('Preset not found.');
         }
 
@@ -364,7 +364,7 @@ export class Preset {
     /**
      * Сформировать новый пресет из данных другого объекта.
      */
-    static fromData(data: Preset): Preset {
+    static fromData(data: any): Preset {
         const preset: Preset = new Preset();
         preset.format = data.format;
         preset.name = data.name;

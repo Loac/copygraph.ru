@@ -30,6 +30,8 @@
     const page = computed({
         get() {
             return props.workbook.render();
+        },
+        set() {
         }
     });
 </script>
