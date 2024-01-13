@@ -75,7 +75,7 @@
             <v-card-text>
               <div class="d-flex ga-4">
                 <v-text-field
-                  v-model="copygraph.workbook.pageWidth"
+                  v-model.number="copygraph.workbook.pageWidth"
                   label="Width"
                   variant="underlined"
                   suffix="mm"
@@ -84,7 +84,7 @@
                   :disabled="true"
                 />
                 <v-text-field
-                  v-model="copygraph.workbook.pageHeight"
+                  v-model.number="copygraph.workbook.pageHeight"
                   label="Height"
                   variant="underlined"
                   suffix="mm"
@@ -95,7 +95,7 @@
               </div>
               <div class="d-flex mt-4 ga-4">
                 <NumberPicker
-                  v-model="copygraph.workbook.pagePadding"
+                  v-model.number="copygraph.workbook.pagePadding"
                   label="Padding"
                   suffix="mm"
                   :min="0"
@@ -103,7 +103,7 @@
                   :step="0.1"
                 />
                 <NumberPicker
-                  v-model="copygraph.workbook.fractionHeight"
+                  v-model.number="copygraph.workbook.fractionHeight"
                   label="Fraction"
                   suffix="mm"
                   :min="1"
@@ -141,19 +141,19 @@
             <v-card-text>
               <div class="d-flex">
                 <NumberPicker
-                  v-model="layer.barHeight"
+                  v-model.number="layer.barHeight"
                   label="Height"
                   :min="1"
                   :max="36"
                 />
                 <NumberPicker
-                  v-model="layer.barMargin"
+                  v-model.number="layer.barMargin"
                   label="Margin"
                   :min="0"
                   :max="36"
                 />
                 <NumberPicker
-                  v-model="layer.barPadding"
+                  v-model.number="layer.barPadding"
                   label="Padding"
                   :min="0"
                   :max="36"
@@ -161,7 +161,7 @@
               </div>
               <div class="d-flex mt-4">
                 <NumberPicker
-                  v-model="layer.lineAngle"
+                  v-model.number="layer.lineAngle"
                   label="Angle"
                   :min="0"
                   :max="180"
