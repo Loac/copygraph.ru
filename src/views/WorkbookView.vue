@@ -1,210 +1,207 @@
 <template>
-  <WorkbookAdvanced :workbook="copygraph.workbook" />
+    <WorkbookAdvanced :workbook="copygraph.workbook" />
 
-  <v-navigation-drawer
-    location="right"
-    class="workbook-advanced-drawer"
-    :permanent="true"
-    :width="300"
-  >
-    <v-toolbar>
-      <v-btn @click="printToPdf" text="Print" />
-    </v-toolbar>
+    <v-navigation-drawer
+        location="right"
+        class="workbook-advanced-drawer"
+        :permanent="true"
+        :width="300"
+    >
+        <v-toolbar>
+            <v-btn @click="printToPdf" text="PDF" />
+        </v-toolbar>
 
-    <v-expansion-panels variant="accordion" class="no-padding" :multiple="true">
-      <v-expansion-panel elevation="0">
-        <v-expansion-panel-title>Preset</v-expansion-panel-title>
-        <v-expansion-panel-text>
-          <v-card variant="flat">
-            <v-card-text>
-              <v-select
-                v-model="copygraph.activePresetName"
-                label="Preset"
-                item-title="name"
-                variant="underlined"
-                hide-details
-                :items="listPreset()"
-                @update:modelValue="acceptPreset"
-              />
-            </v-card-text>
-            <v-card-actions>
-              <v-btn
-                rounded="xs"
-                size="small"
-                variant="text"
-                text="Save"
-                color="blue"
-                prepend-icon="mdi-book-outline"
-                @click="savePreset()"
-              />
-              <v-btn
-                rounded="xs"
-                size="small"
-                variant="text"
-                text="Download"
-                color="blue"
-                prepend-icon="mdi-download"
-                @click="downloadPreset()"
-              />
-
-              <v-btn
-                rounded="xs"
-                size="small"
-                variant="text"
-                text="Load"
-                color="blue"
-                prepend-icon="mdi-upload"
-                @click="uploadPresetDialog()"
-              />
-              <v-file-input
-                v-model="selectFile"
-                id="uploadPreset"
-                accept=".json"
-                class="d-none"
-                @change="uploadPreset"
-              />
-            </v-card-actions>
-          </v-card>
-        </v-expansion-panel-text>
-      </v-expansion-panel>
-
-      <v-expansion-panel elevation="0">
-        <v-expansion-panel-title>Page</v-expansion-panel-title>
-        <v-expansion-panel-text>
-          <v-card variant="flat">
-            <v-card-text>
-              <div class="d-flex ga-4">
-                <v-text-field
-                  v-model.number="copygraph.workbook.pageWidth"
-                  label="Width"
-                  variant="underlined"
-                  suffix="mm"
-                  hide-details
-                  :readonly="true"
-                  :disabled="true"
-                />
-                <v-text-field
-                  v-model.number="copygraph.workbook.pageHeight"
-                  label="Height"
-                  variant="underlined"
-                  suffix="mm"
-                  hide-details
-                  :readonly="true"
-                  :disabled="true"
-                />
-              </div>
-              <div class="d-flex mt-4 ga-4">
-                <NumberPicker
-                  v-model.number="copygraph.workbook.pagePadding"
-                  label="Padding"
-                  suffix="mm"
-                  :min="0"
-                  :max="20"
-                  :step="0.1"
-                />
-                <NumberPicker
-                  v-model.number="copygraph.workbook.fractionHeight"
-                  label="Fraction"
-                  suffix="mm"
-                  :min="1"
-                  :max="10"
-                  :step="0.01"
-                />
-              </div>
-            </v-card-text>
-          </v-card>
-        </v-expansion-panel-text>
-      </v-expansion-panel>
-      <v-expansion-panel elevation="0">
-        <v-expansion-panel-title>Rules</v-expansion-panel-title>
-        <v-expansion-panel-text>
-          <v-card variant="flat">
-            <v-card-actions>
-              <v-btn
-                rounded="xs"
-                size="small"
-                prepend-icon="mdi-plus"
-                color="green-darken-1"
-                variant="text"
-                text="Add"
-                @click="copygraph.workbook.addNewLayer()"
-              />
-            </v-card-actions>
-          </v-card>
-
-          <v-card
-            v-for="(layer, index) in copygraph.workbook.layers"
-            variant="flat"
-            :key="index"
-          >
-            <v-divider></v-divider>
-            <v-card-text>
-              <div class="d-flex">
-                <NumberPicker
-                  v-model.number="layer.barHeight"
-                  label="Height"
-                  :min="1"
-                  :max="36"
-                />
-                <NumberPicker
-                  v-model.number="layer.barMargin"
-                  label="Margin"
-                  :min="0"
-                  :max="36"
-                />
-                <NumberPicker
-                  v-model.number="layer.barPadding"
-                  label="Padding"
-                  :min="0"
-                  :max="36"
-                />
-              </div>
-              <div class="d-flex mt-4">
-                <NumberPicker
-                  v-model.number="layer.lineAngle"
-                  label="Angle"
-                  :min="0"
-                  :max="180"
-                />
-                <WorkbookRhythm
-                  v-model.rhythm="layer.rhythm"
-                  label="Rhythm"
-                />
-              </div>
-              <div class="mt-4">
-                <LineStyleField v-model="layer.lineStyle" />
-              </div>
-            </v-card-text>
-            <v-card-actions>
-              <v-btn
-                rounded="xs"
-                size="small"
-                variant="text"
-                text="Visible"
-                :prepend-icon="layer.visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
-                :color="layer.visible ? 'blue' : 'grey'"
-                @click="copygraph.workbook.showLayer(layer)"
-              />
-              <v-btn
-                rounded="xs"
-                size="small"
-                prepend-icon="mdi-close-thick"
-                color="red-darken-1"
-                variant="text"
-                text="Remove"
-                @click="copygraph.workbook.removeLayer(layer)"
-              />
-            </v-card-actions>
-          </v-card>
-        </v-expansion-panel-text>
-      </v-expansion-panel>
-      <v-expansion-panel  elevation="0">
-        <v-expansion-panel-title>Letters</v-expansion-panel-title>
-        <v-expansion-panel-text>
-        </v-expansion-panel-text>
-      </v-expansion-panel>
-    </v-expansion-panels>
-  </v-navigation-drawer>
+        <v-expansion-panels variant="accordion" class="no-padding" :multiple="true">
+            <v-expansion-panel elevation="0">
+                <v-expansion-panel-title>Preset</v-expansion-panel-title>
+                <v-expansion-panel-text>
+                    <v-card variant="flat">
+                        <v-card-text>
+                            <v-select
+                                v-model="copygraph.activePresetName"
+                                label="Preset"
+                                item-title="name"
+                                variant="underlined"
+                                hide-details
+                                :items="listPreset()"
+                                @update:modelValue="acceptPreset"
+                            />
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn
+                                rounded="xs"
+                                size="small"
+                                variant="text"
+                                text="Save"
+                                color="blue"
+                                prepend-icon="mdi-book-outline"
+                                @click="savePreset()"
+                            />
+                            <v-btn
+                                rounded="xs"
+                                size="small"
+                                variant="text"
+                                text="Download"
+                                color="blue"
+                                prepend-icon="mdi-download"
+                                @click="downloadPreset()"
+                            />
+                            <v-btn
+                                rounded="xs"
+                                size="small"
+                                variant="text"
+                                text="Load"
+                                color="blue"
+                                prepend-icon="mdi-upload"
+                                @click="uploadPresetDialog()"
+                            />
+                            <v-file-input
+                                v-model="selectFile"
+                                id="uploadPreset"
+                                accept=".json"
+                                class="d-none"
+                                @change="uploadPreset"
+                            />
+                        </v-card-actions>
+                    </v-card>
+                </v-expansion-panel-text>
+            </v-expansion-panel>
+            <v-expansion-panel elevation="0">
+                <v-expansion-panel-title>Page</v-expansion-panel-title>
+                <v-expansion-panel-text>
+                    <v-card variant="flat">
+                        <v-card-text>
+                            <div class="d-flex ga-4">
+                                <v-text-field
+                                    v-model.number="copygraph.workbook.pageWidth"
+                                    label="Width"
+                                    variant="underlined"
+                                    suffix="mm"
+                                    hide-details
+                                    :readonly="true"
+                                    :disabled="true"
+                                />
+                                <v-text-field
+                                    v-model.number="copygraph.workbook.pageHeight"
+                                    label="Height"
+                                    variant="underlined"
+                                    suffix="mm"
+                                    hide-details
+                                    :readonly="true"
+                                    :disabled="true"
+                                />
+                            </div>
+                            <div class="d-flex mt-4 ga-4">
+                                <NumberPicker
+                                    v-model.number="copygraph.workbook.pagePadding"
+                                    label="Padding"
+                                    suffix="mm"
+                                    :min="0"
+                                    :max="20"
+                                    :step="0.1"
+                                />
+                                <NumberPicker
+                                    v-model.number="copygraph.workbook.fractionHeight"
+                                    label="Fraction"
+                                    suffix="mm"
+                                    :min="1"
+                                    :max="10"
+                                    :step="0.01"
+                                />
+                            </div>
+                        </v-card-text>
+                    </v-card>
+                </v-expansion-panel-text>
+            </v-expansion-panel>
+            <v-expansion-panel elevation="0">
+                <v-expansion-panel-title>Rules</v-expansion-panel-title>
+                <v-expansion-panel-text>
+                    <v-card variant="flat">
+                        <v-card-actions>
+                            <v-btn
+                                rounded="xs"
+                                size="small"
+                                prepend-icon="mdi-plus"
+                                color="green-darken-1"
+                                variant="text"
+                                text="Add"
+                                @click="copygraph.workbook.addNewLayer()"
+                            />
+                        </v-card-actions>
+                    </v-card>
+                    <v-card
+                        v-for="(layer, index) in copygraph.workbook.layers"
+                        variant="flat"
+                        :key="index"
+                    >
+                        <v-divider></v-divider>
+                        <v-card-text>
+                            <div class="d-flex">
+                                <NumberPicker
+                                    v-model.number="layer.barHeight"
+                                    label="Height"
+                                    :min="1"
+                                    :max="36"
+                                />
+                                <NumberPicker
+                                    v-model.number="layer.barMargin"
+                                    label="Margin"
+                                    :min="0"
+                                    :max="36"
+                                />
+                                <NumberPicker
+                                    v-model.number="layer.barPadding"
+                                    label="Padding"
+                                    :min="0"
+                                    :max="36"
+                                />
+                            </div>
+                            <div class="d-flex mt-4">
+                                <NumberPicker
+                                    v-model.number="layer.lineAngle"
+                                    label="Angle"
+                                    :min="0"
+                                    :max="180"
+                                />
+                                <WorkbookRhythm
+                                    v-model.rhythm="layer.rhythm"
+                                    label="Rhythm"
+                                />
+                            </div>
+                            <div class="mt-4">
+                                <LineStyleField v-model="layer.lineStyle" />
+                            </div>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn
+                                rounded="xs"
+                                size="small"
+                                variant="text"
+                                text="Visible"
+                                :prepend-icon="layer.visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
+                                :color="layer.visible ? 'blue' : 'grey'"
+                                @click="copygraph.workbook.showLayer(layer)"
+                            />
+                            <v-btn
+                                rounded="xs"
+                                size="small"
+                                prepend-icon="mdi-close-thick"
+                                color="red-darken-1"
+                                variant="text"
+                                text="Remove"
+                                @click="copygraph.workbook.removeLayer(layer)"
+                            />
+                        </v-card-actions>
+                    </v-card>
+                </v-expansion-panel-text>
+            </v-expansion-panel>
+            <v-expansion-panel  elevation="0">
+                <v-expansion-panel-title>Letters</v-expansion-panel-title>
+                <v-expansion-panel-text>
+                </v-expansion-panel-text>
+            </v-expansion-panel>
+        </v-expansion-panels>
+    </v-navigation-drawer>
 
     <v-snackbar v-model="presetSaveSnackbar" :timeout="3000">
         Preset are saved in cookies and will be available only you.
@@ -216,9 +213,9 @@
 
 <script setup lang="ts">
     import WorkbookAdvanced from "@/components/workbook/Workbook.vue";
-    import WorkbookRhythm from "@/components/workbook/form/WorkbookRhythm.vue";
+    import WorkbookRhythm from "@/components/fields/WorkbookRhythmField.vue";
     import LineStyleField from "@/components/fields/LineStyleField.vue";
-    import NumberPicker from "@/components/NumberPicker.vue";
+    import NumberPicker from "@/components/fields/NumberPickerField.vue";
     import { onMounted, ref } from "vue";
     import { download, printToPdf } from "@/components/copygraph/Utils";
     import { useCookies } from "vue3-cookies";

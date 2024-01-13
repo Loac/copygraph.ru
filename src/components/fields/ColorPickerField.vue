@@ -30,24 +30,24 @@
 </template>
 
 <script setup lang="ts">
-import { defineModel, ModelRef } from "vue";
+    import { defineModel, ModelRef } from "vue";
 
-const model:ModelRef<string> = defineModel({ required: true });
+    const model:ModelRef<string> = defineModel({ required: true });
 
-const swatchStyle = function(model: any) {
-    return {
-        cursor: 'pointer',
-        backgroundColor: model,
+    const swatchStyle = function(model: any) {
+        return {
+            cursor: 'pointer',
+            backgroundColor: model,
+        }
     }
-}
 </script>
 
 <style>
-.color-picker .color-picker__label {
-    border-radius: 2px;
-    height: 18px;
-    margin-top: 2px;
-    position: absolute;
-    width: 100%;
-}
+    .color-picker .color-picker__label {
+        border-radius: 2px;
+        height: 18px;
+        margin-top: 2px;
+        position: absolute;
+        width: 100%;
+    }
 </style>

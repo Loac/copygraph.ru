@@ -6,13 +6,11 @@
             :min="0"
             :max="5"
             :step="1"
-        ></NumberPicker>
-
+        />
         <StylePicker
             label="Style"
             v-model="model.style"
-        ></StylePicker>
-
+        />
         <ColorPicker
             variant="underlined"
             hide-details
@@ -22,9 +20,9 @@
 </template>
 
 <script setup lang="ts">
-    import StylePicker from "@/components/StylePicker.vue";
-    import NumberPicker from "@/components/NumberPicker.vue";
-    import ColorPicker from "@/components/ColorPicker.vue";
+    import StylePicker from "@/components/fields/StylePickerField.vue";
+    import NumberPicker from "@/components/fields/NumberPickerField.vue";
+    import ColorPicker from "@/components/fields/ColorPickerField.vue";
     import { defineModel } from "vue";
     import { LineStyle } from "@/components/copygraph/Copygraph";
 

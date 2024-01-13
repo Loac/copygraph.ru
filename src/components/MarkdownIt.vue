@@ -1,5 +1,5 @@
 <template>
-  <div v-html="markdown.render(source)" class="typography" />
+    <div v-html="markdown.render(source)" class="typography" />
 </template>
 
 <script setup lang="ts">

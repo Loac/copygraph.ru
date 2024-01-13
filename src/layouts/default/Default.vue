@@ -6,6 +6,6 @@
 </template>
 
 <script lang="ts" setup>
-import DefaultBar from './DefaultBar.vue'
-import DefaultView from './DefaultView.vue'
+    import DefaultBar from './DefaultBar.vue';
+    import DefaultView from './DefaultView.vue';
 </script>

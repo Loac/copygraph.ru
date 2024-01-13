@@ -23,49 +23,49 @@
                     :max="max"
                     :step="step"
                     @update:modelValue="updateModelValue"
-                ></v-slider>
+                />
             </v-card-text>
         </v-card>
     </v-menu>
 </template>
 
 <script setup lang="ts">
-import { defineModel, defineProps, defineEmits, ModelRef } from "vue";
+    import { defineModel, defineProps, defineEmits, ModelRef } from "vue";
 
-const model:ModelRef<number> = defineModel({ required: true });
+    const model:ModelRef<number> = defineModel({ required: true });
 
-defineProps({
-    label: {
-        type: String,
-        default: ''
-    },
-    readonly: {
-        type: Boolean,
-        default: false,
-    },
-    min: {
-        type: Number,
-        default: 0
-    },
-    max: {
-        type: Number,
-        default: 5
-    },
-    step: {
-        type: Number,
-        default: 1
-    },
-    suffix: {
-        type: String,
-        default: ''
+    defineProps({
+        label: {
+            type: String,
+            default: ''
+        },
+        readonly: {
+            type: Boolean,
+            default: false,
+        },
+        min: {
+            type: Number,
+            default: 0
+        },
+        max: {
+            type: Number,
+            default: 5
+        },
+        step: {
+            type: Number,
+            default: 1
+        },
+        suffix: {
+            type: String,
+            default: ''
+        }
+    });
+
+    const emit = defineEmits<{
+        input: []
+    }>()
+
+    const updateModelValue = function() {
+        emit('input');
     }
-});
-
-const emit = defineEmits<{
-    input: []
-}>()
-
-const updateModelValue = function() {
-    emit('input');
-}
 </script>

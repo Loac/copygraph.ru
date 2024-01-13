@@ -9,5 +9,5 @@
 </script>
 
 <style>
-@import "@/styles/copygraph.scss";
+    @import "@/styles/copygraph.scss";
 </style>
