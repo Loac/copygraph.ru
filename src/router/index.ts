@@ -15,11 +15,6 @@ const routes = [
         component: () => import('@/views/HomeView.vue'),
       },
       {
-        path: 'copybook',
-        name: 'Copybook',
-        component: () => import('@/views/CopybookView.vue'),
-      },
-      {
         path: 'workbook',
         name: 'Workbook',
         component: () => import('@/views/WorkbookView.vue'),
