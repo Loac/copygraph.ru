@@ -1,5 +1,5 @@
 <template>
-    <WorkbookAdvanced :workbook="copygraph.workbook" />
+    <Workbook :workbook="copygraph.workbook" />
 
     <v-navigation-drawer
         location="right"
@@ -31,12 +31,13 @@
             </v-expansion-panel>
             <v-expansion-panel elevation="0">
                 <v-expansion-panel-title>Lines</v-expansion-panel-title>
-                <v-expansion-panel-text></v-expansion-panel-text>
+                <v-expansion-panel-text>
+                    <WorkbookLayers v-model="copygraph" />
+                </v-expansion-panel-text>
             </v-expansion-panel>
             <v-expansion-panel  elevation="0">
                 <v-expansion-panel-title>Letters</v-expansion-panel-title>
                 <v-expansion-panel-text>
-                    <WorkbookLayers v-model="copygraph" />
                 </v-expansion-panel-text>
             </v-expansion-panel>
         </v-expansion-panels>
@@ -47,7 +48,7 @@
     import { ref } from "vue";
     import { printToPdf } from "@/components/copygraph/Utils";
     import { Copygraph } from "@/components/copygraph/Copygraph";
-    import WorkbookAdvanced from "@/components/workbook/Workbook.vue";
+    import Workbook from "@/components/workbook/Workbook.vue";
     import WorkbookPreset from "@/components/workbook/form/WorkbookPreset.vue";
     import WorkbookPage from "@/components/workbook/form/WorkbookPage.vue";
     import WorkbookLayers from "@/components/workbook/form/WorkbookLayers.vue";
