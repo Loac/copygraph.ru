@@ -26,7 +26,6 @@
       </v-card-text>
     </v-card>
   </v-menu>
-
 </template>
 
 <script setup lang="ts">
@@ -68,11 +67,4 @@
   const updateModelValue = function() {
     emit('input');
   }
-
-
 </script>
-
-
-<style scoped>
-
-</style>

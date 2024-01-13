@@ -73,8 +73,15 @@
     }
 }
 
+// Убрать отступы внутри раскрывающихся панелей.
 .workbook-advanced-drawer .v-expansion-panel-text__wrapper {
     padding: 0 !important;
+}
+
+// Убрать отступ вертикального слайдера.
+.v-slider.v-input--vertical {
+    margin-bottom: 2px !important;
+    margin-top: 2px !important;
 }
 
 //@import '~vuetify/lib/styles/main.css';
