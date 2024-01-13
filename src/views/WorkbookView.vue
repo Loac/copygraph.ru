@@ -235,7 +235,10 @@
     }
 
     const uploadPresetDialog = (): void => {
-        document.getElementById("uploadPreset").click()
+        let element: HTMLElement | null = document.getElementById("uploadPreset");
+        if (null != element) {
+            element.click()
+        }
     }
 
     const uploadPreset = (): void => {
@@ -246,7 +249,8 @@
         const reader = new FileReader();
         reader.readAsText(selectFile.value[0]);
         reader.onload = () => {
-            if (!copygraph.value.acceptPresetFromJson(reader.result)) {
+            if (typeof reader.result == 'string'
+                && !copygraph.value.acceptPresetFromJson(reader.result)) {
                 presetParseError.value = true;
             }
             selectFile.value = null;
