@@ -70,19 +70,6 @@ export class Copygraph {
         this.workbook.acceptPreset(preset);
     }
 
-    addPresetFromJson(json: string): void {
-        if (null == json) {
-            return;
-        }
-
-        try {
-            const data: any = JSON.parse(json);
-            this.addPresetFromData(data);
-        } catch (e) {
-            console.error('Can\'t add preset from JSON.')
-        }
-    }
-
     addPresetFromData(data: any): void {
         if (null == data) {
             return;
@@ -101,20 +88,6 @@ export class Copygraph {
      */
     addPreset(preset: Preset): void {
         this.presets.set(preset.name, preset);
-    }
-
-    /**
-     * Удалить пресет, если он существует и не является статическим.
-     */
-    removePresetByName(presetName: string): void {
-        const preset: Preset | undefined = this.presets.get(presetName);
-
-        if (undefined == preset)
-            return;
-        if (preset.isStatic())
-            throw new Error('You can\'t remove static preset');
-
-        this.presets.delete(presetName);
     }
 
     /**
@@ -266,15 +239,14 @@ export class Workbook {
     /**
      * Сформировать стиль отображения слоя.
      */
-    layerStyle(layer: Layer): StyleValue {
+    layerStyle(): StyleValue {
         return {
-            // marginTop: (this.fractionHeight * offset) * -1 + 'mm'
         }
     }
 
     barStyle(layer: Layer): StyleValue {
         return {
-            height: layer.barHeight + 'mm',
+            height: this.fractionHeight * layer.barHeight + 'mm',
             marginTop: this.fractionHeight * layer.barMargin + 'mm',
         }
     }
@@ -292,7 +264,7 @@ export class Workbook {
     guideStyle(layer: Layer, rhythm: number): StyleValue {
         return {
             height: this.fractionHeight * rhythm + 'mm',
-            width: layer.barHeight / Math.sin(layer.lineAngle * Math.PI / 180) + 'mm',
+            width: (this.fractionHeight * layer.barHeight) / Math.sin(layer.lineAngle * Math.PI / 180) + 'mm',
             borderTop: layer.lineStyle.width + 'px ' + layer.lineStyle.style + ' ' + layer.lineStyle.color,
             transform: 'translate(' + this.fractionHeight * rhythm + 'mm, 0) rotate(' + (180 - layer.lineAngle) +'deg)',
         }
@@ -312,7 +284,7 @@ export class Workbook {
             .filter((layer: Layer) => layer.visible)
             .forEach((layer: Layer): void => {
                 const rLayer: RLayer = new RLayer();
-                rLayer.style = this.layerStyle(layer);
+                rLayer.style = this.layerStyle();
 
                 let height: number = 0;
                 while (height < this.pageHeight && layer.barHeight > 1) {
