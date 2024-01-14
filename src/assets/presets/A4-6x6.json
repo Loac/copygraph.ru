@@ -2,7 +2,7 @@
   "format": "0.2",
   "name": "A4 6x6",
   "type": "static",
-  "fractionHeight": 3,
+  "fractionHeight": 1,
   "pageHeight": 297,
   "pageWidth": 210,
   "pagePadding": 10,
@@ -10,10 +10,9 @@
   "layers": [
     {
       "visible": true,
-      "rhythm": [2,2,2,2,2],
+      "rhythm": [6,12,18,24,30],
       "barHeight": 36,
       "barMargin": 4,
-      "barPadding": 2,
       "lineAngle": 0,
       "lineStyle": {
         "width": 1,
@@ -23,23 +22,21 @@
     },
     {
       "visible": true,
-      "rhythm": [12, 0],
+      "rhythm": [0,36],
       "barHeight": 36,
       "barMargin": 4,
-      "barPadding": 0,
       "lineAngle": 0,
       "lineStyle": {
         "width": 1,
         "style": "solid",
-        "color": "#000000"
+        "color": "#999999"
       }
     },
     {
       "visible": true,
-      "rhythm": [8,8,8,8,8,8,8,8,8],
+      "rhythm": [30,60,90,120,150,180],
       "barHeight": 36,
       "barMargin": 4,
-      "barPadding": 0,
       "lineAngle": 55,
       "lineStyle": {
         "width": 1,

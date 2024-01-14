@@ -32,12 +32,6 @@
                     :min="0"
                     :max="36"
                 />
-                <NumberPicker
-                    v-model.number="layer.barPadding"
-                    label="Padding"
-                    :min="0"
-                    :max="36"
-                />
             </div>
             <div class="d-flex mt-4">
                 <NumberPicker

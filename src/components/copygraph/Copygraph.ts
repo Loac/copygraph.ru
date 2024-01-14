@@ -208,10 +208,9 @@ export class Workbook {
     newLayer(): Layer {
         const layer: Layer = new Layer();
         layer.offset = 6;
-        layer.rhythm = [2,2,2,2,2];
+        layer.rhythm = [6,12,18,24,30];
         layer.barHeight = 36;
         layer.barMargin = 4;
-        layer.barPadding = 2;
         layer.lineAngle = 0;
         layer.lineStyle.width = 1;
         layer.lineStyle.style = 'dashed';
@@ -277,7 +276,6 @@ export class Workbook {
         return {
             height: layer.barHeight + 'mm',
             marginTop: this.fractionHeight * layer.barMargin + 'mm',
-            paddingTop: this.fractionHeight * layer.barPadding + 'mm',
         }
     }
 
@@ -286,17 +284,17 @@ export class Workbook {
      */
     lineStyle(layer: Layer, rhythm: number): StyleValue {
         return {
-            height: this.fractionHeight * rhythm + 'mm',
+            marginTop: this.fractionHeight * rhythm + 'mm',
             borderTop: layer.lineStyle.width + 'px ' + layer.lineStyle.style + ' ' + layer.lineStyle.color,
         }
     }
 
-    guideStyle(layer: Layer, rhythm: number, translate: number): StyleValue {
+    guideStyle(layer: Layer, rhythm: number): StyleValue {
         return {
             height: this.fractionHeight * rhythm + 'mm',
             width: layer.barHeight / Math.sin(layer.lineAngle * Math.PI / 180) + 'mm',
             borderTop: layer.lineStyle.width + 'px ' + layer.lineStyle.style + ' ' + layer.lineStyle.color,
-            transform: 'translate(' + translate + 'mm, 0) rotate(' + (180 - layer.lineAngle) +'deg)',
+            transform: 'translate(' + this.fractionHeight * rhythm + 'mm, 0) rotate(' + (180 - layer.lineAngle) +'deg)',
         }
     }
 
@@ -316,22 +314,16 @@ export class Workbook {
                 const rLayer: RLayer = new RLayer();
                 rLayer.style = this.layerStyle(layer);
 
-                // Добавить класс, чтобы изменить стили
-                if (layer.lineAngle > 0)
-                    rLayer.class = "guides";
-
                 let height: number = 0;
                 while (height < this.pageHeight && layer.barHeight > 1) {
                     const rBar: RBar = new RBar();
                     rBar.style = this.barStyle(layer);
-                    let translate: number = 0;
                     for (const key in layer.rhythm) {
                         const rLine: RLine = new RLine();
 
-                        translate += layer.rhythm[key] * this.fractionHeight;
                         rLine.style = layer.lineAngle == 0
                             ? this.lineStyle(layer, layer.rhythm[key])
-                            : this.guideStyle(layer, layer.rhythm[key], translate);
+                            : this.guideStyle(layer, layer.rhythm[key]);
 
                         rBar.addLine(rLine);
                     }
@@ -354,7 +346,6 @@ export class Layer {
     offset: number = 0;
     barHeight: number = 0;
     barMargin: number = 0;
-    barPadding: number = 0;
     lineAngle: number = 0;
     rhythm: Array<number> = [];
     lineStyle: LineStyle = new LineStyle();
@@ -368,7 +359,6 @@ export class Layer {
         layer.offset = data.offset;
         layer.barHeight = data.barHeight;
         layer.barMargin = data.barMargin;
-        layer.barPadding = data.barPadding;
         layer.lineAngle = data.lineAngle;
         layer.rhythm = [...data.rhythm];
         layer.lineStyle = LineStyle.fromData(data.lineStyle);
@@ -432,7 +422,6 @@ export class RWorksheet {
 
 export class RLayer {
     style: StyleValue;
-    class: string = "";
     bars: Array<RBar> = [];
 
     addBar(bar: RBar): void {

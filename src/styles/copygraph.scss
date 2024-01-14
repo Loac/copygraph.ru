@@ -47,30 +47,26 @@
         margin-top: 0 !important;
     }
 
-    // Параметры для блока и линий, если указан наклон линий.
-    .guides {
-        .bar {
-            position: relative;
-            overflow: hidden;
-        }
+    .bar {
+        position: relative;
+    }
 
-        .line {
-            transform-origin: top left;
-            top: 0;
-            left: 0;
-            position: absolute;
-            width: 100%;
-        }
+    .line {
+        left: 0;
+        top: 0;
+        position: absolute;
+        transform-origin: top left;
+        width: 100%;
     }
 
     // Раскраска блоков для отладки.
-    .bar:nth-child(1n) {
-        background: rgba(0, 200, 0, .05);
-    }
-
-    .bar:nth-child(2n) {
-        background: rgba(200, 0, 0, .05);
-    }
+    //.bar:nth-child(1n) {
+    //    background: rgba(0, 200, 0, .05);
+    //}
+    //
+    //.bar:nth-child(2n) {
+    //    background: rgba(200, 0, 0, .05);
+    //}
 }
 
 // Убрать отступы внутри раскрывающихся панелей.

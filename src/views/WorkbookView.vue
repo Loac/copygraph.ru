@@ -38,6 +38,17 @@
             <v-expansion-panel  elevation="0">
                 <v-expansion-panel-title>Letters</v-expansion-panel-title>
                 <v-expansion-panel-text>
+                    <v-card variant="flat">
+                        <v-card-text>
+                            <v-select
+                                v-model="font"
+                                label="Font"
+                                variant="underlined"
+                                hide-details
+                                :items="fontList"
+                            />
+                        </v-card-text>
+                    </v-card>
                 </v-expansion-panel-text>
             </v-expansion-panel>
         </v-expansion-panels>
