@@ -36,19 +36,9 @@
                 </v-expansion-panel-text>
             </v-expansion-panel>
             <v-expansion-panel  elevation="0">
-                <v-expansion-panel-title>Letters</v-expansion-panel-title>
+                <v-expansion-panel-title>Lettering</v-expansion-panel-title>
                 <v-expansion-panel-text>
-                    <v-card variant="flat">
-                        <v-card-text>
-                            <v-select
-                                v-model="font"
-                                label="Font"
-                                variant="underlined"
-                                hide-details
-                                :items="fontList"
-                            />
-                        </v-card-text>
-                    </v-card>
+                    <WorkbookLettering v-model="copygraph" />
                 </v-expansion-panel-text>
             </v-expansion-panel>
         </v-expansion-panels>
@@ -63,6 +53,7 @@
     import WorkbookPreset from "@/components/workbook/form/WorkbookPreset.vue";
     import WorkbookPage from "@/components/workbook/form/WorkbookPage.vue";
     import WorkbookLayers from "@/components/workbook/form/WorkbookLayers.vue";
+    import WorkbookLettering from "@/components/workbook/form/WorkbookLettering.vue";
 
     const copygraph = ref(new Copygraph());
     // Раскрыть первую панель.
