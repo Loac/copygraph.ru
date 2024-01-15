@@ -9,6 +9,11 @@
                                 <div v-for="(line, index) in bar.lines" class="line" :style="line.style" :key="index"></div>
                             </div>
                         </div>
+                        <div class="lettering" :style="page.worksheet.lettering.style">
+                            <div v-for="(bar, index) in page.worksheet.lettering.bars" class="bar" :style="bar.style" :key="index">
+                                <div v-for="(letter, index) in bar.letters" class="letter" :style="letter.style" :key="index">{{ letter.letter }}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

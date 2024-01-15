@@ -156,6 +156,7 @@ export class Workbook {
     pagePadding: number = 10;
     pageOrientation: string = 'portrait';
     layers: Array<Layer> = [];
+    lettering: Lettering = new Lettering();
 
     removeLayer(layer: Layer): void {
         const index: number = this.layers.indexOf(layer);
@@ -180,7 +181,6 @@ export class Workbook {
      */
     newLayer(): Layer {
         const layer: Layer = new Layer();
-        layer.offset = 6;
         layer.rhythm = [6,12,18,24,30];
         layer.barHeight = 36;
         layer.barMargin = 4;
@@ -214,6 +214,7 @@ export class Workbook {
         this.pageWidth = preset.pageWidth;
         this.pagePadding = preset.pagePadding;
         this.pageOrientation = preset.pageOrientation;
+        this.lettering = preset.lettering;
 
         this.removeLayerAll();
         preset.layers.forEach((layer: Layer): void => {
@@ -270,6 +271,29 @@ export class Workbook {
         }
     }
 
+    letteringBarStyle(lettering: Lettering): StyleValue {
+        return {
+            height: this.fractionHeight * lettering.barHeight + 'mm',
+            marginTop: this.fractionHeight * lettering.barMargin + 'mm',
+            paddingLeft: this.fractionHeight * lettering.barPadding + 'mm',
+        }
+    }
+
+    letteringStyle(lettering: Lettering): StyleValue {
+        return {
+            fontFamily: lettering.font,
+            fontSize: lettering.fontSize + 'rem'
+        }
+    }
+
+    letterStyle(lettering: Lettering, first: boolean): StyleValue {
+        return {
+            marginTop: this.fractionHeight * lettering.letterTopMargin + 'mm',
+            marginRight: this.fractionHeight * lettering.letterRightMargin + 'mm',
+            color: first ? lettering.firstColor : lettering.color
+        }
+    }
+
     /**
      * Сформировать список объектов страницы для вывода.
      * Необходимо сгенерировать столько линий, чтобы они
@@ -306,6 +330,20 @@ export class Workbook {
                 rPage.worksheet.addLayer(rLayer);
             });
 
+        rPage.worksheet.lettering.style = this.letteringStyle(this.lettering);
+        this.lettering.letters.forEach((items: string[]): void => {
+            const rBar: RLetteringBar = new RLetteringBar();
+            rBar.style = this.letteringBarStyle(this.lettering);
+            items.forEach((item: string, index: number): void => {
+                const rLetter: RLetter = new RLetter();
+                rLetter.letter = item;
+                rLetter.style = this.letterStyle(this.lettering, index == 0);
+                rBar.addLetter(rLetter);
+            })
+
+            rPage.worksheet.lettering.addBar(rBar);
+        })
+
         return rPage;
     }
 }
@@ -315,7 +353,6 @@ export class Workbook {
  */
 export class Layer {
     visible: boolean = true;
-    offset: number = 0;
     barHeight: number = 0;
     barMargin: number = 0;
     lineAngle: number = 0;
@@ -328,13 +365,48 @@ export class Layer {
     static fromData(data: Layer): Layer {
         const layer: Layer = new Layer();
         layer.visible = data.visible;
-        layer.offset = data.offset;
         layer.barHeight = data.barHeight;
         layer.barMargin = data.barMargin;
         layer.lineAngle = data.lineAngle;
         layer.rhythm = [...data.rhythm];
         layer.lineStyle = LineStyle.fromData(data.lineStyle);
         return layer;
+    }
+}
+
+export class Lettering {
+    font: string = '';
+    fontSize: number = 1;
+    color: string = '#DDD';
+    firstColor: string = '#DDD';
+    barHeight: number = 0;
+    barMargin: number = 0;
+    barPadding: number = 0;
+    letterTopMargin: number = 0;
+    letterRightMargin: number = 0;
+    letters: Array<Array<string>> = []
+
+    static fromData(data: Lettering): Lettering {
+        const lettering: Lettering = new Lettering();
+        lettering.font = data.font;
+        lettering.fontSize = data.fontSize;
+        lettering.color = data.color;
+        lettering.firstColor = data.firstColor;
+        lettering.barHeight = data.barHeight;
+        lettering.barMargin = data.barMargin;
+        lettering.barPadding = data.barPadding;
+        lettering.letterTopMargin = data.letterTopMargin;
+        lettering.letterRightMargin = data.letterRightMargin;
+
+        data.letters.forEach((letters: string[]): void => {
+            const _letters: string[] = [];
+            letters.forEach((letter: string): void => {
+                _letters.push(letter);
+            })
+            lettering.letters.push(_letters);
+        })
+
+        return lettering;
     }
 }
 
@@ -352,6 +424,7 @@ export class Preset {
     pagePadding: number = 10;
     pageOrientation: string = 'portrait';
     layers: Array<Layer> = [];
+    lettering: Lettering = new Lettering();
 
     isStatic(): boolean {
         return this.type == 'static';
@@ -370,6 +443,7 @@ export class Preset {
         preset.pageWidth = data.pageWidth;
         preset.pagePadding = data.pagePadding;
         preset.pageOrientation = data.pageOrientation;
+        preset.lettering = Lettering.fromData(data.lettering);
 
         data.layers.forEach((item: Layer): void => {
             preset.layers.push(Layer.fromData(item));
@@ -386,6 +460,7 @@ export class RPage {
 
 export class RWorksheet {
     layers: Array<RLayer> = [];
+    lettering: RLettering = new RLettering();
 
     addLayer(layer: RLayer): void {
         this.layers.push(layer);
@@ -412,4 +487,27 @@ export class RBar {
 
 export class RLine {
     style: StyleValue;
+}
+
+export class RLettering {
+    style: StyleValue;
+    bars: Array<RLetteringBar> = [];
+
+    addBar(bar: RLetteringBar): void {
+        this.bars.push(bar);
+    }
+}
+
+export class RLetteringBar {
+    style: StyleValue;
+    letters: Array<RLetter> = [];
+
+    addLetter(letter: RLetter): void {
+        this.letters.push(letter);
+    }
+}
+
+export class RLetter {
+    style: StyleValue;
+    letter: string = '';
 }

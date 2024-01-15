@@ -59,6 +59,14 @@
         width: 100%;
     }
 
+    .lettering {
+        .bar {
+            display: flex;
+            align-items: center;
+            line-height: 0;
+        }
+    }
+
     // Раскраска блоков для отладки.
     //.bar:nth-child(1n) {
     //    background: rgba(0, 200, 0, .05);
