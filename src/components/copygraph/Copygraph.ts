@@ -330,19 +330,21 @@ export class Workbook {
                 rPage.worksheet.addLayer(rLayer);
             });
 
-        rPage.worksheet.lettering.style = this.letteringStyle(this.lettering);
-        this.lettering.letters.forEach((items: string[]): void => {
-            const rBar: RLetteringBar = new RLetteringBar();
-            rBar.style = this.letteringBarStyle(this.lettering);
-            items.forEach((item: string, index: number): void => {
-                const rLetter: RLetter = new RLetter();
-                rLetter.letter = item;
-                rLetter.style = this.letterStyle(this.lettering, index == 0);
-                rBar.addLetter(rLetter);
-            })
+        if (this.lettering.visible) {
+            rPage.worksheet.lettering.style = this.letteringStyle(this.lettering);
+            this.lettering.letters.forEach((items: string[]): void => {
+                const rBar: RLetteringBar = new RLetteringBar();
+                rBar.style = this.letteringBarStyle(this.lettering);
+                items.forEach((item: string, index: number): void => {
+                    const rLetter: RLetter = new RLetter();
+                    rLetter.letter = item;
+                    rLetter.style = this.letterStyle(this.lettering, index == 0);
+                    rBar.addLetter(rLetter);
+                })
 
-            rPage.worksheet.lettering.addBar(rBar);
-        })
+                rPage.worksheet.lettering.addBar(rBar);
+            })
+        }
 
         return rPage;
     }
@@ -375,6 +377,7 @@ export class Layer {
 }
 
 export class Lettering {
+    visible: boolean = true;
     font: string = '';
     fontSize: number = 1;
     color: string = '#DDD';
@@ -388,6 +391,7 @@ export class Lettering {
 
     static fromData(data: Lettering): Lettering {
         const lettering: Lettering = new Lettering();
+        lettering.visible = data.visible;
         lettering.font = data.font;
         lettering.fontSize = data.fontSize;
         lettering.color = data.color;
