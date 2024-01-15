@@ -31,6 +31,18 @@
         "style": "dashed",
         "color": "#999999"
       }
+    },
+    {
+      "visible": true,
+      "rhythm": [30,60,90,120,150,180],
+      "barHeight": 28,
+      "barMargin": 8.7,
+      "lineAngle": 55,
+      "lineStyle": {
+        "width": 1,
+        "style": "dashed",
+        "color": "#999999"
+      }
     }
   ],
   "lettering": {
