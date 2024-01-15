@@ -7,7 +7,7 @@
                 item-title="name"
                 variant="underlined"
                 hide-details
-                :items="listPreset()"
+                :items="listPreset"
                 @update:modelValue="acceptPreset"
             />
         </v-card-text>
@@ -68,16 +68,14 @@
     const presetSaveSnackbar = ref(false);
     const presetParseError = ref(false);
     const selectFile = ref(null);
-
-    const listPreset = (): Array<string> => {
-        return copygraph.value.listPreset();
-    }
+    const listPreset = ref(['']);
 
     const savePreset = (): void => {
         try {
             copygraph.value.savePreset('[Custom]');
             cookies.set('preset', copygraph.value.exportPresetToJson('[Custom]'));
             presetSaveSnackbar.value = true;
+            listPreset.value = copygraph.value.listPreset();
         } catch (e) {
             console.log(e);
         }
@@ -129,7 +127,7 @@
                 loadPreset();
                 copygraph.value.workbook.fractionHeight = 1;
                 copygraph.value.acceptPresetByName('A4 6x6');
-                listPreset();
+                listPreset.value = copygraph.value.listPreset();
             });
         });
     });
