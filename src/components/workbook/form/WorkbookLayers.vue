@@ -20,13 +20,13 @@
         <v-divider></v-divider>
         <v-card-text>
             <div class="d-flex">
-                <NumberPicker
+                <NumberPickerField
                     v-model.number="layer.barHeight"
                     label="Height"
                     :min="1"
                     :max="36"
                 />
-                <NumberPicker
+                <NumberPickerField
                     v-model.number="layer.barMargin"
                     label="Margin"
                     :min="0"
@@ -34,13 +34,13 @@
                 />
             </div>
             <div class="d-flex mt-4">
-                <NumberPicker
+                <NumberPickerField
                     v-model.number="layer.lineAngle"
                     label="Angle"
                     :min="0"
                     :max="180"
                 />
-                <WorkbookRhythm
+                <WorkbookRhythmField
                     v-model.rhythm="layer.rhythm"
                     label="Rhythm"
                 />
@@ -75,8 +75,8 @@
 <script setup lang="ts">
     import { ModelRef } from "vue";
     import { Copygraph } from "@/components/copygraph/Copygraph";
-    import NumberPicker from "@/components/fields/NumberPickerField.vue";
-    import WorkbookRhythm from "@/components/fields/WorkbookRhythmField.vue";
+    import NumberPickerField from "@/components/fields/NumberPickerField.vue";
+    import WorkbookRhythmField from "@/components/fields/WorkbookRhythmField.vue";
     import LineStyleField from "@/components/fields/LineStyleField.vue";
 
     const copygraph:ModelRef<Copygraph> = defineModel({ required: true });
