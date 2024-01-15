@@ -4,11 +4,11 @@
             <v-text-field
                 v-model="model"
                 v-bind="props"
-                label="Color"
                 variant="underlined"
                 class="color-picker"
                 value=""
                 hide-details
+                :label="label"
                 :readonly="true"
             >
                 <template v-slot:prepend-inner>
@@ -40,6 +40,13 @@
             backgroundColor: model,
         }
     }
+
+    defineProps({
+        label: {
+            type: String,
+            default: 'Color'
+        },
+    });
 </script>
 
 <style>
