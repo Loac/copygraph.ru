@@ -32,10 +32,14 @@
     "letterTopMargin": -2,
     "letterRightMargin": 8,
     "letters": [
-        ["Calligraphy", "Calligraphy"],
-        ["A", "A", "A", "A", "A", "A"],
-        ["B", "B", "B", "B", "B", "B"],
-        ["C", "C", "C", "C", "C", "C", "C", "C", "C"]
+        "Calligraphy,Calligraphy",
+        "A,A,A",
+        "B,B,B",
+        "C,C,C",
+        "D,D,D",
+        "E,E,E",
+        "F,F,F",
+        "G,G,G"
     ]
   }
 }

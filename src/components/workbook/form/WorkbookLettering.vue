@@ -66,6 +66,41 @@
             </div>
         </v-card-text>
     </v-card>
+    <v-card variant="flat">
+        <v-card-text>
+            <div v-for="(letter, index) in copygraph.workbook.lettering.letters" :key="index">
+                <div v-if="index > 0" class="mt-4"></div>
+                <div class="d-flex align-end">
+                    <v-text-field
+                        v-model="copygraph.workbook.lettering.letters[index]"
+                        label="Letter"
+                        variant="underlined"
+                        hide-details
+                    />
+                    <v-btn
+                        rounded="xs"
+                        size="small"
+                        prepend-icon="mdi-close-thick"
+                        color="red-darken-1"
+                        variant="text"
+                        class="btn-remove"
+                        @click="copygraph.workbook.removeLetter(index)"
+                    />
+                </div>
+            </div>
+        </v-card-text>
+        <v-card-actions>
+            <v-btn
+                rounded="xs"
+                size="small"
+                prepend-icon="mdi-plus"
+                color="green-darken-1"
+                variant="text"
+                text="Add"
+                @click="copygraph.workbook.addLetter()"
+            />
+        </v-card-actions>
+    </v-card>
 </template>
 
 <script setup lang="ts">
@@ -77,3 +112,14 @@
     const fontList = ref(['Gloria script', 'Arial']);
     const copygraph:ModelRef<Copygraph> = defineModel({ required: true });
 </script>
+
+<style lang="scss">
+    .btn-remove {
+        min-width: auto;
+        padding: 0 6px;
+
+        .v-btn__prepend {
+            margin: 0;
+        }
+    }
+</style>

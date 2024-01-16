@@ -205,6 +205,14 @@ export class Workbook {
         this.layers.push(layer);
     }
 
+    addLetter(): void {
+        this.lettering.letters.push('abc');
+    }
+
+    removeLetter(index: number): void {
+        this.lettering.letters.splice(index, 1);
+    }
+
     /**
      * Применить пресет к Workbook.
      */
@@ -332,10 +340,10 @@ export class Workbook {
 
         if (this.lettering.visible) {
             rPage.worksheet.lettering.style = this.letteringStyle(this.lettering);
-            this.lettering.letters.forEach((items: string[]): void => {
+            this.lettering.letters.forEach((letters: string): void => {
                 const rBar: RLetteringBar = new RLetteringBar();
                 rBar.style = this.letteringBarStyle(this.lettering);
-                items.forEach((item: string, index: number): void => {
+                letters.split(',').forEach((item: string, index: number): void => {
                     const rLetter: RLetter = new RLetter();
                     rLetter.letter = item;
                     rLetter.style = this.letterStyle(this.lettering, index == 0);
@@ -387,7 +395,7 @@ export class Lettering {
     barPadding: number = 0;
     letterTopMargin: number = 0;
     letterRightMargin: number = 0;
-    letters: Array<Array<string>> = []
+    letters: Array<string> = []
 
     static fromData(data: Lettering): Lettering {
         const lettering: Lettering = new Lettering();
@@ -402,12 +410,8 @@ export class Lettering {
         lettering.letterTopMargin = data.letterTopMargin;
         lettering.letterRightMargin = data.letterRightMargin;
 
-        data.letters.forEach((letters: string[]): void => {
-            const _letters: string[] = [];
-            letters.forEach((letter: string): void => {
-                _letters.push(letter);
-            })
-            lettering.letters.push(_letters);
+        data.letters.forEach((letters: string): void => {
+            lettering.letters.push(letters);
         })
 
         return lettering;
