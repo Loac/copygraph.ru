@@ -60,4 +60,6 @@
     const copygraph = ref(new Copygraph());
     // Раскрыть первую панель.
     const panel = ref([0]);
+
+    document.title = 'Copygraph';
 </script>
