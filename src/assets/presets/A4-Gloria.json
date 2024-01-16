@@ -1,6 +1,6 @@
 {
   "format": "0.2",
-  "name": "A4 6x8",
+  "name": "A4 Gloria",
   "type": "static",
   "fractionHeight": 0.97,
   "pageHeight": 297,
@@ -17,6 +17,30 @@
       "lineStyle": {
         "width": 1,
         "style": "solid",
+        "color": "#999999"
+      }
+    },
+    {
+      "visible": true,
+      "rhythm": [3.5,13,18.5,24.5],
+      "barHeight": 28,
+      "barMargin": 8.7,
+      "lineAngle": 0,
+      "lineStyle": {
+        "width": 1,
+        "style": "dashed",
+        "color": "#999999"
+      }
+    },
+    {
+      "visible": true,
+      "rhythm": [30,60,90,120,150,180],
+      "barHeight": 28,
+      "barMargin": 8.7,
+      "lineAngle": 55,
+      "lineStyle": {
+        "width": 1,
+        "style": "dashed",
         "color": "#999999"
       }
     }

@@ -109,7 +109,7 @@
     import NumberPickerField from "@/components/fields/NumberPickerField.vue";
     import ColorPickerField from "@/components/fields/ColorPickerField.vue";
 
-    const fontList = ref(['Gloria script', 'Arial']);
+    const fontList = ref(['Gloria script', 'Esenin script One']);
     const copygraph:ModelRef<Copygraph> = defineModel({ required: true });
 </script>
 
