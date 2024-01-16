@@ -1,6 +1,6 @@
 {
     "format": "0.2",
-    "name": "A4 Gothic",
+    "name": "A4 Simple",
     "type": "user",
     "fractionHeight": 1.06,
     "pageHeight": 297,
@@ -10,28 +10,14 @@
     "layers": [
         {
             "visible": true,
-            "barHeight": 20,
-            "barMargin": 20,
+            "barHeight": 10,
+            "barMargin": 10,
             "lineAngle": 0,
             "rhythm": [
                 0,
-                20
-            ],
-            "lineStyle": {
-                "width": 1,
-                "style": "solid",
-                "color": "#999999"
-            }
-        },
-        {
-            "visible": true,
-            "barHeight": 20,
-            "barMargin": 20,
-            "lineAngle": 0,
-            "rhythm": [
-                5.5,
+                5,
                 10,
-                17.5
+                15
             ],
             "lineStyle": {
                 "width": 1,
@@ -43,7 +29,7 @@
             "visible": true,
             "barHeight": 260,
             "barMargin": 10,
-            "lineAngle": 43,
+            "lineAngle": 55,
             "rhythm": [
                 50,
                 100,
@@ -71,11 +57,6 @@
         "barPadding": 6,
         "letterTopMargin": 3,
         "letterRightMargin": 8,
-        "letters": [
-            "А,А,А",
-            "а,а,а,а",
-            "в,в,в,в",
-            "г,г,г,г"
-        ]
+        "letters": []
     }
 }
