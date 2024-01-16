@@ -67,7 +67,7 @@
     const { cookies } = useCookies();
     const presetSaveSnackbar = ref(false);
     const presetParseError = ref(false);
-    const selectFile = ref(null);
+    const selectFile = ref(undefined);
     const listPreset = ref(['']);
 
     const savePreset = (): void => {
@@ -104,7 +104,7 @@
                 && !copygraph.value.acceptPresetFromJson(reader.result)) {
                 presetParseError.value = true;
             }
-            selectFile.value = null;
+            selectFile.value = undefined;
         }
     }
 
