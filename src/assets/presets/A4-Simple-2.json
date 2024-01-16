@@ -1,0 +1,93 @@
+{
+    "format": "0.2",
+    "name": "A4 Simple 2",
+    "type": "user",
+    "fractionHeight": 0.97,
+    "pageHeight": 297,
+    "pageWidth": 210,
+    "pagePadding": 10,
+    "pageOrientation": "portrait",
+    "layers": [
+        {
+            "visible": true,
+            "barHeight": 32,
+            "barMargin": 4,
+            "lineAngle": 0,
+            "rhythm": [
+                0,
+                32
+            ],
+            "lineStyle": {
+                "width": 1,
+                "style": "solid",
+                "color": "#999999"
+            }
+        },
+        {
+            "visible": true,
+            "barHeight": 32,
+            "barMargin": 4,
+            "lineAngle": 0,
+            "rhythm": [
+                6,
+                26
+            ],
+            "lineStyle": {
+                "width": 1,
+                "style": "dashed",
+                "color": "#CCC"
+            }
+        },
+        {
+            "visible": true,
+            "barHeight": 32,
+            "barMargin": 4,
+            "lineAngle": 0,
+            "rhythm": [
+                12,
+                20
+            ],
+            "lineStyle": {
+                "width": 1,
+                "style": "solid",
+                "color": "#CCC"
+            }
+        },
+        {
+            "visible": true,
+            "barHeight": 32,
+            "barMargin": 4,
+            "lineAngle": 55,
+            "rhythm": [
+                20,
+                40,
+                60,
+                80,
+                100,
+                120,
+                140,
+                160,
+                180,
+                200
+            ],
+            "lineStyle": {
+                "width": 1,
+                "style": "dashed",
+                "color": "#CCC"
+            }
+        }
+    ],
+    "lettering": {
+        "visible": true,
+        "font": "Gloria script",
+        "fontSize": 4.8,
+        "color": "#DDD",
+        "firstColor": "#333",
+        "barHeight": 28,
+        "barMargin": 8.7,
+        "barPadding": 6,
+        "letterTopMargin": -0.6,
+        "letterRightMargin": 8,
+        "letters": []
+    }
+}

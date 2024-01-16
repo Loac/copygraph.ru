@@ -1,0 +1,92 @@
+{
+    "format": "0.2",
+    "name": "A4 Simple 3",
+    "type": "user",
+    "fractionHeight": 1.025,
+    "pageHeight": 297,
+    "pageWidth": 210,
+    "pagePadding": 10,
+    "pageOrientation": "portrait",
+    "layers": [
+        {
+            "visible": true,
+            "barHeight": 30,
+            "barMargin": 0,
+            "lineAngle": 0,
+            "rhythm": [
+                0
+            ],
+            "lineStyle": {
+                "width": 1,
+                "style": "solid",
+                "color": "#999999"
+            }
+        },
+        {
+            "visible": true,
+            "barHeight": 30,
+            "barMargin": 0,
+            "lineAngle": 0,
+            "rhythm": [
+                10,
+                20
+            ],
+            "lineStyle": {
+                "width": 1,
+                "style": "dashed",
+                "color": "#CCC"
+            }
+        },
+        {
+            "visible": true,
+            "barHeight": 270,
+            "barMargin": 4,
+            "lineAngle": 75,
+            "rhythm": [
+                10,
+                20,
+                30,
+                40,
+                50,
+                60,
+                70,
+                80,
+                90,
+                100,
+                110,
+                120,
+                130,
+                140,
+                150,
+                160,
+                170,
+                180,
+                190,
+                200,
+                210,
+                220,
+                230,
+                240,
+                250
+            ],
+            "lineStyle": {
+                "width": 1,
+                "style": "solid",
+                "color": "#EFEFEF"
+            }
+        }
+    ],
+    "lettering": {
+        "visible": true,
+        "font": "Gloria script",
+        "fontSize": 4.8,
+        "color": "#DDD",
+        "firstColor": "#333",
+        "barHeight": 28,
+        "barMargin": 8.7,
+        "barPadding": 6,
+        "letterTopMargin": -0.6,
+        "letterRightMargin": 8,
+        "letters": []
+    }
+}
