@@ -93,6 +93,15 @@
             <v-btn
                 rounded="xs"
                 size="small"
+                variant="text"
+                text="Visible"
+                :prepend-icon="copygraph.workbook.lettering.visible ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"
+                :color="copygraph.workbook.lettering.visible ? 'blue' : 'grey'"
+                @click="copygraph.workbook.showLettering()"
+            />
+            <v-btn
+                rounded="xs"
+                size="small"
                 prepend-icon="mdi-plus"
                 color="green-darken-1"
                 variant="text"

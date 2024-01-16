@@ -239,6 +239,10 @@ export class Workbook {
         return preset;
     }
 
+    showLettering(): void {
+        this.lettering.visible = !this.lettering.visible;
+    }
+
     pageStyle(): StyleValue {
         return {
             width: this.pageWidth + 'mm',
