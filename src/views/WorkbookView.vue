@@ -8,7 +8,9 @@
         :width="300"
     >
         <v-toolbar>
-            <v-btn @click="printToPdf" text="PDF" />
+            <div class="d-flex justify-center w-100">
+                <v-btn @click="printToPdf" text="Save to PDF" />
+            </div>
         </v-toolbar>
 
         <v-expansion-panels
