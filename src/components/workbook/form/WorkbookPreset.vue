@@ -126,7 +126,7 @@
             copygraph.value.buildPresets().then((): void => {
                 loadPreset();
                 copygraph.value.workbook.fractionHeight = 1;
-                copygraph.value.acceptPresetByName('A4 6x6');
+                copygraph.value.acceptFirstPreset();
                 listPreset.value = copygraph.value.listPreset();
             });
         });

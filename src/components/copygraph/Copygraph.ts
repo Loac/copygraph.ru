@@ -27,12 +27,14 @@ export class Copygraph {
             if (data instanceof Array) {
                 data.forEach((item: Preset) => this.presets.set(item.name, Preset.fromData(item)));
             }
-
-            if (this.presets.size > 0) {
-                this.activePresetName = 'A4 6x6';
-                this.acceptPresetByName(this.activePresetName);
-            }
         });
+    }
+
+    acceptFirstPreset(): void {
+        if (this.presets.size > 0) {
+            this.activePresetName = this.presets.keys().next().value;
+            this.acceptPresetByName(this.activePresetName);
+        }
     }
 
     /**
