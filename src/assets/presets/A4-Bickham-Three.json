@@ -1,0 +1,131 @@
+{
+    "format": "0.2",
+    "name": "A4 Bickham Three",
+    "type": "user",
+    "fractionHeight": 0.97,
+    "pageHeight": 297,
+    "pageWidth": 210,
+    "pagePadding": 10,
+    "pageOrientation": "portrait",
+    "layers": [
+        {
+            "visible": true,
+            "barHeight": 42,
+            "barMargin": 5.5,
+            "lineAngle": 0,
+            "rhythm": [
+                0,
+                42
+            ],
+            "lineStyle": {
+                "width": 1,
+                "style": "solid",
+                "color": "#999999"
+            }
+        },
+        {
+            "visible": true,
+            "barHeight": 42,
+            "barMargin": 5.5,
+            "lineAngle": 0,
+            "rhythm": [
+                18,
+                24
+            ],
+            "lineStyle": {
+                "width": 1,
+                "style": "dashed",
+                "color": "#CCC"
+            }
+        },
+        {
+            "visible": true,
+            "barHeight": 42,
+            "barMargin": 5.5,
+            "lineAngle": 0,
+            "rhythm": [
+                6,
+                36
+            ],
+            "lineStyle": {
+                "width": 1,
+                "style": "dashed",
+                "color": "#CCC"
+            }
+        },
+        {
+            "visible": true,
+            "barHeight": 42,
+            "barMargin": 5.5,
+            "lineAngle": 52,
+            "rhythm": [
+                5,
+                10,
+                15,
+                20,
+                25,
+                30,
+                35,
+                40,
+                45,
+                50,
+                55,
+                60,
+                65,
+                70,
+                75,
+                80,
+                85,
+                90,
+                95,
+                100,
+                105,
+                110,
+                115,
+                120,
+                125,
+                130,
+                135,
+                140,
+                145,
+                150,
+                155,
+                160,
+                165,
+                170,
+                175,
+                180,
+                185,
+                190,
+                195,
+                200,
+                205,
+                210,
+                215,
+                220
+            ],
+            "lineStyle": {
+                "width": 1,
+                "style": "dashed",
+                "color": "#CCC"
+            }
+        }
+    ],
+    "lettering": {
+        "visible": true,
+        "font": "Bickham Three",
+        "fontSize": 7,
+        "color": "#DDD",
+        "firstColor": "#333",
+        "barHeight": 42,
+        "barMargin": 5.6,
+        "barPadding": 10,
+        "letterTopMargin": 1,
+        "letterRightMargin": 10,
+        "letters": [
+            "Hello!",
+            "Pack my box with",
+            "five dozen liquor jugs."
+        ]
+    }
+}

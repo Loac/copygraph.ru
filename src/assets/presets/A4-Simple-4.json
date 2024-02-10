@@ -1,0 +1,88 @@
+{
+    "format": "0.2",
+    "name": "A4 Simple 4",
+    "type": "user",
+    "fractionHeight": 1.072,
+    "pageHeight": 297,
+    "pageWidth": 210,
+    "pagePadding": 10,
+    "pageOrientation": "portrait",
+    "layers": [
+        {
+            "visible": true,
+            "barHeight": 12,
+            "barMargin": 0,
+            "lineAngle": 0,
+            "rhythm": [
+                0,
+                6
+            ],
+            "lineStyle": {
+                "width": 1,
+                "style": "dashed",
+                "color": "#999999"
+            }
+        },
+        {
+            "visible": true,
+            "barHeight": 260,
+            "barMargin": 10,
+            "lineAngle": 55,
+            "rhythm": [
+                10,
+                20,
+                30,
+                40,
+                50,
+                60,
+                70,
+                80,
+                90,
+                100,
+                110,
+                120,
+                130,
+                140,
+                150,
+                160,
+                170,
+                180,
+                190,
+                200,
+                210,
+                220,
+                230,
+                240,
+                250,
+                260,
+                270,
+                280,
+                290,
+                300,
+                310,
+                320,
+                330,
+                340,
+                350
+            ],
+            "lineStyle": {
+                "width": 1,
+                "style": "dashed",
+                "color": "#999999"
+            }
+        }
+    ],
+    "lettering": {
+        "visible": true,
+        "font": "Esenin script One",
+        "fontSize": 5.5,
+        "color": "#DDD",
+        "firstColor": "#333",
+        "barHeight": 8,
+        "barMargin": 8,
+        "barPadding": 6,
+        "letterTopMargin": -6.4,
+        "letterRightMargin": 8,
+        "letters": []
+    }
+}
