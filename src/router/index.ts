@@ -16,6 +16,11 @@ const routes = [
         name: 'About',
         component: () => import('@/views/AboutView.vue'),
       },
+      {
+        path: 'where-to-begin',
+        name: 'С чего начать',
+        component: () => import('@/views/WhereToBeginView.vue'),
+      },
     ],
   },
 ]

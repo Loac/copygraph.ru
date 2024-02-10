@@ -1,18 +1,14 @@
 <template>
     <v-container>
-        <MarkdownIt :source="readme" />
+        <MarkdownIt :source="About" />
     </v-container>
-    <v-navigation-drawer
-        location="right"
-        class="workbook-advanced-drawer"
-        :permanent="true"
-        :width="300"
-    />
+    <AboutSidebar />
 </template>
 
 <script lang="ts" setup>
     import MarkdownIt from "@/components/MarkdownIt.vue";
-    import readme from '@/text/About.md';
+    import About from '@/text/About.md';
+    import AboutSidebar from "@/layouts/AboutSidebar.vue";
 
     document.title = 'Copygraph';
 </script>
