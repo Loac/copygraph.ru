@@ -1,6 +1,6 @@
 {
     "format": "0.2",
-    "name": "A4 Bickham Three",
+    "name": "A4 Bickham Three   ",
     "type": "user",
     "fractionHeight": 0.97,
     "pageHeight": 297,
@@ -11,7 +11,7 @@
         {
             "visible": true,
             "barHeight": 42,
-            "barMargin": 5.5,
+            "barMargin": 6.5,
             "lineAngle": 0,
             "rhythm": [
                 0,
@@ -26,7 +26,7 @@
         {
             "visible": true,
             "barHeight": 42,
-            "barMargin": 5.5,
+            "barMargin": 6.5,
             "lineAngle": 0,
             "rhythm": [
                 18,
@@ -41,7 +41,7 @@
         {
             "visible": true,
             "barHeight": 42,
-            "barMargin": 5.5,
+            "barMargin": 6.5,
             "lineAngle": 0,
             "rhythm": [
                 6,
@@ -56,7 +56,7 @@
         {
             "visible": true,
             "barHeight": 42,
-            "barMargin": 5.5,
+            "barMargin": 6.5,
             "lineAngle": 52,
             "rhythm": [
                 5,
@@ -114,18 +114,19 @@
     "lettering": {
         "visible": true,
         "font": "Bickham Three",
-        "fontSize": 7,
+        "fontSize": 7.5,
         "color": "#DDD",
-        "firstColor": "#333",
+        "firstColor": "#DDD",
         "barHeight": 42,
-        "barMargin": 5.6,
+        "barMargin": 6.5,
         "barPadding": 10,
-        "letterTopMargin": 1,
+        "letterTopMargin": 1.5,
         "letterRightMargin": 10,
         "letters": [
             "Hello!",
-            "Pack my box with",
-            "five dozen liquor jugs."
+            "Pack my box",
+            "with five dozen ",
+            "liquor jugs."
         ]
     }
 }

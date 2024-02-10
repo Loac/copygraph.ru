@@ -10,5 +10,5 @@
     import About from '@/text/About.md';
     import AboutSidebar from "@/layouts/AboutSidebar.vue";
 
-    document.title = 'Copygraph';
+    document.title = 'Copygraph – Контакты';
 </script>

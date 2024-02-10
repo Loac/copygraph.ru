@@ -61,5 +61,5 @@
     // Раскрыть первую панель.
     const panel = ref([0]);
 
-    document.title = 'Copygraph';
+    document.title = 'Copygraph – Прописи и линовки для каллиграфии';
 </script>

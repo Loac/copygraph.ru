@@ -94,6 +94,21 @@
                 "style": "dashed",
                 "color": "#CCC"
             }
+        },
+        {
+            "visible": true,
+            "barHeight": 30,
+            "barMargin": 6.4,
+            "lineAngle": 0,
+            "rhythm": [
+                4.5,
+                25.5
+            ],
+            "lineStyle": {
+                "width": 1,
+                "style": "dashed",
+                "color": "#AAAAAA"
+            }
         }
     ],
     "lettering": {
@@ -101,7 +116,7 @@
         "font": "Casanova",
         "fontSize": 4.8,
         "color": "#DDD",
-        "firstColor": "#333",
+        "firstColor": "#DDD",
         "barHeight": 30,
         "barMargin": 6.4,
         "barPadding": 4,
